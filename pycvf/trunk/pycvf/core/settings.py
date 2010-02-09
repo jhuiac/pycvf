@@ -57,7 +57,7 @@ DEFAULT_MODEL="naive()"
 DEFAULT_MODEL_ARGS=""
 
 DEFAULT_INDEX_CLASS="pseudoincremental(sashindex)"
-DEFAULT_INDEX_CLASS="pseudoincremental(lshindex_lshkit)"
+#DEFAULT_INDEX_CLASS="pseudoincremental(lshindex_lshkit)"
 DEFAULT_INDEX_ARGS=""
 
 PYCVF_DATABASE_PATH=":pycvf.databases."

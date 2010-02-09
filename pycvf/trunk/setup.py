@@ -127,32 +127,7 @@ def configuration(parent_package='',top_path=None):
 
 
 sys.path=["."]+sys.path
-
-def modify_bashrc(pycvfdir=None):
-  if pycvfdir==None:
-    pycvfdir=os.path.dirname(__file__)
-  f=file(os.path.join(os.environ["HOME"],".bashrc"),"r")
-  if (filter(lambda x:re.match("## BEGINING OF PYCVF-CONFIGURATION",x), f.readlines())):
-     sys.stderr.write("your .bashrc appears to be already configured, skipping .bashrc configuration...")
-     return
-  f.close()
-  f=file(os.path.join(os.environ["HOME"],".bashrc"),"a")
-  f.write("\n")
-  f.write("""
-###
-### BEGINING OF PYCVF-CONFIGURATION 
-###
-
-export PATH=$PATH:%PYCVFDIR%/pycvf/bin
-export PYTHONPATH=%PYCVFDIR%:%PYCVFDIR%/wrappers/build/%platform%:$PYTHONPATH
-
-###
-### END OF PYCVF-CONFIGURATION 
-###
-
-""".replace("%PYCVFDIR%",pycvfdir).replace("%platform%",sys.platform+"-"+os.uname()[-1]))
-  f.close()
-
+from pycvf.maintenance.pycvf_modify_bashrc import modify_bashrc
 
 class ConfigureBashRCCommand(Command):
   description = """ Setup your bashrc so that you can use PYCVF as developper """

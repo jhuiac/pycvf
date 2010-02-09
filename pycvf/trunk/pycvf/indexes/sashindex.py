@@ -23,8 +23,8 @@
 # -*- coding: utf-8 -*-
 
 from pycvf.core.errors import pycvf_debug, pycvf_warning, pycvf_error
-from pycvf.distribution.errors import *
-pycvf_require_package(PYCVFD_REQUIRE_PACKAGE,'pysash')
+from pycvf.core.distribution import *
+pycvf_dist(PYCVFD_REQUIRE_PACKAGE,'pysash')
 pycvf_dist(PYCVFD_SPECIFIC_LICENSE,"Sash is patented and is not under LGPL-3. Please refer at the Sash documentation. Do not use in any commercial application.")
 
 from pysash import *

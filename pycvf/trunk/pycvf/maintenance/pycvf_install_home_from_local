@@ -1,0 +1,20 @@
+#!/usr/bin/env python
+import os,sys
+
+filename=__file__
+if filename[0] != os.path.sep:
+    filename=os.path.join(os.getcwd(),filename)
+base=os.path.dirname(os.path.dirname(filename))
+if base.split(os.path.sep)[-1]!=u'pycvf':
+    base=os.path.dirname(base)
+
+dest=os.path.join(os.environ['HOME']+'pycvf'))    
+
+assert(base.split(os.path.sep)[-1]==u'pycvf')
+try:
+    os.stat(dest)
+    sys.stderr.write("Destination path exists aborting \n")
+except:
+    pass
+
+os.symlink(base,dest)

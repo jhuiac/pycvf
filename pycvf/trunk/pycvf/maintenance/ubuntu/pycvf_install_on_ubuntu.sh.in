@@ -1,0 +1,41 @@
+#!/bin/bash -v
+
+
+##
+echo "INSTALLING NECESSARY PACKAGES"
+##
+
+BUILDREQUIRED="%BUILDREQUIREDLIST%"
+REQUIRED="%REQUIREDLIST%"
+
+sudo apt-get install bzr $REQUIRED $BUILDREQUIRED
+
+##
+echo "FETCHING THE BRANCH"
+##
+
+cd 
+bzr branch lp:~bertrand-nouvel/pycvf/main pycvf-bzr
+ln -s pycvf-bzr/trunk pycvf
+cd pycvf
+
+##
+echo "3 CREATING EXECUTABLES"
+##
+python setup.py build_ext -i
+(cd pycvf ; ./linkbin.sh )
+
+##
+echo "4 SETTING UP UP THE ENVIRONEMENT"
+##
+python setup.py modify_bashrc
+
+## 
+echo "5 DOING REGISTRATION AND TEST..."
+##
+
+cd
+
+. ~/.bashrc
+
+pycvf_dbshow

@@ -1,0 +1,13 @@
+wget
+python-numpy
+python-setuptools
+python (>= 2.5)
+python-dev (>= 2.5)
+cython ( >=0.10)
+libcv-dev
+libcvaux-dev
+libhighgui-dev
+python-ctypes
+gcc-4.1
+g++-4.1
+gccxml 

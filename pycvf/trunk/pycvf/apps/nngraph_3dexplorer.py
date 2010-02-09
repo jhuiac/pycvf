@@ -19,6 +19,7 @@ import scipy
 cmr12 = loader.loadFont('cmr12.egg')
  
 class World(DirectObject):
+    
     def enable_picking(self):
         self.lastHiliteObj = []
 
@@ -54,12 +55,12 @@ class World(DirectObject):
         ## a card maker will create planes for us
         cm=CardMaker('')
 
-        cm.setFrame(-5,5,-5,5)       
+        cm.setFrame(-3,3,-3,3)       
 
         self.ld=xxx[0]
         lld=len(self.ld)         
 
-        self.iconwheelMovement = self.iconwheel.hprInterval(50,Point3(360,0,0))                          
+        self.iconwheelMovement = self.iconwheel.hprInterval(self.rotateinterval,Point3(360,0,0))                          
         MAXR=10
         for y in range(lld):
              nn = self.iconwheel.attachNewNode(cm.generate())
@@ -70,10 +71,10 @@ class World(DirectObject):
              nnr.setColor(1,1,1,1)
              texth = TextNode('hicond%04d'%(y,))
              texth.setText(unicode(self.ld[y][2]).encode('utf8'))
-             texth.setTextColor(0,0,0,1)
+             texth.setTextColor(0.5,0.5,0.5,1)
              textb = TextNode('bicond%04d'%(y,))
              textb.setText(unicode(self.ld[y][2]).encode('utf8'))
-             textb.setTextColor(0,0,0,1)
+             textb.setTextColor(0.5,0.5,0.5,1)
              tnpb = self.iconwheel.attachNewNode(textb)
              tnph = self.iconwheel.attachNewNode(texth)
              z=numpy.exp(1j*numpy.pi*2*(y%MAXR)/min(lld,MAXR))
@@ -115,6 +116,7 @@ class World(DirectObject):
     def __init__(self):
         ##  basic settings
         self.movieid=0
+        self.rotateinterval=50
         self.curdir=( os.getcwd() if len(sys.argv)<2 else sys.argv[1])
         base.setBackgroundColor(0,0,0,1)
         base.camLens.setNearFar(1.0,10000)
@@ -127,7 +129,21 @@ class World(DirectObject):
 #        self.accept('u',self.goup)
         self.accept("mouse1", self.click)
         self.accept("mouse1-up", self.release_click) 
+        self.accept("wheel_up", self.rotate_faster)
+        self.accept("wheel_down", self.rotate_slower)
         self.enable_picking()
+
+    def rotate_faster(self):
+        self.rotateinterval/=2.
+        if (self.rotateinterval<0.0001):
+             self.rotateinterval=0.0001
+        self.iconwheelMovement = self.iconwheel.hprInterval(self.rotateinterval,Point3(360,0,0))                          
+        self.iconwheelMovement.loop()                    
+
+    def rotate_slower(self):
+        self.rotateinterval*=2
+        self.iconwheelMovement = self.iconwheel.hprInterval(self.rotateinterval,Point3(360,0,0))                          
+        self.iconwheelMovement.loop()                    
 
     def click(self):
       #print "click" ,self.lastHiliteObj[0].ls()#, self.lastHiliteObj[0].getName(),self.lastHiliteObj[0].listTags(),self.lastHiliteObj[0].getKey()#,self.lastHiliteObj[0].getPythonTag()
@@ -146,7 +162,7 @@ class World(DirectObject):
 
 
 
-class SimpleIndexQueryApp(IndexUsingApplication):
+class NN3dSimpleIndexQueryApp(IndexUsingApplication):
   class ProgramMetadata(object):
       name="3d Nearest Neighbors Explorer based on PANDA"
       version="1.0"
@@ -177,6 +193,6 @@ class SimpleIndexQueryApp(IndexUsingApplication):
 #t.setRamImage(ConstPointerToArrayUnsignedChar(l.data))
 #print dir(t)
 #print cvMgr.listVariables()
-SimpleIndexQueryApp.run(sys.argv[1:])
+NN3dSimpleIndexQueryApp.run(sys.argv[1:])
 
 

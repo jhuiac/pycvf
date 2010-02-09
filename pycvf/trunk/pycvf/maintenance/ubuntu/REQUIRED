@@ -1,0 +1,25 @@
+python (>= 2.5)
+libcv-dev
+libcvaux-dev   
+libhighgui-dev
+python-numpy
+python-scipy
+python-matplotlib
+python-biopython
+python-imaging
+python-qt4
+python-rpy
+python-numpy
+python-numpy-ext
+python-matplotlib
+python-matplotlib-data
+python-tk
+python-reportlab
+python-oss
+python-alsaaudio
+python-pywt
+python-ctypes
+python-dialog
+python-dictclient
+python-cairo
+shogun-python-modular

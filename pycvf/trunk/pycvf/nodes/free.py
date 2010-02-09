@@ -25,9 +25,9 @@ class Model(genericmodel.Model):
         type_in=None
         type_out=None
         def input_datatype(self,x):
-            return self.type_in or x
+            return (self.type_in if (self.type_in!=None) else x)
         def output_datatype(self,x):
-            return self.type_out or x
+            return (self.type_out if (self.type_out!=None) else x)
         def init_model(self,expr,id="",datatype=None,*args,**kwargs):
                  self.type_out=datatype
                  self.xcontext=globals()

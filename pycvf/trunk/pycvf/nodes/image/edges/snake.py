@@ -6,6 +6,10 @@ from pycvf.core import genericmodel
 from pycvf.datatypes import image
 from pycvf.datatypes import basics
 
+from pycvf.core.distribution import *
+
+pycvf_dist(PYCVFD_MODULE_STATUS, PYCVFD_STATUS_EXPERIMENTAL)
+
 def snake(src,alpha=0.45,beta=0.2,gamma=0.45,max_iter=1000,epsilon=0.001,length=int(50),neigborhoodsize=(10,10)):
   CV_VALUE=1
   if (src.ndim==2):

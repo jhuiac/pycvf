@@ -37,7 +37,7 @@ def untarbz2(filename):
 def ungz(filename):
     os.system("gunzip "+filename)
 
-def unzip(filename)
+def unzip(filename):
     os.system("unzip "+filename)
 
 Mb=1024*1024

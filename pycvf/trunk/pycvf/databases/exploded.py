@@ -49,7 +49,7 @@ class DB(database.ContentsDatabase):
       self.structure=(pycvf_builder(structure) if type(structure) in [str, unicode] else structure)
       self.quick_len=quick_len
       self.cache_id=cache_id
-      self.dtp=self.structure.output_datatype(self.vdb)
+      self.dtp=self.structure.output_datatype(self.vdb.datatype())
       #for f in dir(dtp):
       #    if (not hasattr(self,f)):
       #        exec("self."+f+"=dtp."+f)
@@ -70,6 +70,7 @@ class DB(database.ContentsDatabase):
                 yield (s[1],(e[1],s[0]))
          except Exception,e:
             pycvf_warning("Exception "+str(e)+" converted to stopiteration")
+            pycvf_backtrace()
             raise StopIteration 
   def __getitem__(self, addr):
       e=self.vdb[addr[0]]

@@ -20,6 +20,10 @@ from pycvf.core import genericmodel
 from pycvf.datatypes import image
 import numpy,scipy,scipy.ndimage
 
+from pycvf.core.distribution import *
+
+pycvf_dist(PYCVFD_MODULE_STATUS, PYCVFD_STATUS_BETA)
+
 
 def DoG(x,value1=3,value2=1,*args,**kwargs):
   return numpy.abs(scipy.ndimage.gaussian_filter(x,value1,*args,**kwargs)-scipy.ndimage.gaussian_filter(x,value2,*args,**kwargs))

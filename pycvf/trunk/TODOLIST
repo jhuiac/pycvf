@@ -1,7 +1,7 @@
 To be rethought : 
-  * How to avoid name clash in the dataflow
+  * How to avoid name clash in the dataflow (* 50% ok *)
   * The dataflow is loosing part of its utility (check how much necessary/should we remove it)
-    I will move it at the new "NODE" Level
+    I will move it at the new "NODE" Level ... (* 50% ok *)
   * Optimize loading for small apps
   * Relation Library / Components / Program to be simplefied
   * Installation procedure /
@@ -21,12 +21,11 @@ Applications:
  
 Refactoring:
   * Simplify names of statistical models
-  * Refactor indexing so that we have clear range queries and so on ...
-  * General process (Models)
+  * Refactor indexing so that we have clear range queries and so on ... (on the way)
+  * General process (Models) (on the way)
   * Uniformize debug levels
   * datatypes names
-  * Allow pipes to be parsed in good order, maybe with such syntax: 
-     PIPE([Model1, Model2, PIPE([Model3]) ])
+
 
 Finishing:
   * Finish support for database with labels

@@ -12,17 +12,24 @@
 ################################################################################################################################################################################
 
 
-###
-###
-
-
+import numpy, sys
 from pycvf.core import genericmodel
-from pycvf.datatypes import image
-import scipy,scipy.ndimage
+from pycvf.core.genericmodel import NotReady,STATUS_ERROR,STATUS_NOT_READY,STATUS_READY
+from pycvf.datatypes import basics
+from pycvf.stats.DR.PCA import IncrementalPCAdimred
 
-from pycvf.core.distribution import *
 
-pycvf_dist(PYCVFD_MODULE_STATUS, PYCVFD_STATUS_BETA)
+class PCABasisProcessor(object):
+  def __init__(self,*args, **kwargs):     
+     self.args=args
+     self.kwargs=kwargs
+     self.directory=None
+  def process(self,v):
+        self.ipca=IncrementalPCAdimred(-1,*self.args, **self.kwargs)
+        self.ipca.add_train(v)
+        self.ipca.recompute()
+        return self.ipca.M
 
-Model=genericmodel.pycvf_model_function(image.Datatype,image.Datatype)(scipy.ndimage.sobel)
+    
+Model=genericmodel.pycvf_model_class(basics.NumericArray.Datatype,basics.NumericArray.Datatype)(PCABasisProcessor)
 __call__=Model

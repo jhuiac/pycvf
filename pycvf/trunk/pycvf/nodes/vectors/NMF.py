@@ -16,35 +16,28 @@ import numpy, sys
 from pycvf.core import genericmodel
 from pycvf.core.genericmodel import NotReady,STATUS_ERROR,STATUS_NOT_READY,STATUS_READY
 from pycvf.datatypes import basics
-from pycvf.stats.DR.PCA import IncrementalPCAdimred
+from pycvf.stats.DR import nmf3
+from pycvf.stats.DR.nmf3 import NMFdimred
 
 
-
-
-#methods={
-#"IPCA":'pycvf.lib.stats.dimred.PCA.IncrementalPCA',
-#"NMF":'pycvf.lib.stats.dimred.NMF.nmf',
-#}
-
-
-class IPCAProcessor(object):
+class NMFProcessor(object):
   def __init__(self,*args, **kwargs):     
      self.args=args
      self.kwargs=kwargs
      self.directory=None
-  def init(self,odim, burnin=300,*args, **kwargs):
-     self.pcafilename=self.directory+"/pca.pcl"
+     self.trainl=[]
+  def init(self,odim, totrain=2000,*args, **kwargs):
+     self.filename=self.directory+"/nmf.pcl"
      try:
-        self.ipca=IncrementalPCAdimred.load(self.pcafilename)
+        self.inmf=NMFdimred.load(self.pcafilename)
         if (self.ibow==None):
             raise Exception
         self.model_node.status=genericmodel.STATUS_READY
-        pycvf_debug(10, "loaded"+ self.pcafilename+"...")
+        pycvf_debug(10, "loaded"+ self.filename+"...")
      except:
-        self.ipca=IncrementalPCAdimred(-1,odim,*args, **kwargs)
-        #self.ibow.set_filename(self.bowfilename)
+        self.inmf=None
         self.model_node.status=genericmodel.STATUS_NOT_READY        
-        self.totrain=burnin
+        self.totrain=totrain
   def set_model_node(self,model):
         self.model_node=model
         self.directory=model.get_directory()
@@ -56,9 +49,9 @@ class IPCAProcessor(object):
      if (self.totrain):
         q=min(v.shape[0],self.totrain)
         self.totrain-=q
-        self.ipca.add_train(v[:q])
+        self.trainl.append(v[:q])
         if (self.totrain==0):
-           self.ipca.recompute()
+           self.inmf=NMFdimred(numpy.vstack(self.trainl),algox=nmf3.EG_DJ(), algoa=nmf3.EG_DKL(),*self.args,**self.kwargs)
            self.save()
         if (v.shape[0]==q):
           self.model_node.status=genericmodel.STATUS_NOT_READY
@@ -67,7 +60,7 @@ class IPCAProcessor(object):
           v=v[q:]
      try:
         assert(v.ndim==2)
-        r=self.ipca.dimred(v)
+        r=self.inmf.dimred(v)
      except KeyboardInterrupt:
        raise
      except Exception,e:
@@ -77,9 +70,9 @@ class IPCAProcessor(object):
      self.model_node.status=genericmodel.STATUS_READY
      return r
   def save(self):
-     if (self.ipca) and (self.totrain==0):
-        self.ipca.save(file(self.pcafilename,"w"))
+     if (self.inmf) and (self.totrain==0):
+        self.inmf.save(file(self.filename,"w"))
 
     
-Model=genericmodel.pycvf_model_class(basics.NumericArray.Datatype,basics.NumericArray.Datatype)(IPCAProcessor)
+Model=genericmodel.pycvf_model_class(basics.NumericArray.Datatype,basics.NumericArray.Datatype)(NMFProcessor)
 __call__=Model

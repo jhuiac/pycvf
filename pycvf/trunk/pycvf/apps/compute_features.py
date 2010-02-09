@@ -27,7 +27,7 @@ class ComputeFeaturesApp(ModelUsingApplication):
       copyright="        COPYRIGHT Bertrand Nouvel - JFLI - CNRS 2009"
       license="GPLv3"
 
-  delay=CmdLineString("t","trackfile","filename","name of the files where you want the features to be computed ","features")                             
+  trackfilename=CmdLineString("t","trackfile","filename","name of the files where you want the features to be computed ","features")                             
   processors=CmdLineString("p","processors","number","Number of process to be runned","1")                               
   pmode=CmdLineString(None,"pmode","integer","0:1db/many features computers 1:many db/many feature computers ","2")
   accept_in_errors=CmdLineString(None,"ignoreerrors","boolean","Set to 1 for ignoring errors","0")
@@ -154,7 +154,7 @@ class ComputeFeaturesApp(ModelUsingApplication):
   
   @classmethod
   def process(cls,nrels=1,*args,**kwargs):                         
-    trackfile=cls.delay.value
+    trackfile=cls.trackefilename.value
     meta_selector=eval(cls.meta_selector.value)
     cls.nmetas=cls.mmeta
     if (meta_selector!=None):
@@ -177,14 +177,14 @@ class ComputeFeaturesApp(ModelUsingApplication):
     else:
            cls.process_sp(*args,**kwargs)
           
-    if t.meta==None:
-       t.meta={}
+    if self.tf.meta==None:
+       self.tf.meta={}
     
-    t.meta['model_expr']=cls.mymodel.value
-    t.meta['models_meta']=cls.mmeta
-    t.meta['model_class']=cls.mdl.__class__
-    t.meta['inbound_datatype']=cls.vdb.__class__
-    t.savemeta()
+    cls.tf.meta['model_expr']=cls.mymodel.value
+    cls.tf.meta['models_meta']=cls.mmeta
+    cls.tf.meta['model_class']=cls.mdl.__class__
+    cls.tf.meta['inbound_datatype']=cls.vdb.__class__
+    cls.tf.savemeta()
   
 if __name__=="__main__":       
   ComputeFeaturesApp.run(sys.argv[1:])

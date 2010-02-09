@@ -26,7 +26,7 @@ from pycvf.core import settings
 from pycvf.lib.video.render.lazy import LazyDisplay
 import numpy
 
-from pycvf.lib.ui.qtdisplay import QtDisplay
+
 from pycvf.structures import spatial
 
 class Datatype:
@@ -52,6 +52,7 @@ class Datatype:
      pylab.imshow(x)
   @classmethod
   def get_widget(cls,x,*args, **kwargs):
+     from pycvf.lib.ui.qtdisplay import QtDisplay
      q=QtDisplay(*args,**kwargs)
      return q
   @classmethod

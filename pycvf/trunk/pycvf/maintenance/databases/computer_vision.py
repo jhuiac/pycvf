@@ -5,6 +5,18 @@
        'url':['http://vismod.media.mit.edu/pub/VisTex/VisTex.tar.gz'],
        'uncompressed': 203*Mb
      }),
+   ('WANG', {
+     'title':'WANG',
+     'url':['http://www-db.stanford.edu/~wangz/image.vary.jpg.tar'],
+     'reference':' Automatic linguistic indexing of pictures by a statistical modeling approach,'' IEEE Transactions on Pattern Analysis and Machine Intelligence, vol. 25, no. 9, pp. 1075-1088, 2003.'
+     }
+     ),
+   ('MIRFLICKR',{
+       'title':'MIRFLICKR25000',
+       'url':['http://press.liacs.nl/mirflickr/mirflickr08.zip','http://press.liacs.nl/mirflickr/mirflickr08_annotations_v080.zip'],
+       'uncompressed':10*Gb
+       }
+    ),
    ('PASCAL_TU',{      
       'title':'TU Darmstadt Database',
       'url': ['http://pascallin.ecs.soton.ac.uk/challenges/VOC/download/tud.tar.gz'],

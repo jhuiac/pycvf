@@ -6,6 +6,10 @@ from pycvf.core import genericmodel
 from pycvf.datatypes import image
 from pycvf.datatypes import basics
 
+from pycvf.core.distribution import *
+
+pycvf_dist(PYCVFD_MODULE_STATUS, PYCVFD_STATUS_EXPERIMENTAL)
+
 def all_contours(src,maxLevel = 2):
   if (src.ndim==2):
       src=src.reshape(src.shape+(1,))

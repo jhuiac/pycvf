@@ -62,7 +62,7 @@ class Datatype(basics.NumericArray.Datatype):
      q=QtDisplay(*args,**kwargs)
      return q
   @classmethod
-  def set_widget_value(cls,widget,x):
+  def set_widget_value(cls,widget,x,vdb=None, addr=None):
      out = StringIO() 
      img_dpi=72
      width=400

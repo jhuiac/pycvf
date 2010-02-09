@@ -25,7 +25,8 @@ fi
 
 
 
-MODULES="zopencv_core zopencv_highlevel zopencv_lowlevel zopencv_classes zopencv_pclasses"
+MODULES="zopencv_core zopencv_highlevel zopencv_lowlevel zopencv_classes zopencv_pclasses zopencv_argck"
+DOSTRIP=1
 if true; then
 if [ "$ZOPENCVPATH" ]; then
 ## override by environoment
@@ -416,16 +417,10 @@ EOF
 mv zopencv_core.pyxtmp zopencv_core.pyx
 
 if [ "$CMODE" ]; then
-echo "zopencv"
-cython -I . zopencv_core.pyx || exit -1
-echo "lowlevel"
-cython -I . zopencv_lowlevel.pyx || exit -1
-echo "classes"
-cython -I . zopencv_classes.pyx || exit -1
-echo "pclasses"
-cython -I . zopencv_pclasses.pyx || exit -1
-echo "highlevel"
-cython -I . zopencv_highlevel.pyx || exit -1
+for m in $MODULES; do 
+echo "$m"
+cython -I . $m.pyx || exit -1
+done
 else
 cython --cplus -I . zopencv.pyx || exit -1
 fi
@@ -503,6 +498,9 @@ libtool -dynamic -lSystem -compatibility_version 0.1 -current_version 0.1 -o zop
 for f in $MODULES; do   
   echo "$COMPILER -I build $(python-config --libs) $OCVLIBS -shared -o $f.$SHAREDFX $f.o vdefs.c "
   $COMPILER -I build $(python-config --libs) $OCVLIBS -shared -o $f.$SHAREDFX $f.o  vdefs.c -lswscale -lavcodec -lavformat
+  if [ "$DOSTRIP" ] ; then
+      strip $f.$SHAREDFX
+  fi 
 done
 ;;
 esac

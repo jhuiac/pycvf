@@ -102,12 +102,6 @@ class STATUS_ERROR:
 class Model(object):
   """
   This is our generic model class.
-  
-  
-  Still under development...
-  Models are really inited by the init (function) , not the __init__ ()
-  
-  * Link to structures introduced in version 2 is deprecated for version 4 
   """
   anonymous_ctr=0
   processline=None
@@ -130,8 +124,8 @@ class Model(object):
       self.application=None  ## our context : pathes, databases and so on...
       self.context={}
       self.submodels={}
-      self.structures={} # DEPRECATED
-      self.statmodels={} # DEPRECATED
+      #self.structures={} # DEPRECATED
+      #self.statmodels={} # DEPRECATED
       self.processing=[]
       self.status=STATUS_READY
       self.invert_processing=[]
@@ -158,8 +152,8 @@ class Model(object):
       for s in self.submodels.values():
          s.destroy()
       self.submodels=None
-      self.structures=None
-      self.statmodels=None
+      #self.structures=None
+      #self.statmodels=None
   
   def  set_parent(self,parent):
       self.parent=parent
@@ -175,7 +169,7 @@ class Model(object):
      self.directory=(kargs["directory"] if  kargs.has_key("directory") else "/tmp/" )
      try: 
        os.stat(self.directory)
-     except OSError:
+     else:
        os.mkdir(self.directory)
      pycvf_debug(10,basecname)
      ## ported from 2.0
@@ -244,19 +238,19 @@ class Model(object):
   # Structure construction
   #
 
-  def get_new_anonymous_substructure_name(self):
-     pycvf_warning("DEPRECATED")
-     self.anonymous_ctr+=1
-     return "__substructure__%04d"%(self.anonymous_ctr,)
+  #def get_new_anonymous_substructure_name(self):
+  #   pycvf_warning("DEPRECATED")
+  #   self.anonymous_ctr+=1
+  #   return "__substructure__%04d"%(self.anonymous_ctr,)
 
   def get_new_anonymous_submodel_name(self):
      self.anonymous_ctr+=1
      return "__submodel__%04d"%(self.anonymous_ctr,)
 
-  def get_new_anonymous_statmodel_name(self):
-     pycvf_warning("DEPRECATED")
-     self.anonymous_ctr+=1
-     return "__statmodel__%04d"%(self.anonymous_ctr,)
+  #def get_new_anonymous_statmodel_name(self):
+  #   pycvf_warning("DEPRECATED")
+  #   self.anonymous_ctr+=1
+  #   return "__statmodel__%04d"%(self.anonymous_ctr,)
 
 
   def __or__(self,model2):
@@ -264,15 +258,15 @@ class Model(object):
        model2.parent=self
        return self
 
-  def __mul__(self,struct2):
-       pycvf_warning("DEPRECATED CONSTRUCTION")
-       self.structures[struct2.get_name(self.get_new_anonymous_substructure_name())]=struct2
-       return self
+  #def __mul__(self,struct2):
+  #     pycvf_warning("DEPRECATED CONSTRUCTION")
+  #     self.structures[struct2.get_name(self.get_new_anonymous_substructure_name())]=struct2
+  #     return self
 
-  def __sub__(self,stat2):
-       pycvf_warning("DEPRECATED CONSTRUCTION")
-       self.statmodels[stat2.get_name(self.get_new_anonymous_statmodel_name())]=stat2
-       return self
+  #def __sub__(self,stat2):
+  #     pycvf_warning("DEPRECATED CONSTRUCTION")
+  #     self.statmodels[stat2.get_name(self.get_new_anonymous_statmodel_name())]=stat2
+  #     return self
 
   def get_curdb(self):
       """
@@ -300,19 +294,19 @@ class Model(object):
     """
     Returns all the subnodes items associated to that node.
     """
-    return dict(self.submodels.items() + self.statmodels.items() + self.structures.items())
+    return self.submodels.items() #+ self.statmodels.items() + self.structures.items())
    
   def keys(self):
     """
     Returns all the subnodes keys associated to that node.
     """
-    return dict(self.submodels.keys() + self.statmodels.keys() + self.structures.keys())
+    return self.submodels.keys() #+ self.statmodels.keys() + self.structures.keys())
 
   def values(self):
     """
     Returns all the subnodes associated to that node.
     """
-    return dict(self.submodels.values() + self.statmodels.values() + self.structures.values())
+    return self.submodels.values() #+ self.statmodels.values() + self.structures.values())
 
   ###
   ### process own
@@ -466,45 +460,45 @@ class Model(object):
         ###
         ### DO STRUCTURE DECOMPOSITION AND RECURSION
         ###
-        if (len(l) > 1):
-          filt=l[1].split('/')
-          filta=filt[0]
-          if (filta[-1]=='*'):
-            recmode="*"
-            filta=filta[:-1]
-          elif (filta[-1]=='@'):
-            recmode="@"
-            filta=filta[:-1]
-          else:
-            recmode=False
-          filtb="/"+"/".join(l[-1].split("/")[1:])
-          if (len(l)>1):
-             print "available structures=", cmodel.structures.keys(), "len",len(l),l
-             try:
-               taddresses=reduce (lambda x,y: x+y,
-                  [ self.extract_structure(e,cmodel.structures[filta],lambda x:x,"@", eaddress) for e in telements ],
-                  []
-                )
-               telements=reduce (lambda x,y: x+y,
-                 [ self.extract_structure(e,cmodel.structures[filta],lambda x:x,recmode, eaddress) for e in telements],
-                 []
-                )
-             except:
-               taddresses=iconcatiter(lambda e: self.extract_structure(e,cmodel.structures[filta],lambda x:x,"@", eaddress) ,telements )
-               telements=iconcatiter(lambda e: self.extract_structure(e,cmodel.structures[filta],lambda x:x,recmode, eaddress) , telements)
-             #print telements
-             #sys.stdin.readline()
-             print cmodel.structures[filta]
-             print self.submodels.values()
-             print filter(lambda x:x[1]==cmodel.structures[filta],self.submodels.values())
-             cmodel=filter(lambda x:x[1]==cmodel.structures[filta],self.submodels.values())[0][0]
-             print cmodel
-             print "RESELEMS=", telements
-             for x in telements:
-                    print x
+        #if (len(l) > 1):
+          #filt=l[1].split('/')
+          #filta=filt[0]
+          #if (filta[-1]=='*'):
+            #recmode="*"
+            #filta=filta[:-1]
+          #elif (filta[-1]=='@'):
+            #recmode="@"
+            #filta=filta[:-1]
+          #else:
+            #recmode=False
+          #filtb="/"+"/".join(l[-1].split("/")[1:])
+          #if (len(l)>1):
+             #print "available structures=", cmodel.structures.keys(), "len",len(l),l
+             #try:
+               #taddresses=reduce (lambda x,y: x+y,
+                  #[ self.extract_structure(e,cmodel.structures[filta],lambda x:x,"@", eaddress) for e in telements ],
+                  #[]
+                #)
+               #telements=reduce (lambda x,y: x+y,
+                 #[ self.extract_structure(e,cmodel.structures[filta],lambda x:x,recmode, eaddress) for e in telements],
+                 #[]
+                #)
+             #except:
+               #taddresses=iconcatiter(lambda e: self.extract_structure(e,cmodel.structures[filta],lambda x:x,"@", eaddress) ,telements )
+               #telements=iconcatiter(lambda e: self.extract_structure(e,cmodel.structures[filta],lambda x:x,recmode, eaddress) , telements)
+             ##print telements
+             ##sys.stdin.readline()
+             #print cmodel.structures[filta]
+             #print self.submodels.values()
+             #print filter(lambda x:x[1]==cmodel.structures[filta],self.submodels.values())
+             #cmodel=filter(lambda x:x[1]==cmodel.structures[filta],self.submodels.values())[0][0]
+             #print cmodel
+             #print "RESELEMS=", telements
+             #for x in telements:
+                    #print x
 
-             return map(funcname,[ cmodel.process_path([e[0]],[e[1]],  '#'.join(['/'.join(filt[1:])]+l[2:]), lambda x:x, return_all) for e in zip(telements,taddresses) ])
-             #assert(False)
+             #return map(funcname,[ cmodel.process_path([e[0]],[e[1]],  '#'.join(['/'.join(filt[1:])]+l[2:]), lambda x:x, return_all) for e in zip(telements,taddresses) ])
+             ##assert(False)
          ###
           #print telements
         if return_all:
@@ -562,9 +556,9 @@ class Model(object):
      for s in self.statmodels.items():
        if (submodel_selector_f(s,cpath)):
            r[s[0]]=fct_f(s,cpath)
-     for s in self.structures.items():
-       if (submodel_selector_f(s)):
-           r[s[0]]=fct_f(s,cpath)
+     #for s in self.structures.items():
+     #  if (submodel_selector_f(s)):
+     #      r[s[0]]=fct_f(s,cpath)
      return r
 
         
@@ -594,9 +588,9 @@ class Model(object):
      for s in self.statmodels.items():
        if (submodel_selector_f(s,cpath)):
            r.extend(fct_f(s,cpath))
-     for s in self.structures.items():
-       if (submodel_selector_f(s)):
-           r.extend(fct_f(s,cpath))
+     #for s in self.structures.items():
+     #  if (submodel_selector_f(s)):
+     #      r.extend(fct_f(s,cpath))
      return r
 
 

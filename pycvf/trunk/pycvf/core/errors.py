@@ -21,7 +21,7 @@
 
 
 # -*- coding: utf-8 -*-
-import sys,logging,logging.handlers,sys
+import sys,logging,logging.handlers,sys, traceback
 
 from pycvf.core import settings
 
@@ -39,6 +39,12 @@ pycvf_log_handler = logging.handlers.RotatingFileHandler(  LOG_FILENAME, maxByte
 pycvf_log_handler.setFormatter(pycvf_log_formatter)
 pycvf_logger.addHandler(pycvf_log_handler)
 
+
+def pycvf_backtrace():
+    if (hasattr(sys,"last_traceback")):
+        traceback.print_tb(sys.last_traceback)
+    else:
+        traceback.print_tb(sys.exc_traceback)    
 
 def pycvf_error(errmsg):
    try:

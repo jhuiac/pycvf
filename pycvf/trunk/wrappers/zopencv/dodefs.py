@@ -15,6 +15,8 @@ import os
 import numpy
 import ctypes
 import typedesc
+import hashlib
+import pickle
 import gccxmlparser
 from smallgraph import *
 try:
@@ -641,19 +643,39 @@ def write_struct_union_members_accessors2(listelems,prefix=[]):
 
 
 
-def correctarg(t,n):
+def _correctarg(t,n):
     """ this function is called on each argument in order to add the proper workaround for it to be bassed correctly and safely to the C function """
     for tsr in REWRITE_RULES:
       if (tsr["declared_type_match"](t,n)):
 	return ' or '.join( [ "((" +r["match_expr"](t,n) + ") and "+r["returns"](t,n) + ")"  for r in tsr["instantiated_type_match"] ]   )
+
+def _correctargb(t,n):
+    """ this function is called on each argument in order to add the proper workaround for it to be bassed correctly and safely to the C function """
+    for tsr in REWRITE_RULES:
+      if (tsr["declared_type_match"](t,n)):
+	return ' or '.join( [ "((" +r["match_expr"](t,n) + ") and "+r["returns"](t,n) + ")"  for r in tsr["instantiated_type_match"] ]   )
+
+
+def encode_type(t):
+    return hashlib.md5(pickle.dumps(t,protocol=1)).hexdigest()
+    
+arg_checkers={}   
 
 def correctargb(t,n):
-    """ this function is called on each argument in order to add the proper workaround for it to be bassed correctly and safely to the C function """
-    for tsr in REWRITE_RULES:
-      if (tsr["declared_type_match"](t,n)):
-	return ' or '.join( [ "((" +r["match_expr"](t,n) + ") and "+r["returns"](t,n) + ")"  for r in tsr["instantiated_type_match"] ]   )
+    global arg_checkers
+    key=encode_type(t)
+    if (not arg_checkers.has_key(key)):
+       arg_checkers[key]=_correctargb(t,"x")
+    return "zopencv_argck.correctarg_%s(%s)"%(key,n)
 
-
+def correctarg(t,n):
+    global arg_checkers
+    key=encode_type(t)
+    if (not arg_checkers.has_key(key)):
+       arg_checkers[key]=_correctarg(t,"x")
+    return "zopencv_argck.correctarg_%s(%s)"%(key,n)
+    
+    
 def old_correctarg(t,n):
     if (is_valid_pointer_on_structure(t,n)):
         stt=realtype_of(realtype_of(t).typ)
@@ -871,7 +893,7 @@ zzdcl=open("declarations.pxd","w")
 zzdcl.write(file("declarations_header.pyx").read())
 zzdcl.write("cimport numpy\n")
 zzdcl.write("cimport stdlib\n")
-zzdcl.write("ctypedef stdlib.size_t size_t\n")
+#zzdcl.write("ctypedef stdlib.size_t size_t\n")
 
 for t in INCOMPLETETYPES:
  if t not in EXPLICITTYPES:
@@ -924,10 +946,12 @@ classes_f.write("import zopencv_lowlevel\n")
 classes_f.write("import zopencv_pclasses\n")
 classes_f.write("import zopencv_classes\n")
 classes_f.write("import zopencv_core\n")
+classes_f.write("import zopencv_argck\n")
 classes_f.write("cimport stdlib\n")
 classes_f.write("cimport zopencv_lowlevel\n")
 classes_f.write("cimport zopencv_pclasses\n")
 classes_f.write("cimport zopencv_classes\n")
+classes_f.write("cimport zopencv_argck\n")
 sys.stderr.write(("#generating classes\n"))
 for includef in includes:
     for f in filter(lambda x:try_match_location(includef,x),list(xcvsym[0])):
@@ -1023,10 +1047,12 @@ pointerclasses_f.write("import zopencv_classes\n")
 pointerclasses_f.write("import zopencv_pclasses\n")
 pointerclasses_f.write("import zopencv_lowlevel\n")
 pointerclasses_f.write("import zopencv_core\n")
+pointerclasses_f.write("import zopencv_argck\n")
 pointerclasses_f.write("cimport stdlib\n")
 pointerclasses_f.write("cimport zopencv_classes\n")
 pointerclasses_f.write("cimport zopencv_pclasses\n")
 pointerclasses_f.write("cimport zopencv_lowlevel\n")
+pointerclasses_f.write("cimport zopencv_argck\n")
 sys.stderr.write(("#generating pointer classes\n"))
 for includef in includes:
     for f in filter(lambda x:try_match_location(includef,x),list(xcvsym[0])):
@@ -1108,9 +1134,11 @@ lowlevel_functions_d=new_cython_decl_file("zopencv_lowlevel.pxd")
 lowlevel_functions_f.write("import zopencv_classes\n")
 lowlevel_functions_f.write("import zopencv_pclasses\n")
 lowlevel_functions_f.write("import zopencv_core\n")
+lowlevel_functions_f.write("import zopencv_argck\n")
 lowlevel_functions_f.write("cimport stdlib\n")
 lowlevel_functions_f.write("cimport zopencv_classes\n")
 lowlevel_functions_f.write("cimport zopencv_pclasses\n")
+lowlevel_functions_f.write("cimport zopencv_argck\n")
 sys.stderr.write(("#generating low-level function wrappers\n"))
 for includef in includes:
     for f in filter(lambda x:try_match_location(includef,x),list(xcvsym[0])):
@@ -1146,12 +1174,18 @@ highlevel_functions_f.write("import zopencv_lowlevel\n")
 highlevel_functions_f.write("import zopencv_classes\n")
 highlevel_functions_f.write("import zopencv_pclasses\n")
 highlevel_functions_f.write("import zopencv_core\n")
+highlevel_functions_f.write("import zopencv_argck\n")
 highlevel_functions_f.write("import sys\n")
-lowlevel_functions_f.write("cimport stdlib\n")
+highlevel_functions_f.write("cimport stdlib\n")
 highlevel_functions_f.write("cimport zopencv_lowlevel\n")
 highlevel_functions_f.write("cimport zopencv_classes\n")
 highlevel_functions_f.write("cimport zopencv_pclasses\n")
+highlevel_functions_f.write("cimport zopencv_argck\n")
 sys.stderr.write("generating highlevel wrappers\n")
+
+
+
+
 for includef in includes:
     for f in filter(lambda x:try_match_location(includef,x),list(xcvsym[0])):
         if ((type(f)==typedesc.Function) and (not (f.name in IGNOREFUNCTIONS))):
@@ -1171,6 +1205,21 @@ for includef in includes:
             highlevel_functions_f.write(( "\treturn zopencv_lowlevel._raw_"+f.name+'(' + ','.join(map(lambda x:"_arg_"+x, f.iterArgNames())) + ')\n'))
 
 
+
+argck_f=new_cython_file("zopencv_argck.pyx")
+argck_d=new_cython_decl_file("zopencv_argck.pxd")
+argck_f.write("import zopencv_core\n")
+argck_f.write("import sys\n")
+argck_f.write("cimport stdlib\n")
+argck_f.write("cimport zopencv_lowlevel\n")
+argck_f.write("cimport zopencv_classes\n")
+argck_f.write("cimport zopencv_pclasses\n")
+sys.stderr.write("generating argument checking and conversion wrappers\n")
+
+for c in arg_checkers.items():
+    argck_d.write("cdef correctarg_%s(x)\n"%(c[0],))    
+    argck_f.write("cdef correctarg_%s(x):\n"%(c[0],))
+    argck_f.write("\treturn %s\n\n"%(c[1],))
 
 
 ##### ####################################################################################################################################################################

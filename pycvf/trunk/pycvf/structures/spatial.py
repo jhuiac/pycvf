@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+ #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 ## ##########################################################################################################
 ## 
@@ -21,6 +21,7 @@
 
 
 # -*- coding: utf-8 -*-
+from pycvf.core.errors import *
 from pycvf.core.structure import ModelStructure
 import itertools
 from itertools import *
@@ -32,8 +33,15 @@ def unit(n,d):
   return v
 
 def patch(ary,pos,sz):
+    print "P"
+    print "PPOS=",pos
+    print "PSZ=",sz
+    pycvf_warning("PATCH")
     off=sum(map(lambda x,y,z:x*(y%z),ary.strides,pos,ary.shape))
-    return numpy.ndarray(buffer=buffer(ary.data,off,len(ary.data)-off) ,shape=sz, strides=ary.strides, dtype=ary.dtype )
+    print off
+    r=numpy.ndarray(buffer=buffer(ary.data,off,len(ary.data)-off) ,shape=sz, strides=ary.strides, dtype=ary.dtype )
+    print "/P"
+    return r
 
 def set_patch(ary,pos,sz,value):
     for x in numpy.ndindex(sz):
@@ -63,9 +71,9 @@ class DefaultStructure(ModelStructure):
   def output_datatype(self,datatype):
      from pycvf.datatypes import basics
      if (self.layersdim==0):
-        return basics.FloatDatatype
+        return basics.Float.Datatype
      else:
-        return basics.NumericVectorDatatype
+        return basics.NumericVector.Datatype
   @classmethod
   def return_flat_datatype(cls):
      return True
@@ -145,6 +153,9 @@ class DefaultStructure(ModelStructure):
  
  
 class Subdivide(ModelStructure):
+  """
+  Subdivide an image according to a division structure...
+  """
   ##
   ## BASIC CONSTRUCTION
   ##
@@ -219,19 +230,24 @@ class Subdivide(ModelStructure):
      return numpy.linalg.norm(numpy.array(x1)-numpy.array(x2)) 
  
 
-###
-### Decompose and recompose images into regular boxes
-### 
 class RegularPatches(DefaultStructure):
-     def __init__(self, layersdim, patchsize=(4,4), *args, **kwargs):
+     """
+     Decompose and recompose arrays into regular boxes...
+     """
+     def __init__(self, layersdim=1, patchsize=(4,4), *args, **kwargs):
          DefaultStructure.__init__(self,*args,**kwargs)
          self.patchsize=patchsize
+         self.layersdim=layersdim
      def output_datatype(self,datatype):
         return datatype
+     def shape(self,instance):
+         sz=tuple(map(lambda x,y:x//y,DefaultStructure.shape(self,instance),self.patchsize))+(1,)*(self.layersdim)
+         print "SZ=",sz
+         return sz
      def keys(self, instance):
-         return numpy.ndindex(map(lambda x,y:x//y,instance.shape,self.patchsize))
+         return numpy.ndindex(self.shape(instance))
      def values(self,instance):
-        return map(lambda x:patch(instance,x,patchsize),self.keys(instance))
+         return map(lambda x:patch(instance,map(lambda c,d:c*d,x,self.patchsize+(1,)*self.layersdim),self.patchsize+(instance.shape[-self.layersdim:] if self.layersdim else () )),self.keys(instance))
      def items(self, instance):
         return itertools.izip(self.keys(instance),self.values(instance))
      def recompose(self,instance,values):
@@ -240,7 +256,58 @@ class RegularPatches(DefaultStructure):
          for a in range(len(al)):
            set_patch(r,al[a],self.patchsize, v[a] )
          return r
+     
+     
+class RegularPatchEdges(DefaultStructure):
+     """
+     Decompose and recompose arrays into regular boxes...
+     """
+     def __init__(self, layersdim, patchsize=(4,4),edge_dim=0, *args, **kwargs):
+         DefaultStructure.__init__(self,*args,**kwargs)
+         self.patchsize=patchsize
+         self.layersdim=layersdim
+         self.edge_dim=edge_dim
+         self.edgesize=list(self.patchsize)
+         self.edgesize[edge_dim]*=2
+     def output_datatype(self,datatype):
+        return datatype
+     def shape(self,instance):
+         sz=map(lambda x,y:x//y,DefaultStructure.shape(self,instance),self.patchsize)+[1]*(self.layersdim)
+         sz[self.edge_dim]-=1         
+         return tuple(sz)
+     def keys(self, instance):
+         return numpy.ndindex(self.shape(instance))    
+     def values(self,instance):
 
+         print "V,",instance
+         print self.edgesize
+         print instance.shape[-self.layersdim:]
+         v1=self.patchsize+(1,)*self.layersdim
+         print "v1=", v1
+         
+         v2=tuple(self.edgesize)+(instance.shape[-self.layersdim:] if self.layersdim!=0 else ())
+         print "v2=",v2
+         return map(lambda x:patch(instance,map(lambda c,d:c*d,x,v1),v2 ),self.keys(instance))
+
+     
+         r=map(lambda x:patch(instance,map(lambda c,d:c*d,x,v1),v2),self.keys(instance))
+         print "RET"
+         return instance
+         print "/V"
+         return r
+     def items(self, instance):
+        return itertools.izip(self.keys(instance),self.values(instance))
+     def recompose(self,instance,values):
+         r=numpy.zeros(shape=instance.shape,dtype=instance.dtype)
+         al=addresses(instance)
+         for a in range(len(al)):
+           set_patch(r,al[a],self.edgesize, v[a] )
+         return r     
+
+
+     
+     
+     
      
 
 class Elements(DefaultStructure):
@@ -311,8 +378,17 @@ class ReverseEdges(DefaultStructure):
          return v.reshape(self.instance.shape)
 
 
+     
+
+     
+#################################################################################################################################################
+#################################################################################################################################################
+#################################################################################################################################################
+
+     
+     
 class Ball(DefaultStructure):
-     """ Vosinage , Topologie et Contraintes...."""
+     """ At each position returns a ball ...."""
      @classmethod
      def return_flat_datatype(cls):
         return True

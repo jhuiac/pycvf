@@ -1,0 +1,14 @@
+Essentials on Python for Scientists
+===================================
+
+To use PyCVF you need to be able to use Python, with modern extensions.
+There is a various good tutorials online.
+
+There exists already numerous tutorials on the topic, that cover in-depth many aspects of python in Science.
+
+* %[url "http://docs.python.org/tut/tut.html"] The python tutorial.
+
+* %[url "http://www.scipy.org/Tentative_NumPy_Tutorial"] The numpy tutorial.
+* %[url "http://www.scipy.org/NumPy_for_Matlab_Users"] The very good numpy for matlab users.
+
+* %[url "http://www.rexx.com/~dkuhlman/scipy_course_01.html"]The scipy course online.

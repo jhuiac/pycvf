@@ -160,7 +160,9 @@ Fames=["Barack Obama",
        ]
 
 
-class DB(database.ContentsDatabase,image.Datatype):
+class DB(database.ContentsDatabase):
+  def datatype:
+      return image.Datatype
   def __init__(self,who=Fames[0],maxframes=100):
      self.who=who
      self.maxframes=maxframes

@@ -36,6 +36,9 @@ from pycvf.core.builders import *
 from pycvf.core.errors import *
 
 class DB(database.ContentsDatabase):
+  """
+   This allows you to apply some model on the database before to explore it.  
+  """
   def __init__(self,db="imgkanji()",model="histogram()",modelpath="/",datatype=None):
       self.vdb=(pycvf_builder(db) if type(db) in [str,unicode] else db)
       self.model=(pycvf_builder(model) if type(model) in [str,unicode] else model)

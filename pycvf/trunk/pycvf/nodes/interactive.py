@@ -7,15 +7,15 @@ import pycvf.core.database
 from pycvf.core import settings
 from pycvf.core import builders
 
-def dblist():
+def nodelist():
      r=[]
      for x in globals().values():
         try:
-          if issubclass(x,pycvf.core.database.ContentsDatabase):
+          if issubclass(x,pycvf.core.genericmodel.GenericModel):
              r.append(x)
         except:
           pass
-     dbl=settings.PYCVF_DATABASE_PATH.split(':')
+     dbl=settings.PYCVF_MODEL_PATH.split(':')
      for p in dbl:
         if (p):
           for x in os.listdir(builders.pycvf_builder(p[:-1]).__path__[0]):
@@ -33,19 +33,11 @@ def dblist():
      return r
 
 
-def select_db(): 
-    """
-     This database allows you to select interactively which database you want to use.
-     Its implementation is really minimal for the moment, but it may act as memo
-     when you search of the name of databasse.
-    """
-    dbl=dblist()
+def select_node():
+    dbl=nodelist()
     sl=map(lambda x,y:(x,y),range(1,1+len(dbl)),dbl)
     for l in sl: print l
     r=int(sys.stdin.readline())
     return builders.load_force(dbl[r])
-
-DB=select_db    
-__call__=select_db
-
-
+    
+__call__=select_node

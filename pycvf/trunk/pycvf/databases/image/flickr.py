@@ -30,7 +30,9 @@ from pycvf.core import database
 import pickle
 from PIL import Image
 
-class DB(database.ContentsDatabase,image.Datatype):
+class DB(database.ContentsDatabase):
+  def datatype(self):
+      return image.Datatype
   def __init__(self,query="Rocket",results=50, with_cache=None,rescale=None):
     done=False
     self.rescale=rescale

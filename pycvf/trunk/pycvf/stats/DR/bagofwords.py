@@ -24,13 +24,25 @@
 
 import sys,numpy,time
 from pycvf.lib.info import persistent
+from pycvf.core.
+
 from scipy import cluster
 from scipy import spatial
 from scipy import stats
 
 class BagOfWords(persistent.PersistentObject):
   ### aka histograms upon vectorial quantization
-  def __init__(self,categories,burnin=2000, vocabulary=None, algo=0, *args,**kwargs):
+  """
+  """
+  def __init__(self,categories,burnin=2000, 
+               vocabulary=None, 
+               clustering="kmean", 
+               clusteringargs=(),
+               describer="histogram",
+               describerargs=(),
+               algo=0, 
+               *args,
+               **kwargs):
      self.burnin=burnin
      self.categories=(vocabulary) and len(vocabulary) or categories
      self.vocabulary=vocabulary
@@ -42,7 +54,9 @@ class BagOfWords(persistent.PersistentObject):
      self.algo=algo
      self.algos=[self.algo0,self.algo1,self.algo2]
   def algo0(self,r):
-     """ simply return histogram of distance to the closest element in vocabulary"""
+     """ simply return histogram of distance to the closest element in vocabulary
+         r is the distance matrix on the queries
+     """
      return numpy.histogram(r.argmin(axis=1),self.categories,range=(0,self.categories),normed=True)[0]
   def algo1(self,r):
      """ simply return an histogram of distance to the 3 closest elements in vocabulary ,and arbitrary weighting"""
@@ -68,6 +82,8 @@ class BagOfWords(persistent.PersistentObject):
             +c2*numpy.histogram(rag[:,1],self.categories,range=(0,self.categories),normed=True)[0]
             +c3*numpy.histogram(rag[:,2],self.categories,range=(0,self.categories),normed=True)[0]    
             )
+  def get_status():
+      return (STATUS_READY if self.vocabulary!=None else STATUS_NOT_READY)
   def push(self,entries):
     if (entries)==None:
       return None
@@ -88,15 +104,15 @@ class BagOfWords(persistent.PersistentObject):
        #print "BAGOFWORDS PUSH GV!", len(self.te),"/",self.burnin, type(entries), entries.shape
        if (type(entries)==numpy.ndarray):
          if (entries.shape[0]==0):
-           sys.stderr.write("maybe strange... no entry in bag of words...")
+           sys.stderr.write("bagofwords: maybe strange... no entry in bag of words...")
            return numpy.zeros((self.categories,))
          assert(entries[0]!=None)
        else:
          if (len(entries))==0:
-           sys.stderr.write("maybe strange... no entry in bag of words...")
+           sys.stderr.write("bagofwords: maybe strange... no entry in bag of words...")
            return numpy.zeros((self.categories,))
        if entries[0]==None:
-           sys.stderr.write("maybe strange... none in bag of words...")
+           pycvf_warning("bagofwords: maybe strange... none in bag of words...")
            return numpy.zeros((self.categories,))
        try:
          r=spatial.distance.cdist(entries,self.vocabulary)
@@ -108,7 +124,10 @@ class BagOfWords(persistent.PersistentObject):
          #print "entries=", repr(entries)
          #print "vocabulary=", repr(self.vocabulary)
          raise 
-
+  def cluster_kmeans(self,tes,categ):
+     return cluster.vq.kmeans2(tes, self.categories)[0]
+     
+     
 class WeightedBagOfWords(BagOfWords):
   def __init__(self,categories, walgo=0, *args,**kwargs):
      super(WeightedBagOfWords,self).__init__(categories,*args,**kwargs)

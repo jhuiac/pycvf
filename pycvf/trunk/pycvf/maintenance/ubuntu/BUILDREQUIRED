@@ -10,4 +10,7 @@ libhighgui-dev
 python-ctypes
 gcc-4.1
 g++-4.1
-gccxml 
+gccxml
+cmake
+make
+subversion

@@ -89,13 +89,13 @@ def iconcatiter(f,l):
 
 
 
-class StatusNotReady:
+class STATUS_NOT_READY:
     pass
 
-class StatusReady:
+class STATUS_READY:
     pass
 
-class StatusError:
+class STATUS_ERROR:
     pass
 
 
@@ -134,8 +134,9 @@ class Model(object):
       self.structures={}
       self.statmodels={}
       self.processing=[]
-      self.status=StatusNotReady
+      self.status=STATUS_READY
       self.invert_processing=[]
+      self.modelpath=None
       self.datatype_in=None
       self.datatype_out=None
       self.metainfo_curdb=None
@@ -621,7 +622,7 @@ class Model(object):
      """
      Returns information about one node
      """
-     return {'name':self.name,'data_in':self.datatype_in, 'processline': self.processline,'data_out': self.datatype_out}
+     return {'name':self.name,'data_in':self.datatype_in, 'processline': self.processline,'data_out': self.datatype_out,'directory':self.get_modelpath()}
 
 
 
@@ -640,7 +641,22 @@ class Model(object):
      r[self.cname]=lm
      return r
 
+  def get_local_status(self):
+      """ Returns the local status of a node """
+      return STATUS_READY
 
+  def get_status(self):
+      """ Returns STATUS_READY if and only if the whole subtree if ready"""
+      ls=self.get_local_status()
+      if ls!=STATUS_READY:      
+          return ls
+      else:
+          for sub in self.submodels.values():
+              s=sub.get_status()
+              if (s!=STATUS_READY):
+                  return s
+      return STATUS_READY
+  
   def get_cnames(self):
     "returns the complete name of a model"
     r=[]

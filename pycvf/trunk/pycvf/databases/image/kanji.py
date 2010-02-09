@@ -31,12 +31,14 @@ from pycvf.lib.graphics.genkanjis import *
 # Create the ContentsDatabase Object
 #########################################################################################################################################
 
-class DB(database.ContentsDatabase,image.Datatype):
+class DB(database.ContentsDatabase):
     """
        Displays all the kanjis from the database, you may specify the size of the destination area, the size of the rendering area, the size
        of the font, and an upper bound on the number of kanjis that we want to see displayed.
        The rendering engine is QT. So you need to have a working display somewhere.
     """
+    def datatype(self):
+      return image.Datatype
     def __init__(self,scl=(48,48),fontsz=32,maxcnt=10000,invert=False):
         self.scl=scl
         self.fontsz=fontsz

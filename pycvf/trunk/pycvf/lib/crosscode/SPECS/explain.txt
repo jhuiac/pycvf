@@ -1,0 +1,18 @@
+This directory contains module that allow to do cross coding from
+python. I.e. to mix different programming languages into python and
+to do just in time compialtion.
+
+This allow to have both efficiency.
+
+The main issues that these modules are in charge to resolve here are :
+
+1) Finding the libraries and the compilers for the user
+2) Converting the PyCVF datatypes to datatypes that are understandable
+by other toolkits.
+
+Typically, we are now working on these bridges :
+
+1) Torch3
+2) VXL
+3) CImg
+

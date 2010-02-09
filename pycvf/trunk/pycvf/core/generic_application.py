@@ -3,7 +3,7 @@ from pycvf.lib.info.options import *
 from pycvf.core import settings
 from pycvf.core import builders
 from pycvf.core.errors import *
-from pycvf.core.genericmodel import NotReady
+from pycvf.core.genericmodel import STATUS_READY, NotReady
 from pycvf.core import settings
 from pycvf.core import directories
 
@@ -170,7 +170,7 @@ class ModelUsingApplication(DatabaseUsingApplication):
      if int(cls.frameworkv.value) in [1,2]:
         pycvf_warning("Old models are deprecated please think about upgrading yourmodel")
         modelbuilder=__import__(
-                              "pycvf.archives.framework%02d.models.modelbuilder"%(int(cls.frameworkv.value)), 
+                              "pycvf.archives.framework%02d.models.modelbuilder"%(int(cls.frameworkv.value)),
                               fromlist=[
                                  'pycvf', 'archives', 'framework%02d'%(int(cls.frameworkv.value),), 'models'
                                  ] 
@@ -180,11 +180,11 @@ class ModelUsingApplication(DatabaseUsingApplication):
         cls.mdl=model_build(cls.mymodel.value,cls.vdb.datatype(),suppargs=cls.mymodelargs.value)
         cls.mdl.metainfo_curdb=cls.vdb
      else:
-        pycvf_debug(10,"/initializing model")         
+        pycvf_debug(10,"MODELINIT")         
         cls.mdl=builders.model_builder(cls.mymodel.value)
-        cls.mdl.init('/',cls.vdb.datatype(),cls)
+        cls.mdl.init('/',cls.vdb.datatype(),cls,modelpath=os.path.join(settings.PYCVF_MODEL_DIR,cls.session.value))
         cls.mdl.metainfo_curdb=cls.vdb
-        pycvf_debug(10,"/model initialzed")
+        pycvf_debug(10,"/MODELINIT")
      assert(cls.mdl.get_curdb()==cls.vdb)
      cls.mmeta=cls.mdl.get_features_meta()
      cls.preprocess() 
@@ -192,17 +192,20 @@ class ModelUsingApplication(DatabaseUsingApplication):
 
   @classmethod
   def preprocess(cls, *args, **kwqrgs):
-      pycvf_debug(2,"Starting PREPROCESS")
+      pycvf_debug(2,"PREPROCESS")
       cls.mdl.print_tree()
       cont=True
       # while the model is in a learning stqte (returning NotReady) train the model
       ei=iter(cls.vdb)
       while cont:
           try:
-              sys.stderr.write(".")
-              e=ei.next()
-              cls.mdl.process(e[0],addr=e[1])
-              cont=False
+              status=cls.mdl.get_status()
+              if (status!=STATUS_READY):
+                sys.stderr.write(".")
+                e=ei.next()
+                cls.mdl.process(e[0],addr=e[1])
+              else:
+                cont=False
           except StopIteration:
               pycvf_error("Your database appear to be too small for using this model")
           except NotReady:
@@ -210,16 +213,16 @@ class ModelUsingApplication(DatabaseUsingApplication):
           except:
               raise
       cls.mdl.metainfo_curaddr=None
-      pycvf_debug(2," PREPROCESS DONE")
+      pycvf_debug(2," /PREPROCESS")
   
   @classmethod
   def finish(cls, *args, **kwqrgs):
-      pycvf_debug(2,"Starting FINISH")
+      pycvf_debug(2,"CLEANUP")
       cls.mdl.destroy()
       del cls.mdl
       del cls.mmeta
       gc.collect()
-      pycvf_debug(2,"Done FINISH")      
+      pycvf_debug(2,"/CLEANUO")      
 
   modelhelp_option=CmdLineOption(None,"modelhelp",None,"show info on parameters required by the database",lambda :x__modelhelp(ModelUsingApplication))                             
 

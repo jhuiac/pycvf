@@ -23,15 +23,28 @@
 # -*- coding: utf-8 -*-
 from pycvf.lib.graphics.imgfmtutils import *
 
-def surf(object,as_couple=False):
+def surf(x,as_couple=False):
   xnb=x
   if (xnb.ndim==3):
     xnb=xnb.mean(axis=2)
-  if (xnb.dtype!=numpy.int):
-    xnb=xnb.astype(numpy.int)
-  return numpy.array(sifto(xnb))
-  from opencv.cv import cvExtractSURF,CvSeq,cvCreateMemStorage, cvSURFParams
-  keypoints,descriptors=cvExtractSURF(xnb,0,cvSURFParams( 500, 1 ) ,0)
+  if (xnb.dtype!=numpy.uint8):
+    xnb=xnb.astype(numpy.uint8)
+  #from opencv.cv import cvExtractSURF,CvSeq,cvCreateMemStorage, cvSURFParams
+  #keypoints,descriptors=cvExtractSURF(xnb,0,cvSURFParams( 500, 1 ) ,0)
+  import zopencv
+  from zopencv import cvExtractSURF,cvSURFParams
+  params=cvSURFParams(500,1)
+  print dir(params)
+  #cvSURFParams( 500, 1 )
+  #CvArr * img,CvArr * mask,CvSeq * * keypoints,CvSeq * * descriptors,CvMemStorage * storage,CvSURFParams params,int useProvidedKeyPts)
+  keypoints=zopencv.zopencv_pclasses.PointerOnCvSeq(0)
+  descriptors=zopencv.zopencv_pclasses.PointerOnCvSeq(0)
+  storage = zopencv.cvCreateMemStorage ( 0 )
+  cvExtractSURF(xnb,0,keypoints.get_pointer_on_pointer(), descriptors.get_pointer_on_pointer() , storage, params ,0)
+  print "SURF OUTPUT=",keypoints.total, descriptors.total
+  keypoints=map(lambda x:zopencv.zopencv_pclasses.PointerOnCvPoint(keypoints.getSeqElem(x)) ,range(keypoints.total))
+  descriptors=map(lambda x:zopencv.zopencv_pclasses.PointerOnCvPoint(descriptors.getSeqElem(x)) ,range(descriptors.total))
+  zopencv.cvReleaseMemStorage(storage.get_pointer_on_pointer())
   if as_couple:
      return (numpy.array(keypoints),numpy.array(descriptors))
   else:

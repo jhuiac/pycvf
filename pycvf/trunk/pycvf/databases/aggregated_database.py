@@ -32,6 +32,9 @@ import pickle
 from pycvf.lib.ui.qt import qapp
 
 class DB(database.ContentsDatabase):
+  """
+  This database allow you to create a new database composed by aggregating different other database, to which you may assign a label.
+  """
   def __init__(self,dbs):
       self.dbs=dbs
       for db in range(len(self.dbs)):
@@ -48,7 +51,7 @@ class DB(database.ContentsDatabase):
         else:
            self.vdb=ContentsDatabase( **eval('{'+dbargs+'}'))
   def datatype(self):
-       retun self.dbs.datatype()           
+       return self.dbs.datatype()           
   def __iter__(self):
       for db in self.dbs:
         for e in itertools.ifilter(lambda x:self.vdbval[self.vdbaddr.index(x[1])]>self.threshold ,self.vdb):

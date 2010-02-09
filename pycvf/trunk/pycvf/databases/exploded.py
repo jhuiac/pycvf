@@ -37,6 +37,10 @@ from pycvf.core.builders import *
 from pycvf.core.errors import *
 
 class DB(database.ContentsDatabase):
+  """
+  This create a dabase from another database by exploding all the elements of the initial database
+  according to specified structure.
+  """
   def __init__(self,db,structure=None,quick_len=False,cache_id=None):
       self.vdb=(model_builder(db) if type(db) in [str, unicode] else db)
       if (structure==None):

@@ -1,0 +1,13 @@
+The simplest method for installing this package is to use
+
+downloadandbuild.sh
+
+This will download the latest version of OpenCV in the trunk branch of the SVN and build the wrapper against it.
+It still require quite a lot of memory especially on 64bits computers.
+We are working on these issues.
+
+Since we don't want to modify too much your system you still have to install the library manually.
+
+If you have problems, please check TROUBLESHOOTINGS file.
+
+Bertrand Nouvel

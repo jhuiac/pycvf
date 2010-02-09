@@ -7,6 +7,10 @@ from pycvf.core.errors import *
 from pycvf.lib.info.track import OnDiskMultiTrackLarge, OnDiskMultiTrackLargeZ
 
 class DB(database.ContentsDatabase):
+  """
+    When your features are heavy to compute, it is smart to precompute them in a trackfile.
+    You may then access the computed features through this module.
+  """
   def __init__(self,trackfilename,st=0,datatype=None,filter_nulls=True,filter_emptylists=True):
       self.trackfilename=trackfilename
       self.tf=OnDiskMultiTrackLargeZ(trackfilename)     

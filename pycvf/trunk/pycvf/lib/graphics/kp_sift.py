@@ -24,6 +24,7 @@
 import sys,numpy
 import sift as siftm
 #import pycudaSift
+
 sifto=siftm.sift
 
 def sift(x,as_couple=False):

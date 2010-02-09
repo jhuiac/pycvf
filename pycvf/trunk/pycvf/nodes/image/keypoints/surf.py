@@ -12,10 +12,6 @@
 ################################################################################################################################################################################
 
 
-###
-###
-
-
 from pycvf.core import genericmodel
 from pycvf.datatypes import basics
 from pycvf.datatypes import image

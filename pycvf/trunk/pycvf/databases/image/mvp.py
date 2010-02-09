@@ -34,9 +34,11 @@ from pycvfext.lib.specifics.mvp.mvpaccess import *
 from pycvf.core import database
 from pycvf.datatypes import image
 
-class DB(database.ContentsDatabase,image.Datatype):
+class DB(database.ContentsDatabase):
   TRACK_SELECTOR={ 'video1':(0, -1,{})}
   ld=None
+  def datatype(self):
+      return image.Datatype
   def __init__(self,with_mvp=True,channels=None,startfrom=None,keyframes_only=True, smallpics=True,track_selector=None):
      if (with_mvp):
        self.mvp=MvpAccess(with_ontology=False);

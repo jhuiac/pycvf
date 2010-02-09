@@ -33,6 +33,9 @@ from pycvf.datatypes import couple
 from pycvf.datatypes import basics
 
 class DB(database.ContentsDatabase):
+  """
+   This database either  DEPRECATED either to be up UPDATED.
+  """
   def __init__(self,db="image_directory",dbargs="",samplefrom=0,nsamples=20):
       try:
         exec("from "+ db +" import ContentsDatabase as cdb")

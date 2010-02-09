@@ -39,11 +39,24 @@ def select_db():
      Its implementation is really minimal for the moment, but it may act as memo
      when you search of the name of databasse.
     """
-    dbl=dblist()
-    sl=map(lambda x,y:(x,y),range(1,1+len(dbl)),dbl)
-    for l in sl: print l
-    r=int(sys.stdin.readline())
-    return builders.load_force(dbl[r])
+    try:
+      from pycvf.lib.ui import qt
+      from PyQt4.QtGui import QInputDialog
+      dbl=dblist()
+      r=QInputDialog.getItem(None,"Select a database to use", "Select a database to use",dbl)
+      if r[1]:
+        r=str(r[0])
+      else:
+        raise KeyboardInterrupt
+    except KeyboardInterrupt:
+      raise
+    except: 
+      dbl=dblist()
+      sl=map(lambda x,y:(x,y),range(1,1+len(dbl)),dbl)
+      for l in sl: print l
+      r=int(sys.stdin.readline())
+      r=dbl[r-1]
+    return builders.load_force(r)
 
 DB=select_db    
 __call__=select_db

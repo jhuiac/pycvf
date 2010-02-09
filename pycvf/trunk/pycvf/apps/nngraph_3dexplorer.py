@@ -20,6 +20,52 @@ from threading import Thread
 cmr12 = loader.loadFont('cmr12.egg')
 
 world_object=None
+#FDepthStencil 	
+#FColorIndex 	
+#FRed 	
+#FGreen 	
+#FBlue 	
+#FAlpha 	
+#FRgb 	
+#FRgb5 	
+#FRgb8 	
+#FRgb12 	
+#FRgb332 	
+#FRgba 	
+#FRgbm 	
+#FRgba4 	
+#FRgba5 	
+#FRgba8 	
+#FRgba12 	
+#FLuminance 	
+#FLuminanceAlpha 	
+#FLuminanceAlphamask 	
+#FRgba16 	
+#FRgba32 	
+#FDepthComponent 	
+#FDepthComponent16 	
+#FDepthComponent24 	
+#FDepthComponent32 	
+
+
+def np2texture(arr):
+  if (arr.shape[2]==1):
+   arr=arr.repeat(3,axis=2)
+  assert(arr.shape[2] in [3,4])
+  assert(arr.dtype==numpy.uint8)
+  arr=numpy.flipud(arr)
+  #print arr.ndim, len(arr.ravel().copy('C').data), arr.shape
+  #self.arr = numpy.zeros((64, 64, 3), dtype=numpy.uint8) 
+  imageTexture = Texture("image") 
+  imageTexture.setup2dTexture(arr.shape[1], arr.shape[0], Texture.TUnsignedByte, (Texture.FRgb if arr.ndim==3 else Texture.FRgba) ) 
+
+  p = PTAUchar.emptyArray(0) 
+  try: 
+    p.setData(arr.data) 
+  except AttributeError: 
+    p.setData(arr.copy('C').data) 
+  imageTexture.setRamImage(CPTAUchar(p))
+  return imageTexture
  
 class World(DirectObject):    
     def enable_picking(self):
@@ -87,13 +133,14 @@ class World(DirectObject):
              tnph.reparentTo(nnr)
              tnpb.setPos(-w2,0 ,-3)
              tnph.setPos(-w2,0 ,3)
-             texfilename=os.tmpnam()+".jpg"
-             img=NumPy2PIL(255-self.ld[y][0][:,:,0])
-             img.save(texfilename)
-             tex=loader.loadTexture(texfilename)
+             #texfilename=os.tmpnam()+".jpg"
+             #img=NumPy2PIL(255-self.ld[y][0][:,:,0])
+             #img.save(texfilename)
+             #tex=loader.loadTexture(texfilename)
+             tex=np2texture(self.ld[y][0])
              nn.setTexture(tex)
              nnr.setTexture(tex)
-             os.remove(texfilename)
+             #os.remove(texfilename)
              nn.setTag("action",str(pickle.dumps((-1,(self.ld[y][0],self.ld[y][1])))))
              nn.lookAt(base.camera)
              self.nn = self.iconwheel.hprInterval(0,Point3(0,0,0)) 

@@ -176,9 +176,13 @@ class Model(object):
          pycvf_debug(10,"init of "+b+a[1].get_name(None)+"/")
          a[1].init(b+a[1].get_name(None)+"/",self.datatype_out, application,directory=self.directory+a[1].get_name("noname")+"/")
          for k in a[1].context.items():
-           if (self.context.has_key(k[0])):
+           c=0
+           rn=on=k[0]
+           while (self.context.has_key(rn)):
               pycvf_warning("BE CAREFUL IT SEEMS THAT YOU HAVE A CONFLICT")
-           self.context[k[0]]=k[1]
+              rn="%s_%d"%(on,c)
+              c+=1
+           self.context[rn]=k[1]
      self.datatype_in=self.input_datatype(datatype)
      self.datatype_out=self.output_datatype(datatype)
      self.submodel_op(lambda x,y:issubclass(x[1].__class__,Model), set_cname, self.cname)
@@ -219,6 +223,9 @@ class Model(object):
          self.name=sugg_name
      return self.name
      
+  def set_name(self,sugg_name):
+      self.name=sugg_name
+
   def prepare_model(self):
       # normally we shall check for all submodels
       self.status=StatusReady
@@ -257,7 +264,14 @@ class Model(object):
      return self
 
   def __add__(self,model2):
-       self.submodels[model2.get_name(self.get_new_anonymous_submodel_name())]=model2
+       c=0
+       rn=on=model2.get_name(self.get_new_anonymous_submodel_name())
+       while (self.submodels.has_key(rn)):
+         pycvf_warning("already a submodel with name %s"%(rn))
+         rn="%s_%d"%(on,c)
+         c+=1
+         model2.set_name(rn)
+       self.submodels[rn]=model2
        self.last_child=model2
        model2.parent=self
        return self

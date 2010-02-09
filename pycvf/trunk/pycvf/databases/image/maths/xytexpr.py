@@ -21,11 +21,13 @@ from pycvf.datatypes import image
 # Create the ContentsDatabase Object
 #########################################################################################################################################
 
-class DB(database.ContentsDatabase,image.Datatype):
+class DB(database.ContentsDatabase):
   """
     * Create noise images
   """
   #TS_SMALLVIDEO={ 'video1':(0, -1, {'videoframebanksz':1, 'dest_width':128, 'dest_height':96})}
+  def datatype(self):
+    return image.Datatype
   def __init__(self,fct=(lambda x,y,t:127+127*math.cos((x+t)/10)*math.sin((y-t)/10)) ,resolution=(256,256), maximage=None ):
      self.fct=(eval(fct) if type(fct) in [str, unicode] else fct)
      self.resolution=resolution

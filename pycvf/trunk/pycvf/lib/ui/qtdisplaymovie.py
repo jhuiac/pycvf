@@ -50,6 +50,8 @@ class QtDisplayMovie(QtGui.QWidget):
             self.subimages=subimages
             self._i=numpy.zeros((90,120,4),dtype=numpy.uint8)
             self.t=None
+            if (self._i.ndim==2):
+              self._i=self._i.reshape(self._i.shape+(1,)).repeat(3,axis=2)
             self.i=QtGui.QImage(self._i.data,self._i.shape[1],self._i.shape[0],self.imgconvarray[self._i.shape[2]])
             if (self.subimages): 
                self._si=[None]* self.subimages
@@ -88,17 +90,28 @@ class QtDisplayMovie(QtGui.QWidget):
             #self.update()
         def ontimer(self):
             try:
+                #sys.stderr.write("[*")
                 self.reader.step()
-            except:
+                #sys.stderr.write("]")
+            except KeyboardInterrupt:
+                raise
+            except Exception,e:
+                #sys.stderr.write("~")
+                print "Exception in qtdisplaymovie",e
                 self.reader.rewind()
                 self.reader.step()
         def f(self,thearray):
+            #print "f"
             self._i=thearray.astype(numpy.uint8).copy('C')
+            if (self._i.ndim==2):
+              self._i=self._i.reshape(self._i.shape+(1,)).repeat(3,axis=2)
             self.i=QtGui.QImage(self._i.data,self._i.shape[1],self._i.shape[0],self.imgconvarray[self._i.shape[2]])
             if (self._i.shape[2]==1):
                 self.i.setColorTable(self.colortable)
             self.update()
+            #print "/f"
         def paintEvent(self, ev):
+            #print "p", self._i.shape
             rdiv=0.66666
             self.p = QtGui.QPainter()
             self.p.begin(self)
@@ -124,6 +137,7 @@ class QtDisplayMovie(QtGui.QWidget):
                              self.si[sii],
                              QtCore.QRect(0,0,self.si[sii].width(),self.si[sii].height()))
             self.p.end()
+            #print "/p"
 
 
 class QtDisplayMovieDialog(QtGui.QDialog):

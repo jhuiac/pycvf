@@ -21,11 +21,13 @@ from pycvf.datatypes import basics
 # Create the ContentsDatabase Object
 #########################################################################################################################################
 
-class DB(database.ContentsDatabase,basics.NumericArray.Datatype):
+class DB(database.ContentsDatabase):
   """
     * Create noise images
   """
   #TS_SMALLVIDEO={ 'video1':(0, -1, {'videoframebanksz':1, 'dest_width':128, 'dest_height':96})}
+  def datatype(self):
+    return basics.NumericArray.Datatype
   def __init__(self,ndim=4,nvectors=256, amplitude=1,offset=-0.5,maxelems=None ):
      self.resolution=(nvectors,ndim)
      self.maxelems=maxelems

@@ -1,0 +1,12 @@
+include LICENSE INSTALL
+include *.txt
+include LICENSE.GPLv3
+include LICENSE.LGPL-3
+include documentation/tutorial.tex
+include wrappers/install_additional_packages.sh
+recursive-include pycvf *.txt *.py
+recursive-include documentation *.tex *.py
+recursive-include wrappers *.txt *.py
+recursive-include datas *.txt *.py
+prune examples/sample?/build
+prunt *.old

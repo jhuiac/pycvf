@@ -1,0 +1,1 @@
+/usr/bin/c++   -fPIC   CMakeFiles/lsh-run.dir/lsh-run.cpp.o  -o ../bin/lsh-run -rdynamic ../lib/liblshkit.a -Wl,-Bstatic -lboost_program_options-mt -Wl,-Bdynamic 

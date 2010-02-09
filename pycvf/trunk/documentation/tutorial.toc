@@ -1,0 +1,44 @@
+\select@language {english}
+\contentsline {chapter}{\numberline {1}Forewords}{2}{chapter.1}
+\contentsline {section}{\numberline {1.1}This is a development version}{2}{section.1.1}
+\contentsline {section}{\numberline {1.2}What's wrong with previous Frameworks ?}{2}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Which Frameworks ??}{2}{subsection.1.2.1}
+\contentsline {section}{\numberline {1.3}Why to do a Python Framework ?}{2}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Well programmed Python can be REALLY FAST !}{2}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}Python allow OBJECTS and LAMBDAs !}{2}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.3.3}Python is FREE !}{3}{subsection.1.3.3}
+\contentsline {subsection}{\numberline {1.3.4}Python community is ALIVE !}{3}{subsection.1.3.4}
+\contentsline {chapter}{\numberline {2}Installation of the Framework}{4}{chapter.2}
+\contentsline {section}{\numberline {2.1}Installation on your machine with Ubuntu Linux}{4}{section.2.1}
+\contentsline {section}{\numberline {2.2}Generic Installation from the source}{4}{section.2.2}
+\contentsline {chapter}{\numberline {3}Essentials of Python for Scientists}{5}{chapter.3}
+\contentsline {section}{\numberline {3.1}Numeric Python}{5}{section.3.1}
+\contentsline {section}{\numberline {3.2}Scientific Python}{6}{section.3.2}
+\contentsline {section}{\numberline {3.3}PyFFMPEG 2 alpha Essentials}{9}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Playing VideoFiles}{9}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Loading VideoFiles}{9}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Extracting Keyframes}{10}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Checking parameters of file}{11}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}Performances and playing simulatneous video}{11}{subsection.3.3.5}
+\contentsline {subsection}{\numberline {3.3.6}Orange}{13}{subsection.3.3.6}
+\contentsline {subsection}{\numberline {3.3.7}MVPA (Multivariate Pattern Analysis)}{13}{subsection.3.3.7}
+\contentsline {subsection}{\numberline {3.3.8}Shogun}{13}{subsection.3.3.8}
+\contentsline {section}{\numberline {3.4}PyMedia}{13}{section.3.4}
+\contentsline {chapter}{\numberline {4}Use of the Framework}{14}{chapter.4}
+\contentsline {section}{\numberline {4.1}Visualizing Databases}{14}{section.4.1}
+\contentsline {section}{\numberline {4.2}Evaluation Databases}{15}{section.4.2}
+\contentsline {section}{\numberline {4.3}Building Simple Indexes}{15}{section.4.3}
+\contentsline {section}{\numberline {4.4}Using Models}{16}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Checking the Outputs of Models}{16}{subsection.4.4.1}
+\contentsline {section}{\numberline {4.5}Training and Testing Models}{18}{section.4.5}
+\contentsline {section}{\numberline {4.6}Learning Skin Color And Doing Skin Color Filtering}{19}{section.4.6}
+\contentsline {section}{\numberline {4.7}The Poullot Video Indexation Algorithm}{21}{section.4.7}
+\contentsline {section}{\numberline {4.8}Indexing Your Sound Database}{21}{section.4.8}
+\contentsline {section}{\numberline {4.9}Learning the average image}{21}{section.4.9}
+\contentsline {section}{\numberline {4.10}Saving and Reading Track Files}{27}{section.4.10}
+\contentsline {section}{\numberline {4.11}Improving / Repairement}{27}{section.4.11}
+\contentsline {section}{\numberline {4.12}Multiple Tests and Recognition}{28}{section.4.12}
+\contentsline {subsection}{\numberline {4.12.1}Filtering Adult Material}{28}{subsection.4.12.1}
+\contentsline {subsubsection}{Filtering Adult Material based on Skin colors}{28}{section*.2}
+\contentsline {subsubsection}{Filtering Adult Material based on Skin Texture}{28}{section*.3}
+\contentsline {subsection}{\numberline {4.12.2}Classifying Natural Scenes}{28}{subsection.4.12.2}

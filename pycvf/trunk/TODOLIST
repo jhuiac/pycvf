@@ -1,0 +1,45 @@
+To be rethought : 
+  * How to avoid name clash in the dataflow
+  * The dataflow is loosing part of its utility (check how much necessary/should we remove it)
+  * Optimize loading for small apps
+  * Relation Library / Components / Program to be simplefied
+  * Installation procedure /
+    a) Provide script for editing environement
+    b) Provide a way to do binary releases of all the wrappers used.
+  * imgfmtutils is loads zopencv even when we need only PIL2NumPy
+
+Applications:
+  * Spectral Audio Computer
+  * Spectral Audio Denoiser
+  * Video Spectrum
+  * Generic SuperResolution
+ 
+ 
+Refactoring:
+  * Simplify names of statistical models
+  * Refactor indexing so that we have clear range queries and so on ...
+  * General process (Models)
+  * Uniformize debug levels
+  * datatypes names
+  * Allow pipes to be parsed in good order, maybe with such syntax: 
+     PIPE([Model1, Model2, PIPE([Model3]) ])
+
+Finishing:
+  * Finish support for database with labels
+  * Optimize test index
+
+Shot segmented :
+  * Add segmenters
+
+Generic Learning:
+  * Add generic application for learning discrete labels from observations
+  * Add generic application for learning continuous labels from observations
+  * Add generic application for learning vectorial labels from observations
+  * Allow easy specification of models
+
+Tracking :
+  * Implement Trackers
+  * Testing
+
+Highlevel
+  * HL Models

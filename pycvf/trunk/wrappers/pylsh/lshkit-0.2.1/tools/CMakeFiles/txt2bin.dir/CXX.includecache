@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/tranx/pycvfext/wrappers/pylsh/lshkit-0.2.1/tools/txt2bin.cpp
+cctype
+-
+cassert
+-
+iostream
+-
+fstream
+-
+string
+-
+boost/foreach.hpp
+-
+boost/format.hpp
+-
+

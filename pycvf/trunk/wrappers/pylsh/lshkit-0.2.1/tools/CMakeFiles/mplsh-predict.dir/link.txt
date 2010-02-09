@@ -1,0 +1,1 @@
+/usr/bin/c++   -fPIC   CMakeFiles/mplsh-predict.dir/mplsh-predict.cpp.o  -o ../bin/mplsh-predict -rdynamic ../lib/liblshkit.a -Wl,-Bstatic -lboost_program_options-mt -Wl,-Bdynamic 

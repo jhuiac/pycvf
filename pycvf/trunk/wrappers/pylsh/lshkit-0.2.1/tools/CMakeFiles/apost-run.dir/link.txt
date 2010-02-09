@@ -1,0 +1,1 @@
+/usr/bin/c++   -fPIC   CMakeFiles/apost-run.dir/apost-run.cpp.o  -o ../bin/apost-run -rdynamic ../lib/liblshkit.a -Wl,-Bstatic -lboost_program_options-mt -Wl,-Bdynamic 

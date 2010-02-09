@@ -1,0 +1,14 @@
+====
+Please ensure that you have GCCXML at least version 0.9.0
+http://archive.ubuntu.com/ubuntu/pool/main/g/gccxml/gccxml_0.9.0+cvs20080525.orig.tar.gz
+
+====
+If you have problem with emmintrin.h or strange bug during GCC 2 XML
+Please be sure that the compiler you are using is compatible with gcc2xml.
+One classic workwround is to link the vervsion of the compiler you want to use in 
+the directory of the project with the default compiler names, and to include
+this directory as first element of your "PATH".
+
+====
+If you have problem with cython find numpy.pxd, please reinstall the
+latest cython from the source directly..

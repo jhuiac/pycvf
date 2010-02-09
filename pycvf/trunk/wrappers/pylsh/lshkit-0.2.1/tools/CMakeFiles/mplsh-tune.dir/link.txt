@@ -1,0 +1,1 @@
+/usr/bin/c++   -fPIC   CMakeFiles/mplsh-tune.dir/mplsh-tune.cpp.o  -o ../bin/mplsh-tune -rdynamic ../lib/liblshkit.a -Wl,-Bstatic -lboost_program_options-mt -Wl,-Bdynamic 

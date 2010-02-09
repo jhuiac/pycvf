@@ -1,0 +1,1 @@
+/usr/bin/c++   -fPIC   CMakeFiles/sketch-run.dir/sketch-run.cpp.o  -o ../bin/sketch-run -rdynamic ../lib/liblshkit.a -Wl,-Bstatic -lboost_program_options-mt -Wl,-Bdynamic 

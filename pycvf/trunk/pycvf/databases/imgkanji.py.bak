@@ -1,0 +1,37 @@
+# -*- coding: utf-8 -*-
+import re, os, math, random, time,sys, traceback, datetime
+
+
+import Image
+from pycvf.lib.graphics.genkanjis import *
+#########################################################################################################################################
+# Create the ContentsDatabase Object
+#########################################################################################################################################
+
+
+from pycvf.models import database
+from pycvf.models.datatypes import image
+
+class ContentsDatabase(database.ContentsDatabase,image.Datatype):
+  """
+     Displays all the kanjis from the database, you may specify the size of the destination area, the size of the rendering area, the size
+     of the font, and an upper bound on the number of kanjis that we want to see displayed.
+     The rendering engine is QT. So you need to have a working display somewhere.
+  """
+  def __init__(self,scl=(48,48),fontsz=32,maxcnt=10000):
+      self.scl=scl
+      self.fontsz=fontsz
+      self.maxcnt=maxcnt
+  def __iter__(self):
+     global kanjidic
+     for i in range(min(len(kanjidic)-1,self.maxcnt)):
+        yield ((plot_kanji_bw(self.scl[0],self.scl[1],kanjidic[1+i][0], fontsz=self.fontsz)).reshape(self.scl+(1,)),unicode(kanjidic[1+i][0]))
+  def __getitem__(self, addr):
+#        print "getting", addr
+        return (plot_kanji_bw(self.scl[0],self.scl[1],addr, fontsz=self.fontsz)).reshape(self.scl+(1,))
+
+
+
+
+          
+              

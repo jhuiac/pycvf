@@ -1,0 +1,1 @@
+/usr/bin/c++   -fPIC   CMakeFiles/mplsh-run.dir/mplsh-run.cpp.o  -o ../bin/mplsh-run -rdynamic ../lib/liblshkit.a -Wl,-Bstatic -lboost_program_options-mt -Wl,-Bdynamic 

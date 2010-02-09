@@ -1,0 +1,1 @@
+/usr/bin/c++   -fPIC   CMakeFiles/run-spectral.dir/run-spectral.cpp.o  -o ../bin/run-spectral -rdynamic ../lib/liblshkit.a -Wl,-Bstatic -lboost_program_options-mt -Wl,-Bdynamic 

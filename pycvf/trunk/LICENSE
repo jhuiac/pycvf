@@ -1,0 +1,41 @@
+The new version of PYCVF is distributed as follow.
+
+
+Generally speaking
+
+Library Files are generally released under LGPL-v3.
+However, some parts of the program may be released under a different licensing scheme.
+Some files are not suitable for being used in commercial applications,
+please check details of licensing schemes of all your dependencies if you do 
+a commercial application with PyCVF. Althought, not mandatory, we would appreciate also 
+if you  let us of know about your commercial application based on PyCVF.
+Note also, that you may 
+
+
+*** ALL SOURCE CODE ARE PROVIDED WITHOUT ANY WARRANTY OF ANY KIND ***
+
+
+
+
+More 
+
+
+Although, you are free to use our work just following the terms of the license of each file, 
+we would be happy if you use can keep us aware of the important achievements that you realized 
+with our softwares.
+
+Programs are generally released under GPL-v3.
+However, some  programs may be released under a different licensing scheme.
+
+Library files are often released uner LGPL. But some file are released under completely
+
+
+If you don't know the contents of these licenses.
+Please refer to LICENSE.LGPL-v3 and  LICENSE.GPL-v3
+
+It is your responsability to check whether you suitable license to use all the files that you plan to use.
+
+Please refer to the associated LICENSE file.
+
+
+

@@ -1,0 +1,1 @@
+/usr/bin/c++   -fPIC   CMakeFiles/embed.dir/embed.cpp.o  -o ../bin/embed -rdynamic ../lib/liblshkit.a -Wl,-Bstatic -lboost_program_options-mt -Wl,-Bdynamic 

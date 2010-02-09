@@ -1,0 +1,26 @@
+# -*- coding: utf-8 -*-
+
+import urllib
+
+class ImageNet:
+    @staticmethod
+    def imagenet_page(wnid):
+      url="http://www.image-net.org/synset?wnid=%d"%(wnid,)
+      return urllib.urlopen(url).read()
+    @staticmethod
+    def hyponyms(wnid,full=False):
+      url="http://www.image-net.org/api/text/wordnet.structure.hyponym?wnid=%d"%(wnid,)
+      if (full):
+         url+="&full=1"
+      return urllib.urlopen(url).read()
+    @staticmethod
+    def synset(wnid):
+      url="http://www.image-net.org/api/text/wordnet.synset.getwords?wnid=%d"%(wnid,)
+      return urllib.urlopen(url).read()
+    @staticmethod
+    def geturls(wnid):
+      url="http://www.image-net.org/api/text/imagenet.synset.geturls?wnid=[wnid]"
+      return urllib.urlopen(url).read()
+
+
+#"http://www.image-net.org/api/text/imagenet.synset.geturls?wnid=

@@ -1,0 +1,59 @@
+Installation instructions
+=========================
+
+
+So far installation instructions are available for LINUX only.
+
+Contributions for other operating systems are welcome !
+
+
+I LINUX
+=======
+  1. Requirements 
+  
+     Essential requirements
+     
+        Python 2.5, 2.6 (or 2.7?) 
+	Setuptools
+	
+	Numpy
+	Scipy
+	Matplotlib
+	
+  2. Installation
+    
+     A) Install PyCVF base software
+     
+        python setup.py build
+        sudo python setup.py install
+	
+     B) Install additional Wrappers
+     
+        cd wrappers;
+	./install-all.sh
+	cd ..
+	
+     C) Install User Space Applications
+  
+        cd pycvf
+	./linkbin.sh
+	cd ..
+  
+     D) Configure your environement
+     
+        edit your file "~/.pycvf-settings.py"
+	
+	
+	
+     E) Accept LICENSE and Register
+     
+	echo "import pycvf.core" | python
+	
+     F) import CONTRIB packages in pycvfext
+         including :
+	 
+	 niisatoh
+	 trecvid2007
+	 jfli
+	 
+	 

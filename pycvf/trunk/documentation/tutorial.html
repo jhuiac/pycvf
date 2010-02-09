@@ -1,0 +1,1153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+           "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<meta name="GENERATOR" content="TtH 3.80">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+ <style type="text/css"> div.p { margin-top: 7pt;}</style>
+ <style type="text/css"><!--
+ td div.comp { margin-top: -0.6ex; margin-bottom: -1ex;}
+ td div.comb { margin-top: -0.6ex; margin-bottom: -.6ex;}
+ td div.hrcomp { line-height: 0.9; margin-top: -0.8ex; margin-bottom: -1ex;}
+ td div.norm {line-height:normal;}
+ span.roman {font-family: serif; font-style: normal; font-weight: normal;} 
+ span.overacc2 {position: relative;  left: .8em; top: -1.2ex;}
+ span.overacc1 {position: relative;  left: .6em; top: -1.2ex;} --></style>
+
+                                                                                                                                                                                                              
+<title> Python Computer Vision Framework</title>
+ 
+<h1 align="center">Python Computer Vision Framework </h1>
+
+<h3 align="center">Bertrand NOUVEL </h3>
+
+<h3 align="center">2009<br />Development Release<br /><br /><br /><br /><br /><br /> <br /><a href="logo_jfli.png">Figure</a> </h3>
+
+<div class="p"><!----></div>
+   
+<h1>Contents </h1>
+<a href="#tth_chAp1"
+>1&nbsp; Forewords</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc1.1"
+>1.1&nbsp; This is a development version</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc1.2"
+>1.2&nbsp; Computer Framework has a High Entry Cost ?</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc1.3"
+>1.3&nbsp; What's wrong with previous Frameworks ?</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc1.3.1"
+>1.3.1&nbsp; Which Frameworks ??</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc1.4"
+>1.4&nbsp; Why to do a Python Framework ?</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc1.4.1"
+>1.4.1&nbsp; Well programmed Python can be REALLY FAST !</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc1.4.2"
+>1.4.2&nbsp; Python allow OBJECTS and LAMBDAs !</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc1.4.3"
+>1.4.3&nbsp; Python is FREE !</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc1.4.4"
+>1.4.4&nbsp; Python community is ALIVE !</a><br />
+<a href="#tth_chAp2"
+>2&nbsp; Installation of the Framework</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc2.1"
+>2.1&nbsp; Installation at NII</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc2.2"
+>2.2&nbsp; Installation on your machine with Ubuntu Linux</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc2.3"
+>2.3&nbsp; Generic Installation from the source</a><br />
+<a href="#tth_chAp3"
+>3&nbsp; Scientific Python Essentials</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.1"
+>3.1&nbsp; Numeric Python</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.2"
+>3.2&nbsp; Scientific Python</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.3"
+>3.3&nbsp; PyFFMPEG 2 alpha Essentials</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.3.1"
+>3.3.1&nbsp; Playing VideoFiles</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.3.2"
+>3.3.2&nbsp; Loading VideoFiles</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.3.3"
+>3.3.3&nbsp; Extracting Keyframes</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.3.4"
+>3.3.4&nbsp; Checking parameters of file</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.3.5"
+>3.3.5&nbsp; Performances and playing simulatneous video</a><br />
+<a href="#tth_chAp4"
+>4&nbsp; Use of the Framework</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc4.1"
+>4.1&nbsp; Visualizing Databases</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc4.2"
+>4.2&nbsp; Evaluation Databases</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc4.3"
+>4.3&nbsp; Building Simple Indexes</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc4.4"
+>4.4&nbsp; Using Models</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc4.4.1"
+>4.4.1&nbsp; Checking the Outputs of Models</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc4.5"
+>4.5&nbsp; Training and Testing Models</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc4.6"
+>4.6&nbsp; Learning Skin Color And Doing Skin Color Filtering</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc4.7"
+>4.7&nbsp; Learning the average image</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc4.8"
+>4.8&nbsp; Saving and Reading Track Files</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc4.9"
+>4.9&nbsp; Multiple Tests and Recognition</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc4.9.1"
+>4.9.1&nbsp; Filtering Adult Material</a><br />
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc4.9.2"
+>4.9.2&nbsp; Classifying Natural Scenes</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc4.10"
+>4.10&nbsp; High Level Models</a><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc4.10.1"
+>4.10.1&nbsp; Going On TRECVID</a><br />
+
+
+<div class="p"><!----></div>
+ <h1><a name="tth_chAp1">
+Chapter 1 </a><br />Forewords</h1>
+
+ <h2><a name="tth_sEc1.1">
+1.1</a>&nbsp;&nbsp;This is a development version</h2>
+The API is described here in order to help people to start using better framework than previous ones.
+
+<div class="p"><!----></div>
+However, the project has grown very quickly, and some part of the design of the software has still to be rethought to be more clear.
+Thus, be aware that the elements you will find in this documentation are likely to change (for better) within one year.
+
+<div class="p"><!----></div>
+ <h2><a name="tth_sEc1.2">
+1.2</a>&nbsp;&nbsp;Computer Framework has a High Entry Cost ?</h2>
+
+<div class="p"><!----></div>
+ <h2><a name="tth_sEc1.3">
+1.3</a>&nbsp;&nbsp;What's wrong with previous Frameworks ?</h2>
+
+     <h3><a name="tth_sEc1.3.1">
+1.3.1</a>&nbsp;&nbsp;Which Frameworks ??</h3>
+First of all there is the question of which Framework. Althought to do computer vision
+is supposed to be cool and popular, there is not that much good integrated software framework.
+Supposedly the community is addicted to Matlab, but I know some of us refused this choice,
+and stayed for a longtime on C and C++.
+
+<div class="p"><!----></div>
+ <h2><a name="tth_sEc1.4">
+1.4</a>&nbsp;&nbsp;Why to do a Python Framework ?</h2>
+
+     <h3><a name="tth_sEc1.4.1">
+1.4.1</a>&nbsp;&nbsp;Well programmed Python can be REALLY FAST !</h3>
+One of the factor that have made Computer Vision stucked to <tt>C</tt> and <tt>C++</tt> programming is the fact they were affraid of loosing performance in switching to a higher level language.
+It is true that if all the access to individual cell of the pixels of a video array have to be interpreted and checked over bounds, range and so on, your program may easily run 1000 slower 
+then its C version.
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc1.4.2">
+1.4.2</a>&nbsp;&nbsp;Python allow OBJECTS and LAMBDAs !</h3>
+One the complicated features of C++, it that everything is typed, you cannot easily add or remove parameters to functions, moreover a function which take has a argument a function, 
+takes only the function pointer as argument, and the context in which it execute has to be a second argument of the function. This generally make these kind of function quite specific.
+
+<div class="p"><!----></div>
+In python you can easily create things like this :
+
+<div class="p"><!----></div>
+<table border="0"><tr><td></td><td><table border="0"><tr><td></td><td width="1000">
+<font size="-1">
+
+l=<b>range</b>(10) <br />
+<b>class</b>&nbsp;Fib: <br />
+&nbsp;&nbsp;<b>def</b>&nbsp;<b>__init__</b>(self): <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.value=0 <br />
+&nbsp;&nbsp;<b>def</b>&nbsp;<b>method</b>(self,v): <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.value+=v <br />
+ <br />
+fib=<b>Fib</b>() <br />
+<b>map</b>(fib.method,l) <br />
+<i>## &gt;  &gt; &nbsp;[None,&nbsp;None,&nbsp;None,&nbsp;None,&nbsp;None,&nbsp;None,&nbsp;None,&nbsp;None,&nbsp;None,&nbsp;None]</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+ <br />
+<b>print</b>&nbsp;fib.value <br />
+<i>## &gt;  &gt; &nbsp;45</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+ <br />
+
+</font>
+
+</td></tr></table><!--vbox-->
+</td><td></td></tr></table><!--hboxt-->     <h3><a name="tth_sEc1.4.3">
+1.4.3</a>&nbsp;&nbsp;Python is FREE !</h3>
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc1.4.4">
+1.4.4</a>&nbsp;&nbsp;Python community is ALIVE !</h3>
+The number of open-source project in Python is turnint to be more than "5
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg1.1">
+</a> <a href="pythonohloh4.png">Figure</a>
+
+<center>Figure 1.1: graphics from ohloh.org</center>
+
+<div class="p"><!----></div>
+And the number of commits thus follows
+
+<div class="p"><!----></div>
+<a name="tth_fIg1.2">
+</a> <a href="pythonohloh.png">Figure</a>
+
+<center>Figure 1.2: graphics from ohloh.org</center>
+
+<div class="p"><!----></div>
+Python programmers code more efficiently since, although having many program in python, 
+they they have less line to change thant their challengers.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg1.3">
+</a> <a href="pythonohloh3.png">Figure</a>
+
+<center>Figure 1.3: graphics from ohloh.org</center>
+
+<div class="p"><!----></div>
+Also, there is much more "Python" Programmers thant Matlab programmers.
+Actually, Matlab has never emerged as a good language for writing complex applications.
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg1.4">
+</a> <a href="pythonohloh1.png">Figure</a>
+
+<center>Figure 1.4: graphics from ohloh.org</center>
+
+<div class="p"><!----></div>
+ <h1><a name="tth_chAp2">
+Chapter 2 </a><br />Installation of the Framework</h1>
+The framework so far has been developped and used under "Linux Ubuntu 8.04/9.04"
+However, it should be easily portable to other systems.
+
+<div class="p"><!----></div>
+It is not yet for diffusion, and is planed to remain closed source for a while.
+
+<div class="p"><!----></div>
+We plan tor progressively make it opensource are the user number will increase.
+
+<div class="p"><!----></div>
+ <h2><a name="tth_sEc2.1">
+2.1</a>&nbsp;&nbsp;Installation at NII</h2>
+
+
+## install a link to the framework binary tree to your home
+ln -s &nbsp;tranx/framework &nbsp;/pcvf
+
+<div class="p"><!----></div>
+# load the environement
+. ./jfli-pcvf-framework-env.sh
+
+<div class="p"><!----></div>
+# if you use regularly the framework, you may add this line to your bashrc: 
+# (else you have to run the previous command line before any session with the framework !)
+echo ". &nbsp;/pcvf/jfli-pcvf-framework-env.sh" &#62;&#62; &nbsp;/.bashrc
+
+<div class="p"><!----></div>
+The environement provides you access to all the necessaries binary packages.
+Congratulations. You are now ready to use the framework.
+
+<div class="p"><!----></div>
+ <h2><a name="tth_sEc2.2">
+2.2</a>&nbsp;&nbsp;Installation on your machine with Ubuntu Linux</h2>
+The framework requires quite a lot of software to work properly.
+
+<div class="p"><!----></div>
+This section is to be updated with help of the users...
+
+<div class="p"><!----></div>
+sudo apt-get install python2.6-minimal python-yahoo python-support python-sphinx python-simplejson &nbsp;  python-sip4 python-sip4-dev python-scientific python-reportlab python-qt4 python-qt4-gl python-qt4-dbus &nbsp;  python-pywt python-pycurl python-ao python-numpy python-matplotlib python-matplotlib-data python-kde4 &nbsp;  python-kde4-dev python-feedparser python-dev python-beautifulsoup
+
+<div class="p"><!----></div>
+ <h2><a name="tth_sEc2.3">
+2.3</a>&nbsp;&nbsp;Generic Installation from the source</h2>
+The framework requires quite a lot of software to work properly.
+
+<div class="p"><!----></div>
+<font size="-4">
+<pre>
+#&nbsp;PYTHON
+drwxrwxr-x&nbsp;18&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;May&nbsp;13&nbsp;20:57&nbsp;Python-2.6
+
+#&nbsp;SETUP&nbsp;UTILS
+easy_install&nbsp;BeautifulSoup
+easy_install&nbsp;ctypes
+easy_install&nbsp;Cython
+
+
+#&nbsp;CMAKE
+drwxrwxr-x&nbsp;13&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;May&nbsp;13&nbsp;19:17&nbsp;cmake-2.6.4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+#&nbsp;GCCXML
+drwxr-xr-x&nbsp;&nbsp;5&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;May&nbsp;13&nbsp;19:18&nbsp;gccxml-0.9.0+cvs20080525.orig
+
+#&nbsp;BLAS&nbsp;+&nbsp;LAPACK&nbsp;+&nbsp;ATLAS
+-rw-rw-r--&nbsp;&nbsp;1&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;4792502&nbsp;Apr&nbsp;18&nbsp;05:32&nbsp;lapack-3.2.1
+-rw-rw-r--&nbsp;&nbsp;1&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;5306483&nbsp;Oct&nbsp;&nbsp;9&nbsp;&nbsp;2008&nbsp;clapack.tgz&nbsp;&nbsp;
+-rw-rw-r--&nbsp;&nbsp;1&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;98957&nbsp;Apr&nbsp;&nbsp;6&nbsp;&nbsp;2007&nbsp;blas.tgz&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+-rw-rw-r--&nbsp;&nbsp;1&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;3260612&nbsp;Feb&nbsp;19&nbsp;06:40&nbsp;atlas3.8.3.tar.gz&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+#&nbsp;FFTW
+drwxrwxr-x&nbsp;18&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;May&nbsp;13&nbsp;15:28&nbsp;fftw-3.2.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+#&nbsp;NUMPY
+drwxr-xr-x&nbsp;&nbsp;5&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;May&nbsp;13&nbsp;17:21&nbsp;numpy-1.3.0
+
+
+#&nbsp;SCIPY&nbsp;(ONE&nbsp;OF&nbsp;THOSE&nbsp;IS&nbsp;OK)
+drwxr-xr-x&nbsp;&nbsp;5&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;May&nbsp;14&nbsp;19:42&nbsp;scipy-0.7.0
+drwxrwxr-x&nbsp;&nbsp;7&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;May&nbsp;14&nbsp;19:07&nbsp;scipy-svn
+
+#&nbsp;MATPLOTLIB
+drwxr-xr-x&nbsp;&nbsp;8&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Jun&nbsp;11&nbsp;17:37&nbsp;freetype-2.3.9&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+drwxr-xr-x&nbsp;15&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;&nbsp;7&nbsp;13:28&nbsp;matplotlib
+
+#&nbsp;Imaging
+-rw-rw-r--&nbsp;&nbsp;1&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;435854&nbsp;Aug&nbsp;&nbsp;6&nbsp;&nbsp;2007&nbsp;Imaging-1.1.6.tar.gz
+
+#&nbsp;OpenCv
+drwxr-xr-x&nbsp;20&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;&nbsp;6&nbsp;16:24&nbsp;opencv
+
+#&nbsp;FFMPEG&nbsp;RELATIVE&nbsp;PACKAGES&nbsp;(FROM&nbsp;SVN)
+drwxrwxr-x&nbsp;14&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Jun&nbsp;29&nbsp;17:09&nbsp;ffmpeg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+drwxrwxr-x&nbsp;&nbsp;6&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;&nbsp;7&nbsp;21:39&nbsp;pyffmpeg2-alpha-candidate
+
+#&nbsp;MACHINE&nbsp;LEARNING&nbsp;RELATIVE&nbsp;PACKAGES
+drwxrwxr-x&nbsp;&nbsp;6&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;&nbsp;7&nbsp;23:03&nbsp;orange
+
+##&nbsp;QT&nbsp;RELATIVE&nbsp;PACKAGES
+drwxr-xr-x&nbsp;&nbsp;8&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;&nbsp;6&nbsp;17:12&nbsp;sip-4.8.2
+drwxr-xr-x&nbsp;29&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;&nbsp;6&nbsp;17:50&nbsp;PyQt-x11-gpl-4.5.4
+
+
+##&nbsp;KDE&nbsp;RELATIVE&nbsp;PACKAGES&nbsp;(OPTIONAL)
+drwxrwxr-x&nbsp;17&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;&nbsp;6&nbsp;17:48&nbsp;fontconfig-2.7.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+drwxr-xr-x&nbsp;&nbsp;3&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;&nbsp;7&nbsp;19:36&nbsp;automoc4-0.9.88&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+drwxr-xr-x&nbsp;12&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;&nbsp;7&nbsp;19:44&nbsp;phonon-4.3.0
+drwxr-xr-x&nbsp;16&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;&nbsp;7&nbsp;21:56&nbsp;soprano
+drwxrwxr-x&nbsp;&nbsp;9&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;&nbsp;7&nbsp;19:58&nbsp;strigi
+drwxr-xr-x&nbsp;42&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;&nbsp;7&nbsp;21:53&nbsp;kdelibs-4.3.0
+drwxr-xr-x&nbsp;42&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;&nbsp;7&nbsp;21:53&nbsp;kdebase-4.3.0
+drwxr-xr-x&nbsp;42&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;&nbsp;7&nbsp;21:53&nbsp;kdebase-runtime-4.3.0
+drwxrwxr-x&nbsp;10&nbsp;tranx&nbsp;tranx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4096&nbsp;Aug&nbsp;&nbsp;7&nbsp;19:09&nbsp;pykde4
+
+
+</pre>
+</font>
+This section is to be updated with help of the users...
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+ <h1><a name="tth_chAp3">
+Chapter 3 </a><br />Scientific Python Essentials</h1>
+
+ <h2><a name="tth_sEc3.1">
+3.1</a>&nbsp;&nbsp;Numeric Python</h2>
+
+
+import numpy
+
+<div class="p"><!----></div>
+<table border="0"><tr><td></td><td><table border="0"><tr><td></td><td width="1000">
+<font size="-1">
+
+<b>import</b>&nbsp;numpy <br />
+ <br />
+z=numpy.<b>zeros</b>((2,2,2)) <br />
+<b>print</b>&nbsp;z <br />
+<i>## &gt;  &gt; &nbsp;[[[&nbsp;0.&nbsp;&nbsp;0.]</i> <br />
+<i>## &gt;  &gt; &nbsp;&nbsp;&nbsp;[&nbsp;0.&nbsp;&nbsp;0.]]</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+<i>## &gt;  &gt; &nbsp;&nbsp;[[&nbsp;0.&nbsp;&nbsp;0.]</i> <br />
+<i>## &gt;  &gt; &nbsp;&nbsp;&nbsp;[&nbsp;0.&nbsp;&nbsp;0.]]]</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+ <br />
+o=numpy.<b>ones</b>((2,2)) <br />
+<b>print</b>&nbsp;o <br />
+<i>## &gt;  &gt; &nbsp;[[&nbsp;1.&nbsp;&nbsp;1.]</i> <br />
+<i>## &gt;  &gt; &nbsp;&nbsp;[&nbsp;1.&nbsp;&nbsp;1.]]</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+ <br />
+e=numpy.<b>eye</b>(2) <br />
+e <br />
+<i>## &gt;  &gt; &nbsp;array([[&nbsp;1.,&nbsp;&nbsp;0.],</i> <br />
+<i>## &gt;  &gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;0.,&nbsp;&nbsp;1.]])</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+ <br />
+r=numpy.random.<b>random</b>((3,3)) <br />
+ <br />
+
+</font>
+
+</td></tr></table><!--vbox-->
+</td><td></td></tr></table><!--hboxt--> <h2><a name="tth_sEc3.2">
+3.2</a>&nbsp;&nbsp;Scientific Python</h2>
+
+
+pyplot.clf()
+pyplot.gray()
+pyplot.imshow(scipy.lena())
+
+<div class="p"><!----></div>
+pyplot.show()
+
+<div class="p"><!----></div>
+<a href="pyfig-ab2809c07efd01ed3d924a69f951aa28.pdf">Figure</a>
+
+<div class="p"><!----></div>
+import scipy
+
+<div class="p"><!----></div>
+l=scipy.lena()
+scipy.fft2(l)
+
+<div class="p"><!----></div>
+l=scipy.lena()
+# compute FFT
+r=numpy.log(1+numpy.abs(numpy.fft.fft2(l)))
+# recenter FFT so it displays nicely
+r=numpy.roll(r,r.shape[0]//2,axis=0)
+r=numpy.roll(r,r.shape[1]//2,axis=1)
+
+<div class="p"><!----></div>
+pyplot.clf();pyplot.jet();pyplot.colorbar();pyplot.imshow(r)
+
+<div class="p"><!----></div>
+pyplot.show()
+
+<div class="p"><!----></div>
+<a href="pyfig-ea3a0e4746cc8d7e0092a4516bdb92b4.pdf">Figure</a>
+
+<div class="p"><!----></div>
+def powerspectrum_only(i):
+  return numpy.real(numpy.fft.ifft2(abs(numpy.fft.fft2(i))))
+
+<div class="p"><!----></div>
+r=powerspectrum_only(scipy.lena())
+
+<div class="p"><!----></div>
+pyplot.clf();pyplot.jet();pyplot.colorbar();pyplot.imshow(r)
+
+<div class="p"><!----></div>
+pyplot.show()
+
+<div class="p"><!----></div>
+<a href="pyfig-57a80b38750b3fdf8a224dd607ad2e46.pdf">Figure</a>
+
+<div class="p"><!----></div>
+def phase_only(i):
+  return numpy.real(numpy.fft.ifft2(numpy.exp(1J*scipy.angle(numpy.fft.fft2(i)))))
+
+<div class="p"><!----></div>
+r=phase_only(scipy.lena())
+
+<div class="p"><!----></div>
+pyplot.clf();pyplot.jet();pyplot.colorbar();pyplot.imshow(r)
+
+<div class="p"><!----></div>
+pyplot.show()
+
+<div class="p"><!----></div>
+<a href="pyfig-9fdcc79eabdaced297af4fd09aa29aee.pdf">Figure</a>
+
+<div class="p"><!----></div>
+ <h2><a name="tth_sEc3.3">
+3.3</a>&nbsp;&nbsp;PyFFMPEG 2 alpha Essentials</h2>
+
+     <h3><a name="tth_sEc3.3.1">
+3.3.1</a>&nbsp;&nbsp;Playing VideoFiles</h3>
+
+
+cd pyffmpeg2-alpha-candidate
+cd examples
+python playvideo_qt_alsa.py videofile.mpg
+
+<div class="p"><!----></div>
+<a href="playvideoqt.png">Figure</a>
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc3.3.2">
+3.3.2</a>&nbsp;&nbsp;Loading VideoFiles</h3>
+
+
+# basic code for playing a movie (but that so far actually does not display anything)
+from pyffmpegb import FFMpegReader
+p=FFMpegReader()
+mp.open(sys.argv[1])
+mp.run()
+
+<div class="p"><!----></div>
+It is now time to actually do something, let's try to compute the luminance of each frame and to display it on the console :
+
+<div class="p"><!----></div>
+from pyffmpegb import FFMpegReader
+
+<div class="p"><!----></div>
+p=FFMpegReader()
+
+<div class="p"><!----></div>
+mp.open(sys.argv[1])
+tracks=mp.get_tracks()
+
+<div class="p"><!----></div>
+def event_processor(video_packet):
+  video_image,video_time_code = video_packet
+  print video_time_code, video_image.shape, video_image.mean()
+
+<div class="p"><!----></div>
+tracks[0].set_observer(event_processor)
+mp.run()
+
+<div class="p"><!----></div>
+The open function can actually take a very important parameter called the track_selector.
+Using this parameter you may define which track<a href="#tthFtNtAAB" name="tthFrefAAB"><sup>1</sup></a> from the file you want to open,  how you want to open each track.
+
+<div class="p"><!----></div>
+Here are some examples of track selectors:
+
+<div class="p"><!----></div>
+TS_VIDEO_RGB24= 'video1':(0, -1, 'pixel_format':PixelFormats.RGB24), 'audio1':(1,-1,)
+TS_VIDEO_BGR24= 'video1':(0, -1, 'pixel_format':PixelFormats.BGR24), 'audio1':(1,-1,)
+TS_VIDEO_GRAY8= 'video1':(0, -1, 'pixel_format':PixelFormats.GRAY8,'videoframebanksz':1, 'skip_frame':32)
+
+<div class="p"><!----></div>
+As you can see track selectors are disctionaries whose value are triplets.
+The first element of the triplet, which can be 0 or 1 define the nature of the track, 'video' or 'audio'. 
+The second element of the triplet, define the stream number in the file, negative number indicate to query only "compatible streams". Thus -1 generally denotes the default track of the speciefied type.
+The third argument is a dictionary of options to be passed to the decoder. The options are of course dependant on the decoder being used.
+
+<div class="p"><!----></div>
+For video tracks you may set the following option, a pixel_format, the size of the frame buffer (this buffer is normally useless, but I had some problem with some files where frame where still interleaved, 
+and I prefer to keep it to face possible buggy decoders), the skip_frame argument may be used to specified whether all frames should be read, or whether we should only read key_frames. You can get more information
+on this field py reading related ffmpeg header files. There is also option for rescaling the output.
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc3.3.3">
+3.3.3</a>&nbsp;&nbsp;Extracting Keyframes</h3>
+
+
+# basic code for playing a movie (but that so far actually does not display anything)
+p=FFMpegReader()
+TS_VIDEO_GRAY8= 'video1':(0, -1, 'pixel_format':PixelFormats.GRAY8,'videoframebanksz':1, 'skip_frame':32)
+mp.open(sys.argv[1],TS_VIDEO_GRAY8)
+
+<div class="p"><!----></div>
+def event_processor(video_packet):
+  video_image,video_time_code = video_packet
+  print video_time_code, video_image.shape, video_image.mean()
+
+<div class="p"><!----></div>
+mp.run()
+
+<div class="p"><!----></div>
+     <h3><a name="tth_sEc3.3.4">
+3.3.4</a>&nbsp;&nbsp;Checking parameters of file</h3>
+<br /><table border="0" align="left"><tr><td></td><td width="1000">
+<font size="-1">
+
+<b>from</b>&nbsp;pyffmpegb&nbsp;<b>import</b>&nbsp;* <br />
+mp=<b>FFMpegReader</b>() <br />
+TS_VIDEO_GRAY8={&nbsp;<tt>'video1'</tt>:(0,&nbsp;-1,&nbsp;{<tt>'pixel_format'</tt>:PixelFormats.GRAY8,<tt>'videoframebanksz'</tt>:1,&nbsp;<tt>'skip_frame'</tt>:32})} <br />
+mp.<b>open</b>(<tt>"/home/tranx/conan1.flv"</tt>,TS_VIDEO_GRAY8) <br />
+t=mp.<b>get_tracks</b>() <br />
+t[0].<b>get_fps</b>() <br />
+<i>## &gt;  &gt; &nbsp;29.970029830932617</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+mp.<b>duration</b>() <br />
+<i>## &gt;  &gt; &nbsp;494681000L</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+mp.<b>step</b>() <br />
+mp.<b>get_current_frame</b>()[0][0] <br />
+<i>## &gt;  &gt; &nbsp;2603000L</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+mp.<b>get_current_frame</b>()[0][1] <br />
+<i>## &gt;  &gt; &nbsp;1</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+mp.<b>get_current_frame</b>()[0][2].<b>squeeze</b>() <br />
+<i>## &gt;  &gt; &nbsp;array([[&nbsp;97,&nbsp;144,&nbsp;165,&nbsp;...,&nbsp;199,&nbsp;190,&nbsp;171],</i> <br />
+<i>## &gt;  &gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[101,&nbsp;147,&nbsp;167,&nbsp;...,&nbsp;199,&nbsp;190,&nbsp;171],</i> <br />
+<i>## &gt;  &gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;99,&nbsp;146,&nbsp;166,&nbsp;...,&nbsp;199,&nbsp;190,&nbsp;171],</i> <br />
+<i>## &gt;  &gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...,&nbsp;</i> <br />
+<i>## &gt;  &gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;62,&nbsp;&nbsp;88,&nbsp;&nbsp;95,&nbsp;...,&nbsp;103,&nbsp;&nbsp;97,&nbsp;&nbsp;92],</i> <br />
+<i>## &gt;  &gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;62,&nbsp;&nbsp;88,&nbsp;&nbsp;95,&nbsp;...,&nbsp;104,&nbsp;&nbsp;98,&nbsp;&nbsp;93],</i> <br />
+<i>## &gt;  &gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;62,&nbsp;&nbsp;88,&nbsp;&nbsp;95,&nbsp;...,&nbsp;105,&nbsp;&nbsp;99,&nbsp;&nbsp;93]],&nbsp;dtype=uint8)</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+ <br />
+<i>#&nbsp;FLV&nbsp;has&nbsp;no&nbsp;seeking&nbsp;capabilities...</i> <br />
+<b>for</b>&nbsp;i&nbsp;<b>in</b>&nbsp;<b>range</b>(9): <br />
+&nbsp;&nbsp;mp.<b>step</b>() <br />
+ <br />
+mp.<b>get_current_frame</b>()[0][1] <br />
+<i>## &gt;  &gt; &nbsp;10</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+ <br />
+
+</font>
+
+</td></tr></table><!--vbox--><!--hbox--><br clear="all" />     <h3><a name="tth_sEc3.3.5">
+3.3.5</a>&nbsp;&nbsp;Performances and playing simulatneous video</h3>
+Thanks to FFMPEG and Cython PyFFMPEG is fast.
+We are for instance able to extract 22000 keyframes from a 600 Mbyte MPEG filed in 6seconds using one core of 2.83Ghz QuadCore computer.
+
+<div class="p"><!----></div>
+Anotherway to show that PyFFMPEG is fast is to simultaneous play of many video files.
+Here is a simple code that display a mosaic.
+
+<div class="p"><!----></div>
+# basics needs
+import numpy,random
+from pyffmpegb import *
+
+<div class="p"><!----></div>
+# import a few other elements
+from pycvf.lib.video.lazydisplay import LazyDisplay
+from pycvf.lib.readers.directoryreader import VideoDirectoryReader
+
+<div class="p"><!----></div>
+# select your database
+directory="/databases/tv2007.meta.sav/dev/videos/"
+#directory="/databases/anzen_zeitaku/videos_web/"
+
+<div class="p"><!----></div>
+# instantiate the display
+ld=LazyDisplay()
+
+<div class="p"><!----></div>
+# set parameters
+display_sz=(600,800)
+subdisplay_nb=(11,11)
+
+<div class="p"><!----></div>
+#compute the size of each video
+shp=(display_sz[0]//subdisplay_nb[0], display_sz[1]//subdisplay_nb[1])
+
+<div class="p"><!----></div>
+# initials buffers
+img=numpy.zeros(display_sz+(3,),dtype=numpy.uint8)
+subdisplay=numpy.zeros(subdisplay_nb,dtype=object)
+
+<div class="p"><!----></div>
+# look for videofiles
+vdb=VideoDirectoryReader(directory)
+
+<div class="p"><!----></div>
+# specify to open only video at the correct size
+TS= 'video1':(0, -1, 'pixel_format':PixelFormats.RGB24,'videoframebanksz':1, 'dest_width':shp[1], 'dest_height':shp[0] )
+
+<div class="p"><!----></div>
+# initialize all players (note how convenient is python for the do_display function, parameters  xx comes from the loop but will be stored  within the callback function, so that each video displays a the correct place)
+for xx in numpy.ndindex(subdisplay_nb):
+  mp=FFMpegReader()
+  try:
+           mp.open(directory+"/"+vdb.itername.next(),TS)
+  except:
+           vdb=VideoDirectoryReader(directory)
+           mp.open(directory+"/"+vdb.itername.next(),TS)
+  mp.seek_to(random.randint(1,1024))
+  subdisplay[xx]=mp
+  def do_display(subimg):
+     x=shp[1]*xx[1]
+     y=shp[0]*xx[0]
+     dy,dx=shp
+     img[y:(y+dy),x:(x+dx) ]=subimg
+
+<div class="p"><!----></div>
+    mp.get_tracks()[0].set_observer(do_display)
+
+<div class="p"><!----></div>
+# do play, and reinstantiate players in case of error
+while True:
+  ld.f(img)
+  for xx in numpy.ndindex(subdisplay_nb):
+    try:
+      subdisplay[xx].step()
+    except:
+      try:
+        mp=FFMpegReader()
+        try:
+           mp.open(directory+"/"+vdb.itername.next(),TS)
+        except:
+           vdb=VideoDirectoryReader(directory)
+           mp.open(directory+"/"+vdb.itername.next(),TS)
+        subdisplay[xx]=mp
+        def do_display(subimg):
+         x=shp[1]*xx[1]
+         y=shp[0]*xx[0]
+         dy,dx=shp
+         img[y:(y+dy),x:(x+dx) ]=subimg
+
+<div class="p"><!----></div>
+        mp.get_tracks()[0].set_observer(do_display)
+        mp.step()
+      except Exception,e:
+         pass
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+<a name="tth_fIg3.1">
+</a> <a href="121videos.png">Figure</a>
+
+<center>Figure 3.1: 121 videos displayed in realtime using one processor. Successful attempts have been realized to up to 256 videos (using 2gb memory), display was
+a slow(maybe 4 image per seconds). 400 videos attempts raised a (OSError : Too many files opened, that should be solvable by changing appropriates 
+values in operating system settings)</center>
+
+<div class="p"><!----></div>
+
+<div class="p"><!----></div>
+ <h1><a name="tth_chAp4">
+Chapter 4 </a><br />Use of the Framework</h1>
+
+ <h2><a name="tth_sEc4.1">
+4.1</a>&nbsp;&nbsp;Visualizing Databases</h2>
+
+
+python dbshow.pyc -db image_directory &nbsp; -dbargs ''path' : '/home/tranx/databases/INRIAPerson/70X134H96/Test/pos/'" 
+
+<div class="p"><!----></div>
+<a href="dbshow-0-0.png">Figure</a> 
+<a href="dbshow-0-1.png">Figure</a> 
+<a href="dbshow-0-2.png">Figure</a> 
+<a href="dbshow-0-3.png">Figure</a> 
+<a href="dbshow-0-4.png">Figure</a> 
+<a href="dbshow-0-5.png">Figure</a> 
+<a href="dbshow-0-6.png">Figure</a> 
+<a href="dbshow-0-7.png">Figure</a> 
+<a href="dbshow-0-8.png">Figure</a> 
+<a href="dbshow-0-9.png">Figure</a> 
+
+<div class="p"><!----></div>
+python dbshow.py -help
+
+<div class="p"><!----></div>
+<font size="-1"><tt>
+<pre>
+#######################################################################################
+Database&nbsp;Viewer
+version&nbsp;:0.1
+author&nbsp;:Bertrand&nbsp;Nouvel&nbsp;bertrand.nouvel@gmail.com
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COPYRIGHT&nbsp;Bertrand&nbsp;Nouvel&nbsp;-&nbsp;JFLI&nbsp;-&nbsp;CNRS&nbsp;2009
+#######################################################################################
+	-h/--help&nbsp;		:Displays&nbsp;this&nbsp;help&nbsp;message&nbsp;and&nbsp;exit
+	--db&nbsp;database		:set&nbsp;the&nbsp;database&nbsp;to&nbsp;be&nbsp;read
+	--dbargs&nbsp;database_arguments		:set&nbsp;database&nbsp;options
+	--dbhelp&nbsp;		:show&nbsp;info&nbsp;on&nbsp;parameters&nbsp;required&nbsp;by&nbsp;the&nbsp;database
+	-i/--interval&nbsp;interval		:wait&nbsp;for&nbsp;specified&nbsp;interval&nbsp;in-between&nbsp;entries
+#######################################################################################
+
+
+
+</pre>
+</tt></font>
+
+<div class="p"><!----></div>
+python dbshow.py -db tv2007concept -dbhelp
+
+<div class="p"><!----></div>
+<font size="-1"><tt>
+<pre>
+Please&nbsp;Install&nbsp;PyEm2
+ArgSpec(args=['self',&nbsp;'conceptname',&nbsp;'positive',&nbsp;'randomized',&nbsp;'videoset'],&nbsp;varargs=None,&nbsp;keywords=None,&nbsp;defaults=('Dog',&nbsp;True,&nbsp;True,&nbsp;'devel'))
+
+
+
+</pre>
+</tt></font>
+
+<div class="p"><!----></div>
+It may also be the good moment also to have a look at the code of the application.
+
+<div class="p"><!----></div>
+# -*- coding: utf-8 -*-
+from pycvf.lib.info.graph import *
+from pycvf.core.generic_application import *
+
+<div class="p"><!----></div>
+class DbShowApp(DatabaseUsingApplication):
+  class ProgramMetadata(object):
+      name="Database Show Application"
+      version="1.0"
+      author="Bertrand Nouvel bertrand.nouvel@gmail.com"
+      copyright="        COPYRIGHT Bertrand Nouvel - JFLI - CNRS 2009"
+
+<div class="p"><!----></div>
+  delay=CmdLineString(&#239;",&#239;nterval",&#239;nterval","wait for specified interval in-between entries","0")                             
+
+<div class="p"><!----></div>
+  @classmethod
+  def process(cls,nrels=1,*args,**kwargs):
+
+<div class="p"><!----></div>
+     delay=float(cls.delay.value)
+
+<div class="p"><!----></div>
+     for i in cls.vdb:
+       cls.vdb.display(i[0])
+       if (delay):
+          time.sleep(delay)
+
+<div class="p"><!----></div>
+DbShowApp.run(sys.argv[1:])
+
+<div class="p"><!----></div>
+This quite informative.
+
+<div class="p"><!----></div>
+First of all the code contains only the essential informations for the application,
+
+<div class="p"><!----></div>
+ We are creating an application that will iterate over one database 
+ An optional delay is can be passed  
+ When iterating over one database received elements are couple made of the form &#235;lement", &#228;ddress"  
+ The function is called display, but it is actually a mor generic function that will render a sound if it is a sound and so on 
+
+<div class="p"><!----></div>
+ <h2><a name="tth_sEc4.2">
+4.2</a>&nbsp;&nbsp;Evaluation Databases</h2>
+
+
+python dbeval.py -db yahoo -dbargs ''query':'tomato'"
+
+<div class="p"><!----></div>
+<a href="dbeval.png">Figure</a>
+
+<div class="p"><!----></div>
+To use an evaluated database you should do :
+
+<div class="p"><!----></div>
+python dbshow.py -db user_filtered -dbargs ''db':'yahoo','dbargs':\''query':'tomato'\""
+
+<div class="p"><!----></div>
+It is also possible to query to be evaluated database directly, by using the previous command. 
+On the first run, the computer will ask the user to evaluate the database.
+
+<div class="p"><!----></div>
+ <h2><a name="tth_sEc4.3">
+4.3</a>&nbsp;&nbsp;Building Simple Indexes</h2>
+Simple indexes just associates a content with an address.
+
+<div class="p"><!----></div>
+python build_simple_index.pyc -m naive &nbsp; -db image_directory &nbsp; -dbargs ''path' : '/home/tranx/databases/INRIAPerson/70X134H96/Test/pos/', 'rescale':(8,6,'T')" &nbsp; -s &#239;nria"
+
+<div class="p"><!----></div>
+python build_simple_index.pyc -m naive &nbsp; -db imgkanji -dbargs ''scl':(16,16)" 
+
+<div class="p"><!----></div>
+python gcbquery.pyc &nbsp;   -m naive &nbsp;   -db image_directory &nbsp;    -dbargs ''path' : '/home/tranx/databases/INRIAPerson/70X134H96/Test/pos', 'rescale':(8,6,'T')"&nbsp;    -s &#239;nria" &nbsp;    -i 1 -b 30 -n 5
+
+<div class="p"><!----></div>
+<a href="dbquery.png">Figure</a>
+
+<div class="p"><!----></div>
+python build_simple_index.py -m naive  -db imgkanji -dbargs ''scl':(16,16),'fontsz('12')'" -s kanji12
+python nearestneighborapp.py -m naive  -db imgkanji -dbargs ''scl':(16,16),'fontsz('12')'" -s kanji12
+
+<div class="p"><!----></div>
+<a href="graph001.png">Figure</a>
+
+<div class="p"><!----></div>
+ <h2><a name="tth_sEc4.4">
+4.4</a>&nbsp;&nbsp;Using Models</h2>
+
+     <h3><a name="tth_sEc4.4.1">
+4.4.1</a>&nbsp;&nbsp;Checking the Outputs of Models</h3>
+Once you have defined a model, it is first important to check  what models
+
+<div class="p"><!----></div>
+To automatically view all the important features of a model you may use model_features_view.py:
+
+<div class="p"><!----></div>
+python model_features_view.py &nbsp; -db imgkanji &nbsp;  -m "#M('naive') - 'a':M('image.sift') - 'b':M('basics.mean')"
+
+<div class="p"><!----></div>
+<a href="show_features.png">Figure</a>
+
+<div class="p"><!----></div>
+Although this allow to graphically check, your features this does not allow
+you yet to display informations as they will be passed to your machine learning algorithms.
+For this you have to select a path and a structure
+
+<div class="p"><!----></div>
+python model_feature_print_path.&nbsp; -db imgkanji &nbsp;  -m "#M('naive') - 'a':M('image.sift') - 'b':M('basics.mean')" &nbsp;  -modelpart "//a/b"
+
+<div class="p"><!----></div>
+python model_feature_print_path.py&nbsp; -db imgkanji &nbsp;  -m "#M('naive') - 'a':M('image.sift') - 'b':M('basics.mean')" &nbsp;   -modelpart "//#pixels"
+
+<div class="p"><!----></div>
+python model_feature_print_path.py&nbsp; -db imgkanji &nbsp;  -dbargs '&#223;cl":(16,16)' &nbsp;  -m "#M('naive') - 'a':M('image.sift') - 'b':M('basics.mean')" &nbsp;  -modelpart "/#monochrome-V4*" <br />
+
+<div class="p"><!----></div>
+python model_feature_print_path.py <br />
+   -db imgkanji -modelpart "//a#pointlist" -dbargs '&#223;cl":(48,48)' <br />
+    -m "#M('naive') - 'a':(M('image.sift') - 'b':M('basics.mean'))*'pointlist':S(('list.PointListStructure',('NNP',[2]))) "
+
+<div class="p"><!----></div>
+python model_feature_print_path.py <br />
+   -db imgkanji -modelpart "//a#pointlist/mean" -dbargs '&#223;cl":(48,48)' <br />
+    -m "#M('naive') - 'a':(M('image.sift') - 'b':M('basics.mean'))*'pointlist':S(('list.PointListStructure',('NNP',[2]))) "
+
+<div class="p"><!----></div>
+By using the "@" operator it is possible to retrieve address associated with a structure :
+
+<div class="p"><!----></div>
+python model_feature_print_path.py <br />
+   -db imgkanji -dbargs '&#223;cl":(16,16)' <br />
+   -m "#M('naive')" <br />
+   -modelpart "/#color-V4@" 
+
+<div class="p"><!----></div>
+python model_feature_print_path.py <br />
+   -db tv2007concept -dbargs ''conceptname':'Singing'" <br />
+   -m "#M('naive')" <br />
+   -modelpart "/#images/#color-V4@" 
+
+<div class="p"><!----></div>
+python model_feature_print_path.py <br />
+   -db tv2007concept -dbargs ''conceptname':'Singing'" <br />
+   -m "#M('naive') - '#images':MS('images','naive') - 'rescale':M('image.rescaled',(2,2,'T'))" <br />
+   -modelpart "/#images/rescale"
+
+<div class="p"><!----></div>
+#
+# Let's index images inside of the video 
+#
+TV2007DIR=&nbsp;/databases/tv2007.meta.sav/ python build_index.py <br />
+ -db tv2007concept -dbargs ''conceptname':'Singing'" <br />
+ -m "#M('naive')
+       - '#images':MS('images','naive')
+                   - 'rescale':M('image.rescaled',(2,2,'T'))
+        " <br />
+ -key "/#images/rescale"  -value "/#images@" -idx index_vectors
+
+<div class="p"><!----></div>
+#
+# May we want something different
+#
+TV2007DIR=&nbsp;/databases/tv2007.meta.sav/ python build_index.py <br />
+ -db tv2007concept -dbargs ''conceptname':'Singing'" <br />
+ -m "#M('naive')
+       - '#images':MS('images','naive')
+                   - 'rescale':M('image.rescaled',(2,2,'T'))
+        " <br />
+ -value "/#images/rescale"  -key "/#images@[-1]" -idx index_generic
+
+<div class="p"><!----></div>
+#
+# May we want something different
+#
+python build_index.py <br />
+ -db imgkanji -dbargs '&#223;cl":(48,48)'  <br />
+ -m "#M('naive')
+       - 'a':M('image.sift')
+             *'pointlist':S(('list.PointListStructure',('NNP',[2])))
+              - '#pointlist':MS('pointlist','basics.pcared',16)
+              - 'pointliststat':M('basics.transformedpath',) )
+
+<div class="p"><!----></div>
+       " <br />
+ -value "/a"  -key "/a/" <br />
+ -idx index_generic
+
+<div class="p"><!----></div>
+python build_index.py <br />
+   -db imgkanji  -dbargs '&#223;cl":(48,48)' <br />
+   -m "#M('naive') - 'a':(M('image.sift') - 'b':M('basics.mean'))*'pointlist':S(('list.PointListStructure',('NNP',[2]))) " <br />
+   -key "//a#pointlist/mean" <br />
+   -value "//a#pointlist@" <br />
+   -s "position according to mean sift"
+
+<div class="p"><!----></div>
+python gsquery.py <br />
+   -db imgkanji  -dbargs '&#223;cl":(48,48)' <br />
+   -m "#M('naive') - 'a':(M('image.sift') - 'b':M('basics.mean'))*'pointlist':S(('list.PointListStructure',('NNP',[2]))) " <br />
+   -key "//a#pointlist/mean" <br />
+   -value "//a#pointlist@" <br />
+    -s "position according to mean sift"
+
+<div class="p"><!----></div>
+ <h2><a name="tth_sEc4.5">
+4.5</a>&nbsp;&nbsp;Training and Testing Models</h2>
+Simple indexes just associates a content with an address.
+
+<div class="p"><!----></div>
+python train_model.pyc -m '#M("naive")-"mean":L("meanvariancemodel.SimpleMeanVarianceModel")' &nbsp; -db image_directory &nbsp; -dbargs ''path' : '/home/tranx/databases/INRIAPerson/70X134H96/Test/pos/', 'rescale':(8,6,'T')" &nbsp; -s &#239;nria-naive-mean"
+
+<div class="p"><!----></div>
+
+<pre>
+saving&nbsp;model&nbsp;&lt;jfli.models.naive.MyModel&nbsp;object&nbsp;at&nbsp;0x4a7bf10&#62;
+saving&nbsp;model&nbsp;structure&nbsp;('horizontal-edges',&nbsp;(&lt;jfli.models.structures.spatial.SpatialStructure&nbsp;instance&nbsp;at&nbsp;0x4a50a70&#62;,&nbsp;('H',&nbsp;'')))FAILED
+saving&nbsp;model&nbsp;structure&nbsp;('color-pixels',&nbsp;&lt;jfli.models.structures.spatial.SpatialStructure&nbsp;instance&nbsp;at&nbsp;0x4a50710&#62;)FAILED
+saving&nbsp;model&nbsp;structure&nbsp;('datas',&nbsp;&lt;jfli.models.structures.spatial.SpatialStructure&nbsp;instance&nbsp;at&nbsp;0x4a50680&#62;)FAILED
+saving&nbsp;model&nbsp;structure&nbsp;('vertical-edges',&nbsp;(&lt;jfli.models.structures.spatial.SpatialStructure&nbsp;instance&nbsp;at&nbsp;0x4a50ab8&#62;,&nbsp;('V',&nbsp;'')))FAILED
+saving&nbsp;model&nbsp;statmodels&nbsp;('mean',&nbsp;&lt;jfli.stats.cachedmodel.CachedModel&nbsp;instance&nbsp;at&nbsp;0x4a50b00&#62;)writing&nbsp;/home/tranx/models/MnaivemeanLmeanvariancemodelSimpleMeanVarianceModel-image_directory-inria-naive-mean//mean/lowlevel...
+
+
+</pre>
+
+<div class="p"><!----></div>
+python test_model.pyc &nbsp;   -m naive &nbsp;   -db image_directory &nbsp;    -dbargs ''path' : '/home/tranx/databases/INRIAPerson/70X134H96/Test/pos', 'rescale':(8,6,'T')" &nbsp;    -s &#239;nria" &nbsp;
+
+
+<div class="p"><!----></div>
+ <h2><a name="tth_sEc4.6">
+4.6</a>&nbsp;&nbsp;Learning Skin Color And Doing Skin Color Filtering</h2>
+
+
+python dbshow.py &nbsp;    -db image_directory &nbsp;    -dbargs ''path' : '/home/tranx/databases/anzen_zeitaku/skins/','rescale':(32,32,'T')" 
+
+<div class="p"><!----></div>
+<a href="dbshow-1-0.png">Figure</a> 
+<a href="dbshow-1-1.png">Figure</a> 
+<a href="dbshow-1-2.png">Figure</a> 
+<a href="dbshow-1-3.png">Figure</a> 
+<a href="dbshow-1-4.png">Figure</a> 
+
+<div class="p"><!----></div>
+python train_model.py &nbsp;    -m "#M('naive')
+        -'mean':LS('meanvariancemodel.SimpleMeanVarianceModel','pixels')" &nbsp;    -db image_directory &nbsp;    -dbargs ''path' : '/home/tranx/databases/anzen_zeitaku/skins/','rescale':(32,32,'T')" &nbsp;    -s &#223;kincolor" 
+
+<div class="p"><!----></div>
+This code is roughly equivalent to :
+
+<div class="p"><!----></div>
+python train_model.py &nbsp;    -m "#M('naive')
+         - '#pixels':MS('color-pixels','naive')  
+           -'mean':L('meanvariancemodel.SimpleMeanVarianceModel')
+         " &nbsp;    -db image_directory &nbsp;    -dbargs ''path' : '/home/tranx/databases/anzen_zeitaku/skins/','rescale':(32,32,'T')" &nbsp;    -s &#223;kincolor" 
+
+<div class="p"><!----></div>
+Now we can verify that we learned the correct color:
+
+<div class="p"><!----></div>
+<table border="0"><tr><td></td><td><table border="0"><tr><td></td><td width="1000">
+<font size="-1">
+
+<b>from</b>&nbsp;jfli.stats.meanvariancemodel&nbsp;<b>import</b>&nbsp;SimpleMeanVarianceModel&nbsp;as&nbsp;smvm <br />
+r=smvm.<b>load</b>(<b>file</b>(<tt>"/home/tranx/models/MnaivepixelsMScolorpixelsnaivemeanLmeanvariancemodelSimpleMeanVarianceModel-image_directory-skincolor//#pixels/mean/lowlevel"</tt>)) <br />
+r.<b>mean</b>() <br />
+<i>## &gt;  &gt; &nbsp;array([&nbsp;184.22552268,&nbsp;&nbsp;122.45218402,&nbsp;&nbsp;&nbsp;93.20265846])</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+<i>## &gt;  &gt; &nbsp;</i> <br />
+ <br />
+
+</font>
+
+</td></tr></table><!--vbox-->
+</td><td></td></tr></table><!--hboxt-->from jfli.stats.meanvariancemodel import SimpleMeanVarianceModel as smvm
+
+<div class="p"><!----></div>
+r=smvm.load(file("/home/tranx/models/MnaivepixelsMScolorpixelsnaivemeanLmeanvariancemodelSimpleMeanVarianceModel-image_directory-skincolor//#pixels/mean/lowlevel"))
+pyplot.imshow(r.sample(65536).reshape(256,256,3)/256)
+
+<div class="p"><!----></div>
+pyplot.show()
+
+<div class="p"><!----></div>
+<a href="pyfig-fdf2529522d4bbaf4886c973bd757492.pdf">Figure</a>
+
+<div class="p"><!----></div>
+Of course our model was very very simple, and it may be better to work with bit better mordel :
+So the result is very uniform and not really interesting. However it was of course a minimum that we 
+should be able to do so.
+
+<div class="p"><!----></div>
+As a first improvement we may try to use historgrams instead of variance model
+
+<div class="p"><!----></div>
+python train_model.py &nbsp;    -m "#M('naive')
+         - '#pixels':MS('color-pixels','naive')  
+           -'mean':L('histogrammodel.HistogramModel',(16,16,16),(0,0,0),(255,255,255))
+         " &nbsp;    -db image_directory &nbsp;    -dbargs ''path' : '/home/tranx/databases/anzen_zeitaku/skins/','rescale':(32,32,'T')" &nbsp;    -s &#223;kincolorh" 
+
+<div class="p"><!----></div>
+from jfli.stats.histogrammodel import HistogramModel as hm
+fn="/home/tranx/models/MnaivepixelsMScolorpixelsnaivemeanLhistogrammodelHistogramModel161616000255255255-image_directory-skincolorh2//#pixels/mean/lowlevel"
+r=hm.load(file(fn))
+d=r.sample(65536).reshape(256,256,3)/256.
+
+<div class="p"><!----></div>
+## BUGGY BUGGY BUGGY COLORS INVERTED TO BE FIXED URGENTLY
+d=numpy.dstack([x[:,:,2],x[:,:,1],x[:,:,0]])
+pyplot.imshow(d)
+
+<div class="p"><!----></div>
+<a href="skinhisto000.png">Figure</a>
+
+<div class="p"><!----></div>
+The histogram represents of course much better the luminance diversity of the initial database.
+But we still don't have any connnections in-between the pixels and the quality of the rendering is very poor.
+
+<div class="p"><!----></div>
+However, if we do a random field in order without adding any cosntraint, the random field will be likely to give a us a quite trivial solution.
+And we are interested in getting more subtle result, so as a first application we will do retexturing of images based on our models..
+
+<div class="p"><!----></div>
+ <h2><a name="tth_sEc4.7">
+4.7</a>&nbsp;&nbsp;Learning the average image</h2>
+
+
+##
+## TEST YOUR COMMANDS
+##
+
+<div class="p"><!----></div>
+cat="forest"
+python dbshow.pyc &nbsp;    -db image_directory &nbsp;    -dbargs ''path' : '/home/tranx/databases/8outdoorcategories/', 'filtere':'^cat(.*).jpg'" 
+
+<div class="p"><!----></div>
+<a href="dbshow-2-0.png">Figure</a> 
+<a href="dbshow-2-1.png">Figure</a> 
+<a href="dbshow-2-2.png">Figure</a> 
+<a href="dbshow-2-3.png">Figure</a> 
+<a href="dbshow-2-4.png">Figure</a> 
+
+<div class="p"><!----></div>
+python train_model.py &nbsp;    -m "#M('naive')-'mean':L('meanvariancemodel.SimpleMeanVarianceModel')" &nbsp;    -db &#239;mage_directory" &nbsp;    -dbargs ''path' : '/home/tranx/databases/8outdoorcategories/', 'filtere':'^cat(.*).jpg'" &nbsp;    -s &#246;utdoors-	                	                cat(.*).jpgcat" doneNow let's visualize what the model has learn. We have no specific program here.We will directly load the data form our model file, and ask the computer to display it.The first of all we can visualize the mean value for each image category.from jfli.stats.meanvariancemodel import SimpleMeanVarianceModel as smvmpyplot.clf()categories=["coast","forest",nsidecity","highway","mountain",pencountry",treet","tallbuilding"]pyplot.figure(figsize=(12,6))for c in range(8):  pyplot.subplot(240+(c+1))  r=smvm.load(file("/home/tranx/models/MnaivemeanLmeanvariancemodelSimpleMeanVarianceModel-image_directory-outdoors-  pyplot.imshow(r)  pyplot.title("Mean "+categories[c])pyplot.show()<a href="pyfig-2cdc0bfe96be908b647d9223849d9e02.pdf">Figure</a>Now we can also visualize the standard deviation for each image category.from jfli.stats.meanvariancemodel import SimpleMeanVarianceModel as smvmpyplot.clf()categories=["coast","forest",nsidecity","highway","mountain",pencountry",treet","tallbuilding"]pyplot.figure(figsize=(12,6))for c in range(8):  pyplot.subplot(240+(c+1))  r=smvm.load(file("/home/tranx/models/MnaivemeanLmeanvariancemodelSimpleMeanVarianceModel-image_directory-outdoors-  pyplot.imshow(r)  pyplot.title("StdErr "+categories[c])pyplot.show()<a href="pyfig-fee7719bf13fdfad362282fac5cd5c83.pdf">Figure</a>Another way of querying a model is to sample elements from it:import scipy,numpyimport pylab as pyplotfrom jfli.stats.meanvariancemodel import SimpleMeanVarianceModel as smvmpyplot.clf()categories=["coast","forest",nsidecity","highway","mountain",pencountry",treet","tallbuilding"]c=0pyplot.figure(figsize=(12,3))for sampl in range(8):  pyplot.subplot(180+(sampl+1))  r=smvm.load(file("/home/tranx/models/MnaivemeanLmeanvariancemodelSimpleMeanVarianceModel-image_directory-outdoors-  pyplot.imshow(r)  pyplot.title("Sample "+str(sampl))pyplot.show()<a href="pyfig-3ea74af8fd3b058c1e372545ffdcbd4c.pdf">Figure</a><a href="pyfig-5385e07d4b565b297f5da1414d78ada0.pdf">Figure</a><a href="pyfig-90b7d75b8c28657968975bd2a79eeefc.pdf">Figure</a><a href="pyfig-c19f6a6e8b897128ef3084884f522bbf.pdf">Figure</a><a href="pyfig-406efa5de7b02585ee3b98bb76335ed7.pdf">Figure</a><a href="pyfig-dbd5b1f2a900afa9cf8726b65085be08.pdf">Figure</a><a href="pyfig-4550967043313b1e03d4219fe9c8f185.pdf">Figure</a><a href="pyfig-9c4f68d7acb57548dcfc835e0fba3591.pdf">Figure</a>Same effects could be achieved by executing the commandpython sample_model.py     -m "#M('naive')-'mean':L('meanvariancemodel.SimpleMeanVarianceModel')"     db mage_directory"     dbargs path' : '/home/tranx/databases/8outdoorcategories/', 'filtere':'^'"     -s utdoors-	                	                cat(.*).jpgcat" donefrom jfli.stats.meanvariancemodel import SimpleMeanVarianceModel as smvmpyplot.clf()categories=["coast","forest",nsidecity","highway","mountain",pencountry",treet","tallbuilding"]pyplot.figure(figsize=(12,6))for c in range(8):  pyplot.subplot(240+(c+1))  r=smvm.load(file("/home/tranx/models/MimagegrayfftMimagefftmeanLmeanvariancemodelSimpleMeanVarianceModel-image_directory-outdoors-  r=numpy.roll(numpy.roll(numpy.log(numpy.abs(r)).squeeze(),r.shape[0]//2,axis=0),r.shape[0]//2,axis=1)  pyplot.imshow(r,vmin=0,vmax=16)  pyplot.title("Mean FFT of "+categories[c])  pyplot.colorbar()pyplot.show()<a href="pyfig-8003959c06a2a3e6c93397cbd29c953d.pdf">Figure</a>import scipy.ndimagefrom jfli.stats.meanvariancemodel import SimpleMeanVarianceModel as smvmpyplot.clf()categories=["coast","forest",nsidecity","highway","mountain",pencountry",treet","tallbuilding"]pyplot.figure(figsize=(12,6))for c in range(8):  pyplot.subplot(240+(c+1))  r=smvm.load(file("/home/tranx/models/MimagegrayfftMimagefftmeanLmeanvariancemodelSimpleMeanVarianceModel-image_directory-outdoors-  r=numpy.roll(numpy.roll(numpy.log(numpy.abs(r)).squeeze(),r.shape[0]//2,axis=0),r.shape[0]//2,axis=1)  Z =scipy.ndimage.gaussian_filter(r,10)  pyplot.contour(Z,numpy.arange(2.,14**.5,0.2)**2)  pyplot.title("Mean FFT of "+categories[c])  pyplot.colorbar()pyplot.show()<a href="pyfig-e15cf9d59ecdc15b92bb756c893f4341.pdf">Figure</a>from jfli.stats.meanvariancemodel import SimpleMeanVarianceModel as smvmfrom jfli.graphics.rescale import Rescaler2dfrom matplotlib import cmfrom mpl_toolkits.mplot3d import Axes3Dcategories=["coast","forest",nsidecity","highway","mountain",pencountry",treet","tallbuilding"]f=pyplot.figure(figsize=(6,6))c=0ax = Axes3D(f)r=smvm.load(file("/home/tranx/models/MimagegrayfftMimagefftmeanLmeanvariancemodelSimpleMeanVarianceModel-image_directory-outdoors-r=numpy.roll(numpy.roll(numpy.log(numpy.abs(r)).squeeze(),r.shape[0]//2,axis=0),r.shape[0]//2,axis=1).squeeze()X = numpy.arange(0, r.shape[1], 4)Y = numpy.arange(0, r.shape[0], 4)X, Y = numpy.meshgrid(X, Y)Z =Rescaler2d((r.shape[0]//4, r.shape[1]//4)).process(r)ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.hot) <a href="pyfig-6dcb223af46511fdca88084565f0a06f.pdf">Figure</a>             <a href="pyfig-6d984e99a9cb8c992cfe5955f6c697f4.pdf">Figure</a>             <a href="pyfig-90d2717e13d07118323942f8dfdf273c.pdf">Figure</a>             <a href="pyfig-735c7d482722834e4b54679b5542dcad.pdf">Figure</a>              <a href="pyfig-2be4eb4fbb56289fb72ab837f5f1de70.pdf">Figure</a>             <a href="pyfig-be46ce80af5bcaefdb7a38447be23d59.pdf">Figure</a>             <a href="pyfig-b065e7a97d586af83f8bbd3249781afa.pdf">Figure</a>             <a href="pyfig-be4d96c4e90874687e197b3405bba8fb.pdf">Figure</a>  4.8Saving and Reading Track FilesDynamic Datastreams are great for prototyping. But sometimes they are too slow for what we need.Or sometime we may desire to save some datas to reexploit them later in different.These are the goal of trackfiles.Trackfiles are designed to be seeked efficiently, and to support very large amount of datas.TODO 4.9Multiple Tests and RecognitionOnce we've runned, one test it of course temptative to know what is globally happening.And to make in-depth analysis of your models results.Let's start has usual with basics :We will just write a very very basic SVM.python simple_svm_train_and_test.py db labeled_databases_from_labels dbargs labels':['dalmatian','ant','starfish']"   
+<pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Althougth simple_svm_train_and_test.py is not very interesting because it does not allow you to save the data. It is maybe a good wayto a priori test model.The other thing that you are likely to want to do is to know out of differents models, which model is explaining the best your datas.We will do Object Classification on Caltech 101.With a traditional modelclass MyModel(genericmodel.GenericModel):   def __init__(self):       pass   def compute():       res=pysift.sift(x)   def init_featurefilter():        pass     4.9.1Filtering Adult Material
+<h4>Filtering Adult Material based on Skin colors
+<h4>Filtering Adult Material based on Skin Texture     4.9.2Classifying Natural Scenes 4.10High Level ModelsPython is really a great language for developping High Level Models, because it offers you the opportunity to develop simply each particular element as a particular class.class MyHighLevelModel(HighLevelModel):   models=...   modellinks=...   ontonlogy=...   @classmethod   def generic(cls,xxxx):       return foo(xxxx)class DayTime(MyHighLevelModel):   models=[        ("#M('srctint#spatialhistogram)]')",1),        ("#M('srctint#spatialhistogram)]')",1)          ]   @classmethod   def generic(cls,xxxx):       return foo(xxxx)class NightTime(MyHighLevelModel):   models=[        ("#M('srctint#spatialhistogram)]')",1),        ("#M('srctint#spatialhistogram)]')",1)          ]   @classmethod   def generic(cls,xxxx):       return foo(xxxx)     4.10.1Going On TRECVIDFootnotes:
+<a name="tthFtNtAAB"></a>also called streams
+<br /><br /><hr /><small>File translated from
+T<sub><font size="-1">E</font></sub>X
+by <a href="http://hutchinson.belmont.ma.us/tth/">
+T<sub><font size="-1">T</font></sub>H</a>,
+version 3.80.<br />On 26 Aug 2009, 15:25.</small>
+</html>

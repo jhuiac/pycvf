@@ -1,0 +1,41 @@
+\BOOKMARK [0][-]{chapter.1}{Forewords}{}
+\BOOKMARK [1][-]{section.1.1}{This is a development version}{chapter.1}
+\BOOKMARK [1][-]{section.1.2}{What's wrong with previous Frameworks ?}{chapter.1}
+\BOOKMARK [2][-]{subsection.1.2.1}{Which Frameworks ??}{section.1.2}
+\BOOKMARK [1][-]{section.1.3}{Why to do a Python Framework ?}{chapter.1}
+\BOOKMARK [2][-]{subsection.1.3.1}{Well programmed Python can be REALLY FAST !}{section.1.3}
+\BOOKMARK [2][-]{subsection.1.3.2}{Python allow OBJECTS and LAMBDAs !}{section.1.3}
+\BOOKMARK [2][-]{subsection.1.3.3}{Python is FREE !}{section.1.3}
+\BOOKMARK [2][-]{subsection.1.3.4}{Python community is ALIVE !}{section.1.3}
+\BOOKMARK [0][-]{chapter.2}{Installation of the Framework}{}
+\BOOKMARK [1][-]{section.2.1}{Installation on your machine with Ubuntu Linux}{chapter.2}
+\BOOKMARK [1][-]{section.2.2}{Generic Installation from the source}{chapter.2}
+\BOOKMARK [0][-]{chapter.3}{Essentials of Python for Scientists}{}
+\BOOKMARK [1][-]{section.3.1}{Numeric Python}{chapter.3}
+\BOOKMARK [1][-]{section.3.2}{Scientific Python}{chapter.3}
+\BOOKMARK [1][-]{section.3.3}{PyFFMPEG 2 alpha Essentials}{chapter.3}
+\BOOKMARK [2][-]{subsection.3.3.1}{Playing VideoFiles}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.2}{Loading VideoFiles}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.3}{Extracting Keyframes}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.4}{Checking parameters of file}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.5}{Performances and playing simulatneous video}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.6}{Orange}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.7}{MVPA \(Multivariate Pattern Analysis\)}{section.3.3}
+\BOOKMARK [2][-]{subsection.3.3.8}{Shogun}{section.3.3}
+\BOOKMARK [1][-]{section.3.4}{PyMedia}{chapter.3}
+\BOOKMARK [0][-]{chapter.4}{Use of the Framework}{}
+\BOOKMARK [1][-]{section.4.1}{Visualizing Databases}{chapter.4}
+\BOOKMARK [1][-]{section.4.2}{Evaluation Databases}{chapter.4}
+\BOOKMARK [1][-]{section.4.3}{Building Simple Indexes}{chapter.4}
+\BOOKMARK [1][-]{section.4.4}{Using Models}{chapter.4}
+\BOOKMARK [2][-]{subsection.4.4.1}{Checking the Outputs of Models}{section.4.4}
+\BOOKMARK [1][-]{section.4.5}{Training and Testing Models}{chapter.4}
+\BOOKMARK [1][-]{section.4.6}{Learning Skin Color And Doing Skin Color Filtering}{chapter.4}
+\BOOKMARK [1][-]{section.4.7}{The Poullot Video Indexation Algorithm}{chapter.4}
+\BOOKMARK [1][-]{section.4.8}{Indexing Your Sound Database}{chapter.4}
+\BOOKMARK [1][-]{section.4.9}{Learning the average image}{chapter.4}
+\BOOKMARK [1][-]{section.4.10}{Saving and Reading Track Files}{chapter.4}
+\BOOKMARK [1][-]{section.4.11}{Improving / Repairement}{chapter.4}
+\BOOKMARK [1][-]{section.4.12}{Multiple Tests and Recognition}{chapter.4}
+\BOOKMARK [2][-]{subsection.4.12.1}{Filtering Adult Material}{section.4.12}
+\BOOKMARK [2][-]{subsection.4.12.2}{Classifying Natural Scenes}{section.4.12}

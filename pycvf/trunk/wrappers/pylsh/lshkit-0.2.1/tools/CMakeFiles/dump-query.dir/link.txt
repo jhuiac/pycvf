@@ -1,0 +1,1 @@
+/usr/bin/c++   -fPIC   CMakeFiles/dump-query.dir/dump-query.cpp.o  -o ../bin/dump-query -rdynamic ../lib/liblshkit.a -Wl,-Bstatic -lboost_program_options-mt -Wl,-Bdynamic 

@@ -1,0 +1,159 @@
+\newif\ifimagen\imagentrue
+\documentclass{report}
+\usepackage[usenames]{color}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{times}
+\usepackage{mathptmx}
+\usepackage[left=1.5cm,right=6cm,top=1.5cm,bottom=3cm]{geometry}
+\usepackage{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usepackage{yfonts}
+\usepackage{colortbl}
+\usepackage{graphicx}
+\usepackage{listings}
+\newenvironment{changemargin}[2]{\begin{list}{}{%
+\setlength{\topsep}{0pt}%
+\setlength{\leftmargin}{0pt}%
+\setlength{\rightmargin}{0pt}%
+\setlength{\listparindent}{\parindent}%
+\setlength{\itemindent}{\parindent}%
+\setlength{\parsep}{0pt plus 1pt}%
+\addtolength{\leftmargin}{#1}%
+\addtolength{\rightmargin}{#2}%
+\addtolength{\textwidth}{0 pt minus #1}%
+\addtolength{\textwidth}{#2}%
+}\item }{\end{list}}
+\newcommand\Nmff{iwona}
+\newcommand\Nmfont{\usefont{T1}{\Nmff}{m}{n}\selectfont}
+\newcommand\Nmfontb{\usefont{T1}{\Nmff}{m}{sc}\selectfont}
+\newcommand\Nm[1]{{\Nmfont{\Nmfontb{#1}}}\index[author]{#1@{#1}}}
+\newcommand\XNm[2]{{\Nmfont{#1\nobreak\ {\Nmfontb{#2}}}}\index[author]{#2@{#2 #1}}}
+\newcommand\BNm[1]{{\Nmfont\bf {\Nmfontb{#1}}}\index[author]{#1@{#1}}}
+\newcommand\BXNm[2]{{\Nmfont\bf {#1\nobreak\ {\Nmfontb{#2}}}}\index[author]{#2@{#2 #1}}}
+\newcommand\NNm[1]{{\Nmfont{\Nmfontb{#1}}}}
+\newcommand\NXNm[2]{{\Nmfont{#1\nobreak\ {\Nmfontb{#2}}}}}
+\newcommand\BNNm[1]{{\Nmfont\bf {\Nmfontb{#1}}}}
+\newcommand\BNXNm[2]{{\Nmfont\bf{#1\nobreak\ {\Nmfontb{#2}}}}}
+\newcommand\Xtitre[1]{\underline{#1}}
+
+\pagestyle{empty}
+\thispagestyle{empty}
+\begin{document}
+\includegraphics[width=6cm]{logo_jfli.png}
+\clearpage% page: 0
+\includegraphics[width=\textwidth]{pythonohloh4.png}
+\clearpage% page: 1
+\includegraphics[width=\textwidth]{pythonohloh.png}
+\clearpage% page: 2
+\includegraphics[width=\textwidth]{pythonohloh3.png}
+\clearpage% page: 3
+\includegraphics[width=\textwidth]{pythonohloh1.png}
+\clearpage% page: 4
+\includegraphics[width=\textwidth]{pyfig-ab2809c07efd01ed3d924a69f951aa28.pdf}
+\clearpage% page: 5
+\includegraphics[width=\textwidth]{pyfig-ea3a0e4746cc8d7e0092a4516bdb92b4.pdf}
+\clearpage% page: 6
+\includegraphics[width=\textwidth]{pyfig-57a80b38750b3fdf8a224dd607ad2e46.pdf}
+\clearpage% page: 7
+\includegraphics[width=\textwidth]{pyfig-9fdcc79eabdaced297af4fd09aa29aee.pdf}
+\clearpage% page: 8
+\includegraphics[width=5cm]{playvideoqt.png}
+\clearpage% page: 9
+\includegraphics[width=\textwidth]{121videos.png}
+\clearpage% page: 10
+\includegraphics[width=4cm]{dbshow-0-0.png}
+\clearpage% page: 11
+\includegraphics[width=4cm]{dbshow-0-1.png}
+\clearpage% page: 12
+\includegraphics[width=4cm]{dbshow-0-2.png}
+\clearpage% page: 13
+\includegraphics[width=4cm]{dbshow-0-3.png}
+\clearpage% page: 14
+\includegraphics[width=4cm]{dbshow-0-4.png}
+\clearpage% page: 15
+\includegraphics[width=4cm]{dbshow-0-5.png}
+\clearpage% page: 16
+\includegraphics[width=4cm]{dbshow-0-6.png}
+\clearpage% page: 17
+\includegraphics[width=4cm]{dbshow-0-7.png}
+\clearpage% page: 18
+\includegraphics[width=4cm]{dbshow-0-8.png}
+\clearpage% page: 19
+\includegraphics[width=4cm]{dbshow-0-9.png}
+\clearpage% page: 20
+\includegraphics[width=\textwidth]{dbeval.png}
+\clearpage% page: 21
+\includegraphics[width=16cm]{dbquery.png}
+\clearpage% page: 22
+\includegraphics[width=16cm]{graph001.png}
+\clearpage% page: 23
+\includegraphics[width=16cm]{show_features.png}
+\clearpage% page: 24
+\includegraphics[width=4cm]{dbshow-1-0.png}
+\clearpage% page: 25
+\includegraphics[width=4cm]{dbshow-1-1.png}
+\clearpage% page: 26
+\includegraphics[width=4cm]{dbshow-1-2.png}
+\clearpage% page: 27
+\includegraphics[width=4cm]{dbshow-1-3.png}
+\clearpage% page: 28
+\includegraphics[width=4cm]{dbshow-1-4.png}
+\clearpage% page: 29
+\includegraphics[width=\textwidth]{pyfig-fdf2529522d4bbaf4886c973bd757492.pdf}
+\clearpage% page: 30
+\includegraphics[width=8cm]{skinhisto000.png}
+\clearpage% page: 31
+\includegraphics[width=4cm]{dbshow-2-0.png}
+\clearpage% page: 32
+\includegraphics[width=4cm]{dbshow-2-1.png}
+\clearpage% page: 33
+\includegraphics[width=4cm]{dbshow-2-2.png}
+\clearpage% page: 34
+\includegraphics[width=4cm]{dbshow-2-3.png}
+\clearpage% page: 35
+\includegraphics[width=4cm]{dbshow-2-4.png}
+\clearpage% page: 36
+\includegraphics[width=\textwidth]{pyfig-2cdc0bfe96be908b647d9223849d9e02.pdf}
+\clearpage% page: 37
+\includegraphics[width=\textwidth]{pyfig-fee7719bf13fdfad362282fac5cd5c83.pdf}
+\clearpage% page: 38
+\includegraphics[width=\textwidth]{pyfig-3ea74af8fd3b058c1e372545ffdcbd4c.pdf}
+\clearpage% page: 39
+\includegraphics[width=\textwidth]{pyfig-5385e07d4b565b297f5da1414d78ada0.pdf}
+\clearpage% page: 40
+\includegraphics[width=\textwidth]{pyfig-90b7d75b8c28657968975bd2a79eeefc.pdf}
+\clearpage% page: 41
+\includegraphics[width=\textwidth]{pyfig-c19f6a6e8b897128ef3084884f522bbf.pdf}
+\clearpage% page: 42
+\includegraphics[width=\textwidth]{pyfig-406efa5de7b02585ee3b98bb76335ed7.pdf}
+\clearpage% page: 43
+\includegraphics[width=\textwidth]{pyfig-dbd5b1f2a900afa9cf8726b65085be08.pdf}
+\clearpage% page: 44
+\includegraphics[width=\textwidth]{pyfig-4550967043313b1e03d4219fe9c8f185.pdf}
+\clearpage% page: 45
+\includegraphics[width=\textwidth]{pyfig-9c4f68d7acb57548dcfc835e0fba3591.pdf}
+\clearpage% page: 46
+\includegraphics[width=\textwidth]{pyfig-8003959c06a2a3e6c93397cbd29c953d.pdf}
+\clearpage% page: 47
+\includegraphics[width=\textwidth]{pyfig-e15cf9d59ecdc15b92bb756c893f4341.pdf}
+\clearpage% page: 48
+\includegraphics[width=4cm]{pyfig-6dcb223af46511fdca88084565f0a06f.pdf}
+\clearpage% page: 49
+\includegraphics[width=4cm]{pyfig-6d984e99a9cb8c992cfe5955f6c697f4.pdf}
+\clearpage% page: 50
+\includegraphics[width=4cm]{pyfig-90d2717e13d07118323942f8dfdf273c.pdf}
+\clearpage% page: 51
+\includegraphics[width=4cm]{pyfig-735c7d482722834e4b54679b5542dcad.pdf}
+\clearpage% page: 52
+\includegraphics[width=4cm]{pyfig-2be4eb4fbb56289fb72ab837f5f1de70.pdf}
+\clearpage% page: 53
+\includegraphics[width=4cm]{pyfig-be46ce80af5bcaefdb7a38447be23d59.pdf}
+\clearpage% page: 54
+\includegraphics[width=4cm]{pyfig-b065e7a97d586af83f8bbd3249781afa.pdf}
+\clearpage% page: 55
+\includegraphics[width=4cm]{pyfig-be4d96c4e90874687e197b3405bba8fb.pdf}
+\clearpage% page: 56
+%Options: -png
+\end{document}

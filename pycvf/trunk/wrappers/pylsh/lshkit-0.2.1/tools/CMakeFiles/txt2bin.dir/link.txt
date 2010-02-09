@@ -1,0 +1,1 @@
+/usr/bin/c++   -fPIC   CMakeFiles/txt2bin.dir/txt2bin.cpp.o  -o ../bin/txt2bin -rdynamic ../lib/liblshkit.a -Wl,-Bstatic -lboost_program_options-mt -Wl,-Bdynamic 

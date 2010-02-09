@@ -1,0 +1,26 @@
+#!/usr/bin/env python
+
+from pycvf.core.version import version
+
+print "Python Computer Vision Framework v."+str(version)
+
+from pycvf.core.directories import *
+
+import pycvf.core.settings as settings
+
+print ""
+print "Directories:"
+
+def print_var(x):
+    print("  %s \t : %s"%(x,str(eval(x))))
+
+for d in [ 'PYCVF_ROOT' ,"PYCVF_DATABASE_DIR", "PYCVF_INDEX_DIR", "PYCVF_MODEL_DIR", "PYCVF_HLMODEL_DIR", "PYCVF_WEIGHT_DIR", "PYCVF_CACHE_DIR", "PYCVF_LOG_DIR","PYCVF_PROJECTS_DIR"]:
+    print_var(d)
+
+print ""
+print "Settings:"    
+print ""    
+
+for d in dir(settings):
+    if type(getattr(settings,d)) in [ str, unicode ] and d[0]!="_":
+            print("  %s \t : %s"%(d,getattr(settings,d)))

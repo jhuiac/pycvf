@@ -1,0 +1,1 @@
+/usr/bin/c++   -fPIC   CMakeFiles/fitdata.dir/fitdata.cpp.o  -o ../bin/fitdata -rdynamic ../lib/liblshkit.a -Wl,-Bstatic -lboost_program_options-mt -Wl,-Bdynamic 

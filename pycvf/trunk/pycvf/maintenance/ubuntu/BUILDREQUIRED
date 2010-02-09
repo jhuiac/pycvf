@@ -12,5 +12,10 @@ gcc-4.1
 g++-4.1
 gccxml
 cmake
-make
 subversion
+make
+libswscale-dev
+libavformat-dev
+libavcodec-dev
+libavutil-dev
+

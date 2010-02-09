@@ -95,7 +95,8 @@ def pointerclassname_transform(n):
 
 REWRITE_RULES=\
 [
- {  'declared_type_match': (lambda t,n:  (is_valid_pointer_on_structure(t,n) and (realtype_of(realtype_of(t).typ).name in ["UIplImage"]))),
+ {  'rule_name': '__PointerOnImages',
+    'declared_type_match': (lambda t,n:  (is_valid_pointer_on_structure(t,n) and (realtype_of(realtype_of(t).typ).name in ["UIplImage"]))),
     'instantiated_type_match': [
          {  ## raw pointers
            'match_expr': (lambda t,n:"((type("+n+")==int) or (type("+n+")==long))"),
@@ -116,7 +117,8 @@ REWRITE_RULES=\
 	 }
      ]
   },
-  {  'declared_type_match': (lambda t,n:  (is_valid_pointer_on_structure(t,n) and (realtype_of(realtype_of(t).typ).name in ["CvMat"]))),
+  { 'rule_name': '__PointerOnMatrices',
+    'declared_type_match': (lambda t,n:  (is_valid_pointer_on_structure(t,n) and (realtype_of(realtype_of(t).typ).name in ["CvMat"]))),
     'instantiated_type_match': [
          {  ## raw pointers
            'match_expr': (lambda t,n:"((type("+n+")==int) or (type("+n+")==long))"),
@@ -137,7 +139,8 @@ REWRITE_RULES=\
 	 }
      ]
   },
-  {  'declared_type_match': (lambda t,n:  (is_valid_pointer_on_structure(t,n) and (realtype_of(realtype_of(t).typ).name in ["CvMatND"]))),
+  { 'rule_name': '__PointerOnNDMatrices',
+    'declared_type_match': (lambda t,n:  (is_valid_pointer_on_structure(t,n) and (realtype_of(realtype_of(t).typ).name in ["CvMatND"]))),
     'instantiated_type_match': [
          {  ## raw pointers
            'match_expr': (lambda t,n:"((type("+n+")==int) or (type("+n+")==long))"),
@@ -158,7 +161,8 @@ REWRITE_RULES=\
 	 }
      ]
   },
-  {  'declared_type_match': (lambda t,n:  (is_valid_pointer_on_structure(t,n) and (realtype_of(realtype_of(t).typ).name in ["CvPoint"]))),
+  { 'rule_name': '__PointerOnPoints', 
+    'declared_type_match': (lambda t,n:  (is_valid_pointer_on_structure(t,n) and (realtype_of(realtype_of(t).typ).name in ["CvPoint"]))),
     'instantiated_type_match': [
          { ## numpy arrays 
            'match_expr': (lambda t,n:"type("+n+")==numpy.ndarray"),
@@ -175,7 +179,9 @@ REWRITE_RULES=\
 	 }
      ]
   },  
-  {  'declared_type_match': (lambda t,n:  ((is_valid_pointer_on_fundamental_type(t,n) and (hasattr(no_const_type_of(realtype_of(t).typ),"name") and no_const_type_of(realtype_of(t).typ).name in ["CvArr"])))),
+  { 'rule_name': '__PointerOnCvArr', 
+    'declared_type_match': (lambda t,n:  ((is_valid_pointer_on_fundamental_type(t,n) 
+                                    and (hasattr(no_const_type_of(realtype_of(t).typ),"name") and no_const_type_of(realtype_of(t).typ).name in ["CvArr"])))),
     'instantiated_type_match': [
          {  ## raw pointers
            'match_expr': (lambda t,n:"((type("+n+")==int) or (type("+n+")==long))"),
@@ -197,6 +203,7 @@ REWRITE_RULES=\
      ]
   },
   { ## pointers declared
+    'rule_name': '__PointerOnDeclaredClass',
     'declared_type_match': (lambda t,n: (is_valid_pointer_on_structure(t,n) and(realtype_of(realtype_of(t).typ).name in declaredstructlist))),
     'instantiated_type_match': [
          {  ## raw pointers
@@ -214,7 +221,8 @@ REWRITE_RULES=\
 	 }
        ]
   },
-  {  'declared_type_match': (lambda t,n:  (is_valid_pointer_on_structure(t,n))),
+  {  'rule_name': '__PointerOnOtherStructure',
+     'declared_type_match': (lambda t,n:  (is_valid_pointer_on_structure(t,n))),
     'instantiated_type_match': [
          {  ## raw pointers
            'match_expr': (lambda t,n:"((type("+n+")==int) or (type("+n+")==long))"),
@@ -233,6 +241,7 @@ REWRITE_RULES=\
   },
 
   { ## pointers on fundamental types 
+    'rule_name': '__PointerOnFundamentalType',
     'declared_type_match': (lambda t,n:is_valid_pointer_on_fundamental_type(t,n)),
     'instantiated_type_match': [
          {  ## raw pointers
@@ -256,6 +265,7 @@ REWRITE_RULES=\
     ]
   },
   { ## default match
+    'rule_name': '__RawArgument',
     'declared_type_match': (lambda t,n:True),
     'instantiated_type_match': [
          {  ## raw pointers
@@ -860,6 +870,8 @@ def decld(n):
 zzdcl=open("declarations.pxd","w")
 zzdcl.write(file("declarations_header.pyx").read())
 zzdcl.write("cimport numpy\n")
+zzdcl.write("cimport stdlib\n")
+zzdcl.write("ctypedef stdlib.size_t size_t\n")
 
 for t in INCOMPLETETYPES:
  if t not in EXPLICITTYPES:
@@ -912,6 +924,7 @@ classes_f.write("import zopencv_lowlevel\n")
 classes_f.write("import zopencv_pclasses\n")
 classes_f.write("import zopencv_classes\n")
 classes_f.write("import zopencv_core\n")
+classes_f.write("cimport stdlib\n")
 classes_f.write("cimport zopencv_lowlevel\n")
 classes_f.write("cimport zopencv_pclasses\n")
 classes_f.write("cimport zopencv_classes\n")
@@ -1010,6 +1023,7 @@ pointerclasses_f.write("import zopencv_classes\n")
 pointerclasses_f.write("import zopencv_pclasses\n")
 pointerclasses_f.write("import zopencv_lowlevel\n")
 pointerclasses_f.write("import zopencv_core\n")
+pointerclasses_f.write("cimport stdlib\n")
 pointerclasses_f.write("cimport zopencv_classes\n")
 pointerclasses_f.write("cimport zopencv_pclasses\n")
 pointerclasses_f.write("cimport zopencv_lowlevel\n")
@@ -1094,6 +1108,7 @@ lowlevel_functions_d=new_cython_decl_file("zopencv_lowlevel.pxd")
 lowlevel_functions_f.write("import zopencv_classes\n")
 lowlevel_functions_f.write("import zopencv_pclasses\n")
 lowlevel_functions_f.write("import zopencv_core\n")
+lowlevel_functions_f.write("cimport stdlib\n")
 lowlevel_functions_f.write("cimport zopencv_classes\n")
 lowlevel_functions_f.write("cimport zopencv_pclasses\n")
 sys.stderr.write(("#generating low-level function wrappers\n"))
@@ -1132,6 +1147,7 @@ highlevel_functions_f.write("import zopencv_classes\n")
 highlevel_functions_f.write("import zopencv_pclasses\n")
 highlevel_functions_f.write("import zopencv_core\n")
 highlevel_functions_f.write("import sys\n")
+lowlevel_functions_f.write("cimport stdlib\n")
 highlevel_functions_f.write("cimport zopencv_lowlevel\n")
 highlevel_functions_f.write("cimport zopencv_classes\n")
 highlevel_functions_f.write("cimport zopencv_pclasses\n")

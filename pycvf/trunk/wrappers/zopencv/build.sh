@@ -30,8 +30,8 @@ if true; then
 if [ "$ZOPENCVPATH" ]; then
 ## override by environoment
   OPENCVPREFIX=$ZOPENCVPATH
-  OCVLIBS="-L $ZOPENCVPATH/opencv/lib -L /usr/local/lib -lcv -lcvaux -lhighgui -lml"
-  OCVFLAGS="-I $ZOPENCVPATH/opencv/include/opencv -I ."  
+  OCVLIBS="-L $ZOPENCVPATH/lib -L /usr/local/lib -lcv -lcvaux -lhighgui -lml"
+  OCVCFLAGS="-I $ZOPENCVPATH/include/opencv -I ."  
 else
 ## GENERIC CONFIGURATION VIA PKG-CONFIG
 if [ "$(which pkg-config)" ]; then

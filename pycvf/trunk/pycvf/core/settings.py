@@ -31,10 +31,8 @@
 
 from pycvf.core.directories import *
 
-
-
+PYCVF_STABILITY_LEVEL=3
 DEBUG_LEVEL=0
-
 LOG_LEVEL=2
 
 DISPLAY_DRIVER="pyglet"
@@ -61,7 +59,7 @@ DEFAULT_INDEX_CLASS="pseudoincremental(sashindex)"
 DEFAULT_INDEX_ARGS=""
 
 PYCVF_DATABASE_PATH=":pycvf.databases."
-PYCVF_MODEL_PATH=":pycvf.nodes." #:pycvf.archives.framework02.models."
+PYCVF_MODEL_PATH="pycvf.nodes.:" #:pycvf.archives.framework02.models."
 PYCVF_INDEX_PATH=":pycvf.indexes."
 
 

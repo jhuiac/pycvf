@@ -57,7 +57,7 @@ class Datatype:
      q=QtDisplayMovie(x,*args,**kwargs)
      return q
   @classmethod
-  def set_widget_value(cls,widget,x):
+  def set_widget_value(cls,widget,x,vdb,addr):
      widget.push(x)
   @classmethod
   def get_typerelated_structures(cls):

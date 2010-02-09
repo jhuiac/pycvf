@@ -124,8 +124,6 @@ class Model(object):
       self.application=None  ## our context : pathes, databases and so on...
       self.context={}
       self.submodels={}
-      #self.structures={} # DEPRECATED
-      #self.statmodels={} # DEPRECATED
       self.processing=[]
       self.status=STATUS_READY
       self.invert_processing=[]
@@ -134,6 +132,7 @@ class Model(object):
       self.datatype_out=None
       self.metainfo_curdb=None
       self.metainfo_curaddr=None
+      self.last_child=None
       if (self.kwargs.has_key("name") and self.kwargs["name"]!=None):
            self.name=self.kwargs["name"]
       else :
@@ -187,9 +186,6 @@ class Model(object):
      self.datatype_out=self.output_datatype(database)
      self.metas=self.get_features_meta()
      if self.processline==None:
-       #if (self.process):
-       #  self.processline="src|"
-       #else:
        for pi in self.processing:
 	      for i in pi[1].items():
 		if (self.context.has_key(i[0])):
@@ -253,10 +249,24 @@ class Model(object):
   #   return "__statmodel__%04d"%(self.anonymous_ctr,)
 
 
-  def __or__(self,model2):
+  def get_last_child(self):
+     if (self.last_child!=None):
+        return self.last_child.get_last_child()
+     return self
+
+  def __add__(self,model2):
        self.submodels[model2.get_name(self.get_new_anonymous_submodel_name())]=model2
+       self.last_child=model2
        model2.parent=self
        return self
+
+  def __sub__(self,model2):
+       self.get_last_child()+model2
+       return self
+
+  def __or__(self,model2):
+       return self.get_last_child()+model2
+
 
   #def __mul__(self,struct2):
   #     pycvf_warning("DEPRECATED CONSTRUCTION")

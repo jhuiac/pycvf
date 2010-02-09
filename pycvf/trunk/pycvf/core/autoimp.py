@@ -190,7 +190,7 @@ class _RecursiveLazyModule:
         #print 
         #print subname
         #print 
-        #print _sys.path
+        consider=_sys.path
         fromlist=self.__name__.split(".")
         #print fromlist
         #print "============================^^^^========================"
@@ -200,6 +200,7 @@ class _RecursiveLazyModule:
         sublib = getattr(lib, key)
       except ImportError,e:
         print "Exception ",e
+        #print "lazy module content =",dir(self)
         raise AttributeError("'lazymodule' object '%s' has no attribute %r " % (self.__name__,key))
       self.__dict__[key] = _RecursiveLazyModule(subname, searchpath=self.__searchpath__, lib=sublib)
       #print key,self.__dict__[key]

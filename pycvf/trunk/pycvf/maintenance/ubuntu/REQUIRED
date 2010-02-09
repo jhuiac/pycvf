@@ -2,6 +2,10 @@ python (>= 2.5)
 libcv-dev
 libcvaux-dev   
 libhighgui-dev
+libswscale-dev
+libavcodec-dev
+libavformat-dev
+libavutil-dev
 python-numpy
 python-scipy
 python-matplotlib
@@ -24,3 +28,6 @@ python-dictclient
 python-cairo
 python-pyglet
 shogun-python-modular
+clive
+youtube-dl
+weka

@@ -92,6 +92,8 @@ class SimpleVideoReader7:
                except:
                  pass
             self.frameno=f
+    def rewind(self):
+        self.seek_to(0)
     def get_current_address(self):
         return (self.file,int(self.get_current_frame_no()))
     def get_current_frame(self):

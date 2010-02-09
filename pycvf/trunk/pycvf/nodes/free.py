@@ -31,7 +31,7 @@ class Model(genericmodel.Model):
         def init_model(self,expr,id="",datatype=None,*args,**kwargs):
                  self.type_out=datatype
                  self.xcontext=globals()
-                 self.processline='src|freeexpr'+id 
-                 self.context['freeexpr'+id]=lambda x:eval(expr,{'x':x},self.xcontext )
+                 self.processline='src|freeexpr'+self.get_total_name() 
+                 self.context['freeexpr'+self.get_total_name()]=lambda x:eval(expr,{'x':x},self.xcontext )
 
 __call__=Model

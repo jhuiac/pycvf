@@ -16,17 +16,23 @@ import numpy, sys
 from pycvf.core import genericmodel
 from pycvf.datatypes import image
 
+def ifft_one_layer(x):
+    return numpy.fft.ifft2(x)
+
+def all_layer(f,i):
+    return numpy.dstack([f(i[:,:,l]) for l in range(i.shape[2])])
+
+def imgifft(x,roll=True):
+    if roll:
+        x=numpy.roll(x,x.shape[0]//2,axis=0)
+        x=numpy.roll(x,x.shape[1]//2,axis=1)            
+    if (x.ndim==3):
+        r=all_layer(ifft_one_layer,x)
+    else:
+        r=ifft_one_layer_x
+    return r 
 
 
-def hessian(img):
-        res=numpy.zeros( (img.ndim,img.ndim) ,dtype=object )
-        for i in range(img.ndim):
-           for j in range(img.ndim):
-                 res[i,j]=numpy.diff(numpy.diff(img,axis=j),axis=i)
-        return res
-
-
-
-Model=genericmodel.pycvf_model_function(image.Datatype,image.Datatype)(hessian)
+Model=genericmodel.pycvf_model_function(image.Datatype,image.Datatype)(imgifft)
 __call__=Model
                  

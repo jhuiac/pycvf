@@ -18,10 +18,10 @@ from pycvf.datatypes import image
 
 
 def jacobian(img):
-      res=numpy.zeros( (img.ndim-1,img.shape[-1]) , dtype=object)
-      for i in range(img.shape[2])                               
+      res=numpy.zeros( (img.ndim-1,img.shape[2]) , dtype=object)
+      for i in range(img.shape[2]):                               
            for j in range(img.ndim-1):                             
-               res[j,i]=diff(res[:,:,i],axis=j)
+               res[i,j]=numpy.diff(res[:,:,i],axis=j)
       return res
 
 

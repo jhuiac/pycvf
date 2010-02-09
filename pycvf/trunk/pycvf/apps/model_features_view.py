@@ -20,7 +20,7 @@ from pycvf.lib.ui.qtfeaturesview import QtFeaturesViewerDialog
 def is_prefix(a,b):
     return (b[:len(a)]==a)
 
-# -*- coding: utf-8 -*-
+
 class DbMdlFeatureView(ModelUsingApplication):
   class ProgramMetadata(object):
       name="Model Feature Printer Application"

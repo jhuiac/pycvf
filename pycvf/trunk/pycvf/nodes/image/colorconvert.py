@@ -15,18 +15,12 @@
 import numpy, sys
 from pycvf.core import genericmodel
 from pycvf.datatypes import image
+from pycvf.lib.graphics import colortransforms
+
+def colorconvert(x,fromto="rgb2hsv"):
+    return (eval("colortransforms."+fromto))(x)
 
 
-
-def hessian(img):
-        res=numpy.zeros( (img.ndim,img.ndim) ,dtype=object )
-        for i in range(img.ndim):
-           for j in range(img.ndim):
-                 res[i,j]=numpy.diff(numpy.diff(img,axis=j),axis=i)
-        return res
-
-
-
-Model=genericmodel.pycvf_model_function(image.Datatype,image.Datatype)(hessian)
+Model=genericmodel.pycvf_model_function(image.Datatype,image.Datatype)(colorconvert)
 __call__=Model
                  

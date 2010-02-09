@@ -33,7 +33,7 @@ def Datatype(ElemType):
         #print "LX=",len(x)
         for i in range(len(x)):
             q=ElemType.get_widget(widget)
-            ElemType.set_widget_value(q,x[i])
+            ElemType.set_widget_value(q,x[i],db,addr)
             widget.addItem(str(i))
             wi=widget.item(i)
             widget.setItemWidget(wi,q)

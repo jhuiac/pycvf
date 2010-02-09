@@ -18,15 +18,19 @@ from pycvf.datatypes import image
 
 
 
-def hessian(img):
-        res=numpy.zeros( (img.ndim,img.ndim) ,dtype=object )
-        for i in range(img.ndim):
-           for j in range(img.ndim):
-                 res[i,j]=numpy.diff(numpy.diff(img,axis=j),axis=i)
-        return res
+def highpass(x,radius=10,smooth=5):
+    dx=x.shape[0]
+    dy=x.shape[1]
+    dx2=dx//2
+    dy2=dy//2
+    g=numpy.mgrid[(-dx2):(dx-dx2),(-dy2):(dy-dy2)]
+    gd=((g[0]**2+g[1]**2)**.5)
+    g=(numpy.pi/2.+numpy.arctan((gd-radius)/smooth))/(numpy.pi)
+    if (x.ndim==2):
+      return g*x
+    else:
+      return g.reshape(x.shape[0],x.shape[1],1)*x  
 
-
-
-Model=genericmodel.pycvf_model_function(image.Datatype,image.Datatype)(hessian)
+Model=genericmodel.pycvf_model_function(image.Datatype,image.Datatype)(highpass)
 __call__=Model
                  

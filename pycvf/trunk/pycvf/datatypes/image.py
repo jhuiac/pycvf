@@ -57,11 +57,14 @@ class Datatype:
      return q
   @classmethod
   def set_widget_value(cls,widget,x,*args,**kwargs):
-     if (x.ndim==2 or x.shape[2]==1):
-        x=numpy.asarray(x)
-        widget.f(x.reshape(x.shape[0],x.shape[1],1).repeat(3,axis=2),*args,**kwargs)
-     else:
-        widget.f(x)
+     try:
+       if (x.ndim==2 or x.shape[2]==1):
+         x=numpy.asarray(x)
+         widget.f(x.reshape(x.shape[0],x.shape[1],1).repeat(3,axis=2),*args,**kwargs)
+       else:
+          widget.f(x)
+     except Exception,e:
+       print "Exception while displaying image",e
   @classmethod
   def get_structure(cls):
      #if (instance.ndim==2) or (instance.shape[2]==1):

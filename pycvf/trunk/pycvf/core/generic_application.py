@@ -38,6 +38,12 @@ class GenericApplication(object):
   debugger_option=CmdLineString('D','debugger',"bool",'Runs in debugger',"0")
   profiler_option=CmdLineString(None,'profiler',"filename",'Runs in debugger',"")  
 
+  @classmethod
+  def call(cls,**kwargs):
+     for x in kwargs.items():
+        getattr(cls,x[0]).value=x[1]
+     cls.run([])
+ 
   @classmethod  
   def prepare_process(cls, *args, **kwargs):
     pass
@@ -143,7 +149,7 @@ class DatabaseUsingApplication(GenericApplication):
      #   cls.vdb=ContentsDatabase( **eval('{'+cls.databaseargs.value+'}'))
      #else:
      #   cls.vdb=ContentsDatabase()      
-     cls.vdb=builders.database_builder(cls.database.value)
+     cls.vdb=(builders.database_builder(cls.database.value) if type(cls.database.value) in [ str, unicode] else cls.database.value)
 
 
 
@@ -167,7 +173,7 @@ class ModelUsingApplication(DatabaseUsingApplication):
   def prepare_process(cls, *args, **kwargs):
      super(ModelUsingApplication,cls).prepare_process(*args,**kwargs)
      pycvf_debug(10,"MODELINIT")         
-     cls.mdl=builders.model_builder(cls.mymodel.value)
+     cls.mdl=( builders.model_builder(cls.mymodel.value) if type(cls.mymodel.value) in [str, unicode] else cls.mymodel.value)
      cls.mdl.init('/',cls.vdb.datatype(),cls,directory=os.path.join(settings.PYCVF_MODEL_DIR,cls.session.value))
      cls.mdl.metainfo_curdb=cls.vdb
      pycvf_debug(10,"/MODELINIT")
@@ -248,9 +254,9 @@ class IndexUsingApplication(ModelUsingApplication):
      cls.idx=builders.index_builder(cls.indexclass.value)
           
      ipv=cls.indexpath.value
-     ipv=ipv.replace('$modelname',namerecode(cls.mymodel.value.split('.')[-1]))
-     ipv=ipv.replace('$contentname',namerecode(cls.database.value.split('.')[-1]))
-     ipv=ipv.replace('$indexname',namerecode(cls.indexclass.value.split('.')[-1]))
+     #ipv=ipv.replace('$modelname',namerecode(cls.mymodel.value.split('.')[-1]))
+     #ipv=ipv.replace('$contentname',namerecode(cls.database.value.split('.')[-1]))
+     #ipv=ipv.replace('$indexname',namerecode(cls.indexclass.value.split('.')[-1]))
      ipv=ipv.replace('$sessionname',namerecode(cls.session.value))
      try:
        os.mkdir(ipv)

@@ -26,12 +26,20 @@ fi
 
 
 MODULES="zopencv_core zopencv_highlevel zopencv_lowlevel zopencv_classes zopencv_pclasses"
-if false; then
+if true; then
+if [ "$ZOPENCVPATH" ]; then
+## override by environoment
+  OPENCVPREFIX=$ZOPENCVPATH
+  OCVLIBS="-L $ZOPENCVPATH/opencv/lib -L /usr/local/lib -lcv -lcvaux -lhighgui -lml"
+  OCVFLAGS="-I $ZOPENCVPATH/opencv/include/opencv -I ."  
+else
+## GENERIC CONFIGURATION VIA PKG-CONFIG
 if [ "$(which pkg-config)" ]; then
   OPENCVPREFIX=$(dirname $(dirname $(pkg-config --cflags-only-I opencv | cut -c 3-)))
   OCVLIBS=$(pkg-config opencv --libs | sed -e "s/-lml//g") 
   OCVCFLAGS=$(pkg-config opencv --cflags) 
 else
+## STANDARD SETTINGS ?
   OPENCVPREFIX="/usr/local"
   OCVLIBS="-L$OPENCVPREFIX/lib -lcxcore -lcv -lhighgui -lcvaux"
   OCVCFLAGS="-I $OPENCVPREFIX/include -I $OPENCVPREFIX/include/opencv" 
@@ -39,7 +47,12 @@ else
   DARWINNUMPYINC="/System/Library/Frameworks/Python.framework/Versions/2.5/Extras/lib/python/numpy/core/include/"
   CFLAGS="-I $DARWINNUMPYINC"
 fi
+fi
 else
+##
+## MANUAL CONFIGURATION FOR SPECIFIC SYSTEMS 
+##
+
 #  OPENCVPREFIX=/opt/OpenCV-1.0.0/x86_64/
 #  OCVLIBS="-L /opt/OpenCV-1.0.0/x86_64/lib -lcv -lcvaux -lhighgui -lml"
 #  OCVCFLAGS="-I /opt/OpenCV-1.0.0/x86_64/include/opencv -I ." 
@@ -71,7 +84,13 @@ INCOMPLETETYPES="$EXPLICITTYPES CvVoronoiEdge2D CvGraphEdge N6CvEHMM4DOT27_E CvE
 
 FILES="cxerror.h cxtypes.h cxcore.h cvtypes.h cv.h cvaux.h highgui.h" #  cxcore.h cvtypes.h
 IGNOREFUNCTIONS="cvSubdiv2DGetEdge cv3dTracker2dTrackedObject cv3dTrackerTrackedObject"
-DESTDIR=/usr/local
+
+if [ "$ZOPENCVDEST" ]; then
+DESTDIR=$ZOPENCVDEST
+else
+DESTDIR=/usr/local/lib/
+fi 
+
 
 export INCOMPLETETYPES
 export EXPLICITTYPES
@@ -493,10 +512,10 @@ fi
 
 if [ "$(echo $STEPS|tr -cd 7)" ];then
 echo "#######################################################################"
-echo "Installing into graphics directory..."
+echo "Installing into directory $DESTDIR..."
 echo "#######################################################################"
 
-ln -sf $PWD/zzopencv.py $DESTDIR
-ln -sf $PWD/zopencv.$SHAREDFX $DESTDIR
+ln -s $PWD/zopencv.py $DESTDIR
+ln -s $PWD/zopencv_*.$SHAREDFX $DESTDIR
 
 fi

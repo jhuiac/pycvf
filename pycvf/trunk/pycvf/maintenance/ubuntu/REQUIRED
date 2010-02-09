@@ -22,4 +22,6 @@ python-ctypes
 python-dialog
 python-dictclient
 python-cairo
+python-pyglet
 shogun-python-modular
+

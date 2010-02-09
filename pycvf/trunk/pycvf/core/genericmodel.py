@@ -626,7 +626,7 @@ class Model(object):
 
 
   def get_features_meta(self):
-     pycvf_debug(10,"getting meta")
+     #pycvf_debug(10,"getting meta")
      lm=self.local_meta()
      def update_processlines(e):
          if lm['processline']:

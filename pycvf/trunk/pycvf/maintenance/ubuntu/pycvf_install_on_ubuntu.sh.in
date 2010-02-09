@@ -8,7 +8,36 @@ echo "INSTALLING NECESSARY PACKAGES"
 BUILDREQUIRED="%BUILDREQUIREDLIST%"
 REQUIRED="%REQUIREDLIST%"
 
-sudo apt-get install bzr $REQUIRED $BUILDREQUIRED
+if [ "$WITH_PYFFMPEG" ]; then
+
+cat << EOF > /tmp/tranx.list
+## Tranx - Ubuntu 9.10 "karmic koala"
+deb http://ppa.launchpad.net/bertrand-nouvel/tranx/ubuntu karmic main 
+deb-src http://ppa.launchpad.net/bertrand-nouvel/tranx/ubuntu karmic main
+EOF
+sudo mv /tmp/tranx.list /etc/apt/sources.list.d/tranx.list
+sudo apt-get update
+ADDPKG="pyffmpeg $ADDPKG"
+fi
+
+
+
+
+if [ "$WITH_ITK" ]; then
+cat << EOF > /tmp/paulnove.list
+## PaulNovo - Ubuntu 9.10 "karmic koala"
+deb http://apt.paulnovo.org/ubuntu karmic main
+deb-src http://apt.paulnovo.org/ubuntu karmic main
+EOF
+sudo mv /tmp/paulnovo.list /etc/apt/sources.list.d/paulnovo.list
+sudo apt-get update
+ADDPKG="pyffmpeg python-itk"
+fi
+
+
+sudo apt-get install bzr $REQUIRED $BUILDREQUIRED $ADDPKG
+
+sudo easy_install colorterm
 
 ##
 echo "FETCHING THE BRANCH"
@@ -24,6 +53,11 @@ echo "3 CREATING EXECUTABLES"
 ##
 python setup.py build_ext -i
 (cd pycvf ; ./linkbin.sh )
+
+
+cd wrappers
+(cd pysash; python setup.py build_ext -i)
+(cd pylsh; python setup.py build_ext -i)
 
 ##
 echo "4 SETTING UP UP THE ENVIRONEMENT"

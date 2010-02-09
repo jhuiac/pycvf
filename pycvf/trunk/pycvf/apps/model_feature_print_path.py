@@ -22,15 +22,15 @@ class MPathPrintApp(ModelUsingApplication):
       copyright="        COPYRIGHT Bertrand Nouvel - JFLI - CNRS 2009"
 
 
-  modelpart=CmdLineString(None,"modelpart","modelpath","specified within the mode where the structure is to be extracted","//")
+  modelpath=CmdLineString(None,"modelpath","modelpath","specified within the mode where the structure is to be extracted","//")
   delay=CmdLineString("i","interval","interval","wait for specified interval in-between entries","0")           
   @classmethod
   def process(cls, * args, **kwargs):
-    #submdl=mdl.get_by_cname(modelpart.value)
+    #submdl=mdl.get_by_cname(modelpath.value)
     cls.mdl.print_tree()
     delay=float(cls.delay.value)
     for e in cls.vdb:
-       cls.mdl.process_path([e[0]],[e[1]],cls.modelpart.value,lambda x:sys.stdout.write("\mRES="+str(x)+"\n"))
+       cls.mdl.process_path([e[0]],[e[1]],cls.modelpath.value,lambda x:sys.stdout.write(unicode(x).encode('utf8')+u"\n"))
        if (delay):
           time.sleep(delay)
        

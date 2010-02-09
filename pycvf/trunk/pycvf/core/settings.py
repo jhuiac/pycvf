@@ -74,14 +74,33 @@ WNDICT="/usr/local/wordnet3/dict/"
 WNHOME="/usr/local/wordnet3"
 
 
-import os
+
+#import os
+#try:
+#  f=
+#  for l in filter(lambda x:(len(x)>0) and (x[0]!='#'),map(lambda x:x.strip(), f.readlines())):
+#    ll=l.split('=')
+#    print ll[0]
+#    exec l #ll[0],'='.join(ll[1:]))
+#except Exception,e:
+#  print "Error while reading settings",e
+#  pass
+
+read_home_pycvf_settings=False
 try:
+  os.stat(os.path.join(os.environ["HOME"],".pycvf-settings.py"))
+  read_home_pycvf_settings=True
+except:
+  pass
+if read_home_pycvf_settings:
   exec file(os.path.join(os.environ["HOME"],".pycvf-settings.py")).read()
-except:
-  pass
-
+  
+  
+read_local_pycvf_settings=False
 try:
-  exec file(os.path.join(os.getcwd(),"local-pycvf-settings.py")).read()
+  os.stat(os.path.join(os.getcwd(),"local-pycvf-settings.py"))
+  read_local_pycvf_settings=True
 except:
   pass
-
+if read_local_pycvf_settings:
+  exec file(os.path.join(os.getcwd(),"local-pycvf-settings.py")).read()

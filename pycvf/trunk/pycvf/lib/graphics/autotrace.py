@@ -77,7 +77,15 @@ class _at_spline_type(Structure):
 			'degree': self.degree,
 			'linearity':   self.linearity
 		      }
-	
+        def get_degree(self):
+            return self.degree
+        def get_linearity(self):
+            return self.linerarity
+        def get_v(self):
+                  return ((self.v[0].x,self.v[0].y,self.v[0].z ),
+		            (self.v[1].x,self.v[1].y,self.v[1].z ), 
+			    (self.v[2].x,self.v[2].y,self.v[2].z ),
+			    (self.v[3].x,self.v[3].y,self.v[3].z ))
 
 at_spline_type = _at_spline_type
 
@@ -87,6 +95,12 @@ class _at_color_type(Structure):
 		('g', c_ubyte),
 		('b', c_ubyte),
 	]
+        def get_r():
+            return self.r
+        def get_g():
+            return self.g
+        def get_b():
+            return self.b        
 
 at_color_type = _at_color_type
 
@@ -107,7 +121,49 @@ class _at_spline_list_type(Structure):
 			'color':(self.color.r, self.color.g,self.color.b),
 			'open':(self.open)
 			}
-
+        def get_spline(self):
+            return map(lambda x:x.__dict__(), self)
+        def get_clockwise(self):
+            return self.clockwise
+        def get_open(self):
+            return self.open        
+        def get_color(self):
+            return (self.color.r, self.color.g,self.color.b),      
+        def get_perimeter(self):
+            it=iter(self)
+            p0=po=it.next()
+            s=0
+            try:
+                while True:
+                  pi=it.next()
+                  pov=po.get_v()
+                  piv=pi.get_v()
+                  s+=((pov[0][0]-piv[0][0])**2 + (pov[0][1]-piv[0][1])**2)**.5
+                  po=pi
+            except StopIteration:
+                pass
+            if (not self.open):
+                pi=p0
+                pov=po.get_v()
+                piv=pi.get_v()                
+                s+=((pov[0][0]-piv[0][0])**2 + (pov[0][1]-piv[0][1])**2)**.5
+            return s
+        def get_perimeter_points(self):
+            import numpy
+            r=[]
+            try:
+              for x in self:
+                  r.append(x.get_v()[0])
+                  
+            except StopIteration:
+                pass            
+            return numpy.array(r)
+        def get_pcenter(self):
+            return get_perimeter_points(self).mean(axis=0)
+        def get_pstd(self):
+            return get_perimeter_points(self).std(axis=0)        
+        def get_size(self):
+            return get_perimeter_points(self).ptp(axis=0)        
 
 at_spline_list_type = _at_spline_list_type
 
@@ -134,6 +190,23 @@ class _at_spline_list_array_type(Structure):
 			'preserve_width':self.preserve_width,
 			'width_weight_factor':self.width_weight_factor
 			}
+        def get_splines(self):
+            return list(self)
+        def get_height(self):
+            return self.height
+        def get_width(self):
+            return self.width
+        def get_background_color(self):
+            return self.background_color and (self.background_color.contents.r,self.background_color.contents.g,self.background_color.contents.b) or None,
+        def get_centerliner(self):
+            return self.centerline
+        def get_preserve_width(self):
+            return self.preserve_width
+        def get_width_weight_factor(self):
+            return self.width_weight_factor
+        
+        
+        
 # enumeration _at_msg_type
 AT_MSG_FATAL = 1
 AT_MSG_WARNING = 2
@@ -312,6 +385,8 @@ class AutoTrace:
 		       return iter(self.splines.contents)
 		def __dict__(self):
 		       return self.splines.contents.__dict__()
+                def get_object(self):
+                    return self.splines.contents
 	def __init__(self):
 		self.opts = at_fitting_opts_new()
 	        self.output_opts = at_output_opts_new()

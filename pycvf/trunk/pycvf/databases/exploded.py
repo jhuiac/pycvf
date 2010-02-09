@@ -30,7 +30,7 @@ from pycvf.core import database
 import itertools
 import hashlib
 import pickle
-from pycvf.lib.ui.qt import qapp
+#from pycvf.lib.ui.qt import qapp
 from pycvf.datatypes import couple
 from pycvf.datatypes import basics
 from pycvf.core.builders import *

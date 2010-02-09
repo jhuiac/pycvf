@@ -23,7 +23,6 @@
 # -*- coding: utf-8 -*-
 
 from pycvf.core import settings
-from pycvf.lib.video.render.lazy import LazyDisplay
 import numpy
 
 
@@ -37,6 +36,7 @@ class Datatype:
      return hasattr(x,"content_type") and x.content_type==cls.content_type
   @classmethod
   def display(cls,x):
+     from pycvf.lib.video.render.lazy import LazyDisplay      
      if (cls.ld==None):
         cls.ld=LazyDisplay()
      if (x.ndim==2 or x.shape[2]==1):

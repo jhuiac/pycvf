@@ -63,6 +63,14 @@ def select_open_file():
     qfd=PyQt4.QtGui.QFileDialog()
     return unicode(qfd.getOpenFileName()).encode('utf8')
 
+
+def select_save_file():
+    import pycvf.lib.ui.qt
+    import PyQt4, PyQt4.QtGui
+    qfd=PyQt4.QtGui.QFileDialog()
+    return unicode(qfd.getSaveFileName()).encode('utf8')
+
+
 def select_existing_directory():
     import pycvf.lib.ui.qt
     import PyQt4, PyQt4.QtGui
@@ -86,6 +94,8 @@ def add_context_basics(context):
   context["ML"]=load_force_ml
   context["PM"]=piped_models  
   context["select_open_file"]=select_open_file
+  context["select_save_file"]=select_save_file  
+  context["select_existing_file"]=select_open_file  
   context["select_existing_directory"]=select_existing_directory  
   
 def database_builder(expr, database_path=settings.PYCVF_DATABASE_PATH):

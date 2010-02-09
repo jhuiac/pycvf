@@ -67,6 +67,8 @@ class DB(database.ContentsDatabase):
      else:
         r=lambda x:x
      return r(self.ir[a])
+  def keys(self):
+     return self.ir.keys()
 
 ContentsDatabase=DB
 __call__=DB

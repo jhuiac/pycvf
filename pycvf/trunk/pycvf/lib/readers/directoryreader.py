@@ -38,10 +38,13 @@ class DirectoryReader:
         if (randomized):
           random.shuffle(ld)
         self.ld=ld
+        self.filtere=filtere
         self.observer=observer
         self.itername=itertools.imap( lambda x:os.path.join(self.path,x) ,itertools.ifilter(lambda x:re.match(filtere,x,re.I),ld))
+    def keys(self):
+        return map( lambda x:os.path.join(self.path,x) ,itertools.ifilter(lambda x:re.match(self.filtere,x,re.I),self.ld))
     def rewind(self):
-        self.itername=itertools.imap( lambda x:os.path.join(self.path,x) ,itertools.ifilter(lambda x:re.match(filtere,x,re.I),ld))
+        self.itername=itertools.imap( lambda x:os.path.join(self.path,x) ,itertools.ifilter(lambda x:re.match(self.filtere,x,re.I),ld))
     def next(self):
         return self.itername.next()
     def step(self):
@@ -80,10 +83,13 @@ class ImageDirectoryReader:
           ld.sort()
         self.ld=ld
         self.ca=None
+        self.filtere=filtere
         self.itername=itertools.ifilter(lambda x:re.match(filtere,x,re.I),ld)
         self.iterimages=itertools.ifilter(lambda x:x!=None,itertools.imap(lambda x:ImgOpenOrNone(path+"/"+x),self.itername))
         self.iterimages_with_filenames=itertools.ifilter(lambda x:x[0]!=None,itertools.imap(lambda x:(ImgOpenOrNone(path+"/"+x),path+"/"+x) ,self.itername))
         self.observer=None
+    def keys(self):
+        return map( lambda x:os.path.join(self.path,x) ,itertools.ifilter(lambda x:re.match(self.filtere,x,re.I),self.ld))
     def next(self):
         return self.iterimages_with_filenames.next()
     def step(self):

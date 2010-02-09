@@ -22,11 +22,14 @@
 
 # -*- coding: utf-8 -*-
 
-try:
-  from pycvf.lib.video.render.lazy import LazyDisplay
-except:
-  pass
-from pycvf.lib.ui.qtdisplay import QtDisplay
+#try:
+#  from pycvf.lib.video.render.lazy import LazyDisplay
+#except:
+#  pass
+#try:
+#  from pycvf.lib.ui.qtdisplay import QtDisplay
+#except:
+#  pass
 
 
 

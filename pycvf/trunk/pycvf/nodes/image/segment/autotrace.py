@@ -37,5 +37,13 @@ class AutoTracer:
         #return r.__dict__()['splines']
         return r
 
+@genericmodel.pycvf_model_function(basics.Label.Datatype,basics.Label.Datatype)    
+def background_color(r):
+    return r.get_object().get_background_color()
+
+@genericmodel.pycvf_model_function(basics.Label.Datatype,basics.Label.Datatype)    
+def splines(r):
+    return r.get_object().get_splines()
+
 Model=genericmodel.pycvf_model_class(image.Datatype,basics.Label.Datatype)(AutoTracer)
 __call__=Model

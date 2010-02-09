@@ -54,7 +54,7 @@ class DB(database.ContentsDatabase):
     try:
       return [it.next() for x in range(self.limit) ]
     except:
-      return list(self.vdb.keys())
+      return list(self.vdb.keys())[:self.limit]
   def __len__(self):
       return min(self.limit,len(self.vdb))
 

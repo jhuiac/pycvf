@@ -48,10 +48,12 @@ class DB(database.ContentsDatabase):
         self.labels=labels
       l=self.labels[0]
       self.vdb=self.cdb( **eval((self.dbargs).replace('$label$',l))) 
-      dtp=couple.Datatype(self.vdb,basics.Label.Datatype)
-      for f in dir(dtp):
-          if (not hasattr(self,f)):
-              exec("self."+f+"=dtp."+f)
+      self.dtp=couple.Datatype(self.vdb,basics.Label.Datatype)
+      #for f in dir(dtp):
+      #    if (not hasattr(self,f)):
+      #        exec("self."+f+"=dtp."+f)
+  def datatype(self):
+      return self.dtp
   def __iter__(self):
       for l in self.labels:
          self.vdb=self.cdb( **eval((self.dbargs).replace('$label$',l))) 

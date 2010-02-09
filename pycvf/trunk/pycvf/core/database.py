@@ -30,6 +30,9 @@ class ContentsDatabase(object):
     return itertools.imap(lambda x:x[0], self)
   def keys(self):
     return itertools.imap(lambda x:x[1], self)
+  def datatype(self):
+      pycvf_warning("You are using a old style database... Please implement 'datatype' for specifying the datatype type")
+      return self
   def labeling_default(selfdb):
     class Labels:
             @staticmethod
@@ -88,4 +91,3 @@ class ContentsDatabase(object):
     return Labels()
       
 
-          

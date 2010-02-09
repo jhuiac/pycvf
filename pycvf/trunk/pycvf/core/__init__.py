@@ -143,19 +143,20 @@ try:
 except:
     import datetime
     sys.stderr.write("""
-    PYCVF is released under LGPL v.3.
-    It means that you are free to use the software as you want.
+    PYCVF is mostly released under LGPL v.3.
+    HOWEVER SOME PARTS MAY BE RELEASED UNDER DIFFERENT LICENSING SCHEME.
     
-    However for this software to survive, we need your support.
-    For providing you better support in further release, and in order to prove interest that our
-    software received, we would appreciate if you would accept to register.
+    For providing you better support in further release, 
+    and in order to prove interest that our software received, 
+    we would appreciate if you would accept to register.
+    Please fill-in the registration form, and decide whether 
+    you want to register after.
    
     
     
     
     Press Enter to continue to License.
     """)
-    sys.stdin.readline()
     pdbd = os.path.dirname(globals()["__file__"])
     os.system(os.environ.get('PAGER','more')+ " "+ pdbd+"/../../LICENSE")
     answer=""
@@ -163,8 +164,8 @@ except:
       sys.stderr.write("Do you accept the term of the license ? (yes/no) \n")
       answer=sys.stdin.readline().strip().lower()
       if (answer!='yes'):
-        sys.stderr.write("\nWell, you did not accept the licencse.")
-        sys.stderr.write("You cannot legally use the software then, also we would be thankful to you to remove the source code from your machine.\n")       
+        sys.stderr.write("\nWell, you did not accept the license.")
+        sys.stderr.write("You cannot legally use the software then, also you shall remove the source code from your machine.\n")       
         sys.exit(-1)
     file(pycvf_license_accept_file,"w").write("# PyCVF License has been accepted on %s" %(datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")))       
     sys.stderr.write("\nThanks for approving the license\n\n")

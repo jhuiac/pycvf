@@ -12,7 +12,7 @@
 #########################################################################################################################################
 from pycvf.core import database
 from pycvf.datatypes import basics
-import numpy, random
+import numpy
 
 #########################################################################################################################################
 # Create the ContentsDatabase Object
@@ -26,22 +26,21 @@ def gdist(npoints, center, radius):
    return numpy.random.normal(center,radius,(npoints,len(center)))
 
 class DB(database.ContentsDatabase,basics.NumericVector.Datatype):
-   def __init__(self, npoints_per_clusters=100, nclusters=10, ndim=4, sigma=0.12, space_size=20, seed=None, shuffled=True):
+   def __init__(self, npoints_per_clusters=100, clusters=10, ndim=4, sigma=0.12, space_size=20, seed=None, shuffled=True):
      self.NE=npoints_per_clusters
-     self.nclusters=nclusters
+     self.nclusters=clusters
      self.ndim=ndim
      self.sigma=sigma
      self.space_size=space_size
      self.shuffled=shuffled
      if (seed!=None):
-       random.seed(seed)
        numpy.random.seed(seed)
-     self.data=numpy.vstack([gdist(self.NE,tuple([random.randint(0,self.space_size) for x in range(ndim)]),self.sigma) for i in range(self.nclusters)])
+     self.data=numpy.vstack([gdist(self.NE,tuple([numpy.random.randint(0,self.space_size) for x in range(ndim)]),self.sigma) for i in range(self.nclusters)])
      self.gtdata=reduce(lambda x,y:x+[y]*self.NE ,range(self.nclusters),[])
    def __iter__(self):
        r=range(len(self))
        if (self.shuffled):
-          random.shuffle(r)
+          numpy.random.shuffle(r)
        for x in r:
            #print self.data.shape
            yield (self.data[x,:],x)
@@ -60,7 +59,7 @@ class DB(database.ContentsDatabase,basics.NumericVector.Datatype):
             def __iter__():
              r=range(len(selfdb))
              if (self.shuffled):
-               random.shuffle(r)
+               numpy.random.shuffle(r)
              for x in r:
                yield (selfdb.gtdata[x],x)
             @staticmethod

@@ -46,7 +46,9 @@ class DB(database.ContentsDatabase):
         if (type(dbargs)==dict):
           self.vdb=ContentsDatabase( **dbargs)
         else:
-           self.vdb=ContentsDatabase( **eval('{'+dbargs+'}')) 
+           self.vdb=ContentsDatabase( **eval('{'+dbargs+'}'))
+  def datatype(self):
+       retun self.dbs.datatype()           
   def __iter__(self):
       for db in self.dbs:
         for e in itertools.ifilter(lambda x:self.vdbval[self.vdbaddr.index(x[1])]>self.threshold ,self.vdb):
@@ -55,14 +57,8 @@ class DB(database.ContentsDatabase):
       return self.dbs[addr[0]][addr[1]]
   def keys(self):
       return reduce(lambda b,y: b+map(lambda l:(y[1],l),y[0].keys()) ,zip(self.dbs,range(len(self.dbs))),[])
-  def items(self):
-      raise Exception, "Not Yet Implemented"
-  def values(self):
-      raise Exception, "Not Yet Implemented"
   
-  
-  
-  
+
 # Framework 2 compatibility       
 ContentsDatabase=DB
 __call__=DB

@@ -2,8 +2,11 @@ Installation instructions
 =========================
 
 
-So far installation instructions are available for LINUX only.
+FIRST of all, 1./ DO NOT TRY TO USE THE SOURCE PACKAGES FROM SOURCEFORGE,
+THE MANIFEST IS NOT YET READY, AND SOME FILES ARE MISSIMG. USE
+THE REPOSITORY INSTEAD.
 
+So far installation instructions are available for LINUX only.
 Contributions for other operating systems are welcome !
 
 
@@ -24,36 +27,42 @@ I LINUX
     
      A) Install PyCVF base software
      
-        python setup.py build
-        sudo python setup.py install
+        python setup.py build_ext -i
 	
-     B) Install additional Wrappers
-     
-        cd wrappers;
-	./install-all.sh
-	cd ..
+	## SKIP THAT FOR THE MOMENT WE ARE STILL DEVELOPPING
+        #sudo python setup.py install
 	
+	INSTEAD MODIFY FOR ".bashrc"
+	to add the directory containing this file to your PYTHONPATH
+        and THISDIRECTORY/pycvf/bin to your PATH (do not worry if it does not exist yet, it will be created by B)
+	
+
      C) Install User Space Applications
   
         cd pycvf
 	./linkbin.sh
 	cd ..
-  
-     D) Configure your environement
+
+
+     D) Install additional Wrappers
+     
+        cd wrappers;
+	./install-all.sh
+	cd ..
+	
+
+     E) Configure your environement
      
         edit your file "~/.pycvf-settings.py"
 	
-	
-	
      E) Accept LICENSE and Register
      
+        Ok, this is just for checking. 
+	Registration is not mandatory but is welcomed.
+	
 	echo "import pycvf.core" | python
 	
-     F) import CONTRIB packages in pycvfext
-         including :
-	 
-	 niisatoh
-	 trecvid2007
-	 jfli
-	 
+     F) if you have CONTRIB package, import those CONTRIB packages in pycvfext.
+	
+	The best way is actually to relink pycvfext to some alternative directory
 	 

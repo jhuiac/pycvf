@@ -155,10 +155,10 @@ class NumericArray:
       #  q=QLineEdit(*args)
       #  return q
     @classmethod
-    def set_widget_value(cls,widget,x):
+    def set_widget_value(cls,widget,x,vdb=None,addr=None):
       if (x.ndim==2):
         from pycvf.datatypes import datapoints2d
-        return datapoints2d.Datatype.set_widget_value(widget,x)
+        return datapoints2d.Datatype.set_widget_value(widget,x,vdb,addr)
       else:
         widget.setText((str(x)))    
     @classmethod 

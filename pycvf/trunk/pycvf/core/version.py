@@ -1,7 +1,7 @@
 
 # THIS FILE IS GENERATED FROM PYCVF SETUP.PY
-short_version='0.0.11'
-version='0.0.11'
+short_version='0.0.12'
+version='0.0.12'
 release=True
 
 if not release:

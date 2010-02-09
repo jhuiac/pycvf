@@ -1,6 +1,7 @@
 To be rethought : 
   * How to avoid name clash in the dataflow
   * The dataflow is loosing part of its utility (check how much necessary/should we remove it)
+    I will move it at the new "NODE" Level
   * Optimize loading for small apps
   * Relation Library / Components / Program to be simplefied
   * Installation procedure /
@@ -11,6 +12,9 @@ To be rethought :
 Applications:
   * Spectral Audio Computer
   * Spectral Audio Denoiser
+  * Audio Segmentation
+  * Video Segmentation
+  * Generic Segmentation
   * Video Spectrum
   * Generic SuperResolution
  
@@ -27,9 +31,6 @@ Refactoring:
 Finishing:
   * Finish support for database with labels
   * Optimize test index
-
-Shot segmented :
-  * Add segmenters
 
 Generic Learning:
   * Add generic application for learning discrete labels from observations

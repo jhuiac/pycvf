@@ -44,7 +44,7 @@ class DbMdlFeatureView(ModelUsingApplication):
     qapp.processEvents()
     for e in cls.vdb:
        cls.mdl.metainfo_curaddr=e[1]
-       cls.mdl.process(e[0],processf=qv.push)
+       cls.mdl.process(e[0],processf=lambda x:qv.push(x,cls.vdb,e[1]),addr=e[1])
        #mdl.process(e[0],processf=lambda x:sys.stdout.write(str(x)+"\n"))
        qapp.processEvents()
        if (delay):

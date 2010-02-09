@@ -16,18 +16,22 @@ class DB(database.ContentsDatabase):
       self.filter_nulls=filter_nulls
       self.filter_emptylists=filter_emptylists
       if (datatype):
-          for i in dir(datatype):
-              if (not (hasattr(self,i))):
-                  setattr(self,i,getattr(datatype,i))
+          self.dtp=datatype
+          #for i in dir(datatype):
+          #    if (not (hasattr(self,i))):
+          #        setattr(self,i,getattr(datatype,i))
       else:
         try:
           print self.tf.meta
-          self.display=self.tf.meta["inbound_datatype"].display
+          self.dtp=self.tf.meta["inbound_datatype"]
+          #self.display=self.tf.meta["inbound_datatype"].display
         except:
           pycvf_warning("Failed to use information stored in metadata for typing reverting to no datatype")
           def print_e(x):
             sys.stdout.write(str(x)+"\n")
           self.display=print_e
+  def datatype(self):
+      return self.dtp
   def __iter__(self):
       ltf=len(self.tf)
       for x in range(ltf):

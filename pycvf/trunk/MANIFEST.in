@@ -6,7 +6,8 @@ include documentation/tutorial.tex
 include wrappers/install_additional_packages.sh
 recursive-include pycvf *.txt *.py
 recursive-include documentation *.tex *.py
-recursive-include wrappers *.txt *.py
+recursive-include wrappers *.txt *.py *.pyx *.c *.cpp
 recursive-include datas *.txt *.py
+prune examples/sample?/build
 prune examples/sample?/build
 prunt *.old

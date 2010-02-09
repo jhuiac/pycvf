@@ -45,10 +45,12 @@ class DB(database.ContentsDatabase):
       self.structure=(pycvf_builder(structure) if type(structure) in [str, unicode] else structure)
       self.quick_len=quick_len
       self.cache_id=cache_id
-      dtp=self.structure.output_datatype(self.vdb)
-      for f in dir(dtp):
-          if (not hasattr(self,f)):
-              exec("self."+f+"=dtp."+f)
+      self.dtp=self.structure.output_datatype(self.vdb)
+      #for f in dir(dtp):
+      #    if (not hasattr(self,f)):
+      #        exec("self."+f+"=dtp."+f)
+  def datatype(self):
+      return self.dtp
   def __iter__(self):
          try:
            for e in self.vdb:

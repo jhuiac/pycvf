@@ -46,10 +46,12 @@ class ContentsDatabase(database.ContentsDatabase):
       self.databases=dict(map(lambda x:(x[0],x[1][0](**x[1][1])),databases.items()))
       self.labels=self.keys()
       self.vdb=self.databases.values()[0]
-      dtp=couple.Datatype(self.vdb,basics.Label.Datatype)
-      for f in dir(dtp):
-          if (not hasattr(self,f)):
-              exec("self."+f+"=dtp."+f)
+      self.dtp=couple.Datatype(self.vdb,basics.Label.Datatype)
+      #for f in dir(dtp):
+      #    if (not hasattr(self,f)):
+      #        exec("self."+f+"=dtp."+f)
+  def datatype(self):
+      return self.dtp
   def __iter__(self):
       for l in self.databases.items():
          for e in l[1]:

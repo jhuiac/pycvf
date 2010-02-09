@@ -270,9 +270,9 @@ class QtFeaturesViewer(QtGui.QTableWidget):
                self.setCellWidget( i,0, self.wi[i])
                self.setRowHeight(i,300)
             #self.push(iv)
-        def push(self,v):
+        def push(self,v,*args,**kwargs):
             for i in range(len(self.ed)):
-                self.ed[i][1].set_widget_value(self.wi[i],v[i])
+                self.ed[i][1].set_widget_value(self.wi[i],v[i],*args,**kwargs)
         def resizeEvent(self,ev):
              self.setColumnWidth(0,self.geometry().width()-70) #self.horizontalHeader().width())
              return QtGui.QTableWidget.resizeEvent(self , ev)
@@ -294,8 +294,8 @@ class QtFeaturesViewerDialog(QtGui.QDialog):
             self.connect(self.pbcancel,SIGNAL("clicked()"),self,SLOT("reject()"))
             self.layout.addWidget(self.pbcancel)
             self.update()
-        def push(self,x):
-            self.pwl.push(x)
+        def push(self,x,*args,**kwargs):
+            self.pwl.push(x,*args,**kwargs)
         def __del__(self):
             self.hide()
 

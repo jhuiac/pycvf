@@ -36,9 +36,10 @@ class DB(database.ContentsDatabase):
   def __init__(self,db,session="std",threshold=0.8,annfile=os.environ["HOME"]+"/"+"weights/$database-$session.pcl",reevaluate=False):
       self.vdb=database_builder(db)
       self.threshold=threshold
-      for f in dir(dtp):
-          if (not hasattr(self,f)):
-              exec("self."+f+"=dtp."+f)
+      sekf.dtp=self.vdb.datatype()
+      # for f in dir(dtp):
+      #    if (not hasattr(self,f)):
+      #        exec("self."+f+"=dtp."+f)
       self.annfile=annfile
       self.annfile=self.annfile.replace("$database",db)
       self.annfile=self.annfile.replace("$session",session)
@@ -71,6 +72,8 @@ class DB(database.ContentsDatabase):
             else:
                 if (self.vdbval==None):
                   raise Exception, "No user evaluation for database"
+  def datatype(self):
+      reutn self.dtp
   def __iter__(self):
       for e in itertools.ifilter(lambda x:self.vdbval[self.vdbaddr.index(x[1])]>self.threshold ,self.vdb):
          yield e

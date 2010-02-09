@@ -31,59 +31,41 @@ import marshal
 ###
 ###
 ###
-from pycvf.indexes.pseudoincrementalindex import PseudoIncrementalIndex
+from pycvf.indexes.pseudoincremental import PseudoIncrementalIndex
 from pycvf.indexes.sashindex import SashIndex
-from pycvf.stats import parzenestimator
-        
+
 class StatModel:
    def __init__(self, k):
       """
        We approximate by the mean of our nearest neighbors
       """ 
       self.k=k
-      self.idx=PseudoIncrementalIndex(SashIndex())
+      self.idx=PseudoIncrementalIndex(SashIndex)
    def dump(self,file_):
        assert(False)
    @staticmethod
    def load(file_, *args, **kwargs):
        assert(False)   
-   def train(self,A,AN=None,B=None,BN=None,online=False):
+   def train(self,A,B,online=False):
        ## basically train consists in creating 1 or 2 sahs
-       assert(AN==None)
-       assert(BN==None)
        assert(A!=None)
        assert(B!=None)
        self.idx.add_many(A,B)
-   def test(self,A,AN=None,B=None,BN=None,log=False):
+       self.idx.recompute()
+   def predict(self,A,AN=None,B=None,BN=None,log=False):
+       """
+        Predict what will be the label according to $k$-closest neighbors
+       """
        ### basically train consists in checking out the average distance of neighbors
        ### basically train consists in checking out the average distance of neighbors compared to oponents features...
        #
        # basically we consider density estimation as a 
        # 
-       parzenestimator()
-       return scipy.mean(map(self.idx.getitem(obs,self.k),lambda x:x[1]))
-   def onesample(self):
-       assert(False)
-       # choose randomly one point
-       # takes its nearest neighbors in all directions... 
-       # build a gaussian parzen estimator and sample from it
+       res=self.idx.getitems(A,self.k)
+       return map(lambda x:x[0][0][0],res)
 
-
-       #return random.choice(self.cost)
-   def manysamples(self,numsamples):
-       assert(False)
-       # choose randomly one point
-       # takes its nearest neighbors in all directions... 
-       # build a gaussian parzen estimator and sample from it
-
-
-       #return random.choice(self.cost)
-        return random.sample(self.idx.keys,numsamples)
-   def sample(self,numsamples=10):
-       if (numsamples < self.nbins) :
-         return numpy.array([self.onesample() for x in range(numsamples) ])
-       else:
-         return self.manysamples(numsamples)
+       #parzenestimator()
+       #return scipy.mean(map(self.idx.getitem(obs,self.k),lambda x:x[1]))
    def memory_cost(self, *args, **kwargs):
         assert(False)
    def cpu_cost(self, *args, **kwargs):

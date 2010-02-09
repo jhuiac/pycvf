@@ -154,7 +154,7 @@ class ComputeFeaturesApp(ModelUsingApplication):
   
   @classmethod
   def process(cls,nrels=1,*args,**kwargs):                         
-    trackfile=cls.trackefilename.value
+    trackfile=cls.trackfilename.value
     meta_selector=eval(cls.meta_selector.value)
     cls.nmetas=cls.mmeta
     if (meta_selector!=None):

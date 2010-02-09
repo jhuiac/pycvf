@@ -15,7 +15,7 @@ class MdlRunner(ModelUsingApplication):
   def process(cls,*args,**kwargs):                         
      for e in cls.vdb:
        sys.stderr.write('.')
-       sys.stderr.write(e[1])
+       #sys.stderr.write(e[1])
        cls.mdl.process(e[0],addr=e[1])
      sys.stderr.write('\n')
 

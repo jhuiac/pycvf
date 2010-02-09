@@ -169,7 +169,7 @@ class Model(object):
      self.directory=(kargs["directory"] if  kargs.has_key("directory") else "/tmp/" )
      try: 
        os.stat(self.directory)
-     else:
+     except:
        os.mkdir(self.directory)
      pycvf_debug(10,basecname)
      ## ported from 2.0
@@ -553,9 +553,9 @@ class Model(object):
            r[s[0]]=fct_f(s,cpath)
        else:
            r[s[0]]=s[1].submodel_op(submodel_selector_f, fct_f)
-     for s in self.statmodels.items():
-       if (submodel_selector_f(s,cpath)):
-           r[s[0]]=fct_f(s,cpath)
+     #for s in self.statmodels.items():
+     #  if (submodel_selector_f(s,cpath)):
+     #      r[s[0]]=fct_f(s,cpath)
      #for s in self.structures.items():
      #  if (submodel_selector_f(s)):
      #      r[s[0]]=fct_f(s,cpath)
@@ -585,9 +585,9 @@ class Model(object):
            r.extend(fct_f(s,cpath))
        else:
            r.extend(s[1].submodel_op(submodel_selector_f, fct_f))
-     for s in self.statmodels.items():
-       if (submodel_selector_f(s,cpath)):
-           r.extend(fct_f(s,cpath))
+     #for s in self.statmodels.items():
+     #  if (submodel_selector_f(s,cpath)):
+     #      r.extend(fct_f(s,cpath))
      #for s in self.structures.items():
      #  if (submodel_selector_f(s)):
      #      r.extend(fct_f(s,cpath))
@@ -669,7 +669,7 @@ class Model(object):
     r=[]
     if (self.cname):
       r+=[ self.cname] # basecname+self.cname+"/" ] 
-      r+=map(lambda x:self.cname+"#"+x,self.structures.keys())
+      #r+=map(lambda x:self.cname+"#"+x,self.structures.keys())
     r+=reduce(lambda x,y:x+ y.get_cnames(),self.submodels.values(),[])
     return r
 
@@ -701,13 +701,13 @@ class Model(object):
         stream.write(indent+"\n")
         if (smi+1!=lsm):
           stream.write(indent+"\n")
-     lsm=len(self.statmodels)
-     statmodelsi=self.statmodels.items()
-     for smi in range(lsm):
-        sm= statmodelsi[smi]
-        stream.write(indent+"+-"+sm[0]+"\n")
-        if (smi+1!=lsm):
-          stream.write(indent+"\n")
+     #lsm=len(self.statmodels)
+     #statmodelsi=self.statmodels.items()
+     #for smi in range(lsm):
+     #   sm= statmodelsi[smi]
+     #   stream.write(indent+"+-"+sm[0]+"\n")
+     #   if (smi+1!=lsm):
+     #     stream.write(indent+"\n")
      stream.write(indent+"\n")
 
   ##

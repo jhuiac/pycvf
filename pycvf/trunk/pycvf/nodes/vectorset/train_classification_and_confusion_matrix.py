@@ -19,7 +19,7 @@ class ModelTrainer:
     """
     ## Here we train a model on a labeled sample set and then we try to recover the data from the sample set
     """
-    def __init__(self,statmodel,label=None,label_op=None,*args, **kwargs):
+    def __init__(self,statmodel,label=None,label_op=None,cross_train=0,*args, **kwargs):
         if (label==None):
             label="default"
         if (label_op==None):
@@ -30,6 +30,7 @@ class ModelTrainer:
         self.model_node=None
         self.label=label
         self.label_op=label_op
+        self.cross_train=cross_train
     def set_model_node(self,model):
         self.model_node=model
     def on_model_destroy(self,model):
@@ -38,6 +39,7 @@ class ModelTrainer:
           #neg=numpy.array(map(lambda x:x[0],self.negative_data.next()))
           labelv=eval("self.model_node.get_curdb().labeling_"+self.label,{'self':self})()
           addr=eval("self.model_node.get_curaddr()",{'self':self})
+          assert(addr!=None)
           labels=self.label_op(labelv[addr])
           if (x.ndim==1):
              pycvf_warning("Your data is one dimensional only\n")
@@ -51,10 +53,24 @@ class ModelTrainer:
              labels=labels.reshape(-1,1)
           elif (labels.ndim>2):
              pycvf_error("Your label data is too high dimensional for learning\n")
-          assert(labels.ptp()>0)
-          self.statmodel.train(x,labels,online=False,*self.args,**self.kwargs)
-          aclass=self.statmodel.predict(data)
-          return multiplicity(zip(numpy.sign(aclass),labels.flat))
+          #print labels
+          if (labels.dtype in [int, float, numpy.uint8,numpy.int, numpy.float, numpy.float32,  numpy.float64] ):
+             assert(labels.ptp()>0)
+          if (not self.cross_train):
+            self.statmodel.train(x,labels,online=False,*self.args,**self.kwargs)
+            aclass=self.statmodel.predict(x)
+            #print "ACLASS=",aclass
+            print "EXACT=", (numpy.array(aclass)==numpy.array(labels.flat)).mean()
+            return multiplicity(zip(aclass,labels.flat))
+          else:
+            sel=(numpy.random.random(x.shape[0]))<(float(self.cross_train)/(1+self.cross_train))
+            self.statmodel.train(x[sel],labels[sel],online=False,*self.args,**self.kwargs)
+            sel=(1-sel).astype(bool)
+            aclass=self.statmodel.predict(x[sel])
+            #print "ACLASS=",aclass
+            
+            print "EXACT=", (numpy.array(aclass)==numpy.array(labels.flat)[sel]).mean()*100
+            return multiplicity(zip(aclass,labels.flat))
 
 Model=pycvf_model_class(basics.NumericArray.Datatype,basics.Label.Datatype)(ModelTrainer)
 __call__=Model

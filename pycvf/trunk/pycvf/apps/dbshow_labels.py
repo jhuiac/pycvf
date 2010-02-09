@@ -21,7 +21,7 @@ class DbShowLblApp(DatabaseUsingApplication):
      print_addr=int(cls.print_addr.value)
      label=str(cls.label.value)
      label_c=eval("cls.vdb.labeling_"+label,{'cls':cls})()
-     dtp=(pycvf_builder(cls.forced_datatype.value) if len(cls.forced_datatype.value) else label_c.datatype(cls.vdb))
+     dtp=(pycvf_builder(cls.forced_datatype.value) if len(cls.forced_datatype.value) else label_c.datatype()) #cls.vdb
 
      for i in cls.vdb:
        if print_addr:

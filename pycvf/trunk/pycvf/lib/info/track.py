@@ -24,8 +24,9 @@
 import cPickle as pickle
 import numpy
 import ctypes
-import zlib
+import os,zlib
 
+from pycvf.core.errors import *
 from pycvf.core.builders import *
 
 def check_has_title(mo):
@@ -65,15 +66,18 @@ class OnDiskTrack(object):
             if (self.fp): self.fp.close()
             self.mode='rb+'
             self.fp=open(self.filename,self.mode)
+            self.fplen=os.stat(self.filename).st_size            
     def __openfilea(self):
         if (self.mode!='ab+'):
             if (self.fp): self.fp.close()
             self.mode='ab+'
             self.fp=open(self.filename,self.mode)
+            self.fplen=os.stat(self.filename).st_size                        
     def __init__(self,filename,saverate=10,meta=None):
         self.filename=filename
         self.mode=''
         self.fp=None
+        self.fplen=0
         self.ano=0
         self.tryloadmeta()
         if (meta!=None):
@@ -284,12 +288,14 @@ class OnDiskTrackLarge(OnDiskTrack):
             self.mode='rb+'
             self.cfileno=0
             self.fp=open(("%s-%04d.mfa"%(self.filename,self.cfileno)),self.mode)
+            self.fplen=os.stat(("%s-%04d.mfa"%(self.filename,self.cfileno))).st_size            
     def __openfilea(self):
         if ((self.mode!='ab+') or (self.fp.tell() > 0x70000000)):
             self.cfileno=self.next_free_file();
             if (self.fp): self.fp.close()
             self.mode='ab+'
             self.fp=open(("%s-%04d.mfa"%(self.filename,self.cfileno)),self.mode)
+            self.fplen=os.stat(("%s-%04d.mfa"%(self.filename,self.cfileno))).st_size                        
     def __init__(self,*args,**xargs):
         super(OnDiskTrackLarge,self).__init__(*args,**xargs)
         self.cfileno=-1
@@ -309,15 +315,22 @@ class OnDiskTrackLarge(OnDiskTrack):
     def next(self):
         try :
             self.__openfiler()
+            if (self.fp.tell()==self.fplen):
+                #print  "FPLEN=",self.fplen
+                raise StopIteration
             return self._internalread()
-        except:
+        except Exception,e:
+            #print "ex=",e
             try:
                 (os.stat(("%s-%04d.mfa"%(self.filename,self.cfileno+1))))
             except:
+                
                 raise StopIteration
             self.fp.close()
             self.cfileno+=1
             self.fp=gzip.open(("%s-%04d.mfa"%(self.filename,self.cfileno)),self.mode)
+            print dir(self.fp)
+            self.fplen=os.stat(("%s-%04d.mfa"%(self.filename,self.cfileno))).st_size
             return self._internalread()
     def append(self,o):
         self.__openfilea()
@@ -327,17 +340,21 @@ class OnDiskTrackLarge(OnDiskTrack):
         if (self.ano%self.saverate==0):
             self.fp.flush()
     def makeindex(self):
-        print "remaking index... this operation may be long !!!"
+        pycvf_warning( "remaking index... this operation may be long !!!")
         self.index=[]
         self.rewind()
         self.__openfiler()
         cp=(self.cfileno,self.fp.tell())
+        c=0
         try:
             while self.next():
+                sys.stderr.write("reading record (%d,%d,%d)\r"%(c,self.cfileno,self.fp.tell()))                
                 self.index.append(cp)
                 cp=(self.cfileno,self.fp.tell())
+                c+=1
         except StopIteration:
-            pass
+            sys.stderr.write("\nindexing done\n")
+            pass            
     def __getitem__(self,no):
         if (not self.index):
             self.makeindex()

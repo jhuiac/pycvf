@@ -6,10 +6,11 @@
 from pycvf.core.errors import *
 
 
-PYCVFD_REQUIRE_PACKAGE=0
+PYCVFD_REQUIRE_PYTHON_PACKAGE=0
 PYCVFD_SPECIFIC_LICENSE=1
 PYCVFD_SPECIFIC_ACCEPT_REQUIRED=2
 PYCVFD_MODULE_STATUS=3
+PYCVFD_REQUIRE_PACKAGE=4
 
 PYCVFD_STATUS_PRODUCTION=0
 PYCVFD_STATUS_BETA=1
@@ -26,17 +27,19 @@ PYCVF_STATUS_DICT={
 
 def pycvf_dist(pragma, value):
    
-    if (pragma==PYCVFD_REQUIRE_PACKAGE):
+    if (pragma==PYCVFD_REQUIRE_PYTHON_PACKAGE):
         try:
             __import__(value,fromlist=value.split(".")[-1])
         except:
             pycvf_error("The following package is required : %s "%(value,))            
-    if (pragma==PYCVFD_SPECIFIC_LICENSE):
+    if (pragma==PYCVFD_REQUIRE_PACKAGE):
+        pass
+    elif (pragma==PYCVFD_SPECIFIC_LICENSE):
             pycvf_warning("Please note that you are using a non LGPL module : %s"%(value,))        
     elif (pragma==PYCVFD_SPECIFIC_ACCEPT_REQUIRED):        
             pycvf_error("Before to use this file you must accept its license")
     elif (pragma==PYCVFD_MODULE_STATUS):        
-            from pycvf.core.settings import PYCVF_STABILITY_LEVEL:
+            from pycvf.core.settings import PYCVF_STABILITY_LEVEL
             if (value>PYCVF_STABILITY_LEVEL):
               pycvf_warning("You are using a package that have the status : %s" %(PYCVF_STATUS_DICT[value],))            
     pass

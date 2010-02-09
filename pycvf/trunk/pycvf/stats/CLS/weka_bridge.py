@@ -33,7 +33,7 @@ import arff
 ###
 ###
 from pycvf.core.distribution import *
-from pycvf.core.utilities import TempDirectory
+from pycvf.core.utilities import TempDirectory, pycvf_config_var
 pycvf_dist(PYCVFD_REQUIRE_PACKAGE,"weka")
 
 WEKACLASSPATH=pycvf_config_var("WEKACLASSPATH","/usr/share/java/weka-3.6.0.jar:/home/tranx/build/yumegraphe.contrib/libsvm-2.85/java/libsvm.jar")

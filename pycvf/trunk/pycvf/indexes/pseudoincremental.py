@@ -23,8 +23,8 @@ class PseudoIncrementalIndex():
       self._values.append(value)
       self.dirty=True
     def add_many(self,keys,values):
-      self.keys.extend(keys )
-      self.values.extend(values )
+      self._keys.extend(keys )
+      self._values.extend(values )
       self.dirty=True
     def recompute(self):
       print "computing index"#, self.keys.shape, self.values.shape

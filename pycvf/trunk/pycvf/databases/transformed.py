@@ -34,15 +34,16 @@ from pycvf.datatypes import couple
 from pycvf.datatypes import basics
 from pycvf.core.builders import *
 from pycvf.core.errors import *
+from pycvf.core import settings
 
 class DB(database.ContentsDatabase):
   """
    This allows you to apply some model on the database before to explore it.  
   """
-  def __init__(self,db="imgkanji()",model="histogram()",modelpath="/",datatype=None):
+  def __init__(self,db="imgkanji()",model="histogram()",modelpath="/",datatype=None,subdir="transformed_db"):
       self.vdb=(pycvf_builder(db) if type(db) in [str,unicode] else db)
       self.model=(pycvf_builder(model) if type(model) in [str,unicode] else model)
-      self.model.init("/",self.vdb,self)
+      self.model.init("/",self.vdb,self,directory=os.path.join(settings.PYCVF_MODEL_DIR,subdir) )
       self.modelpath=modelpath
       metak= self.model.get_features_meta().keys()
       pycvf_warning("TRANSFORMED DB BE SURE TO HAVE CHOSEN THE GOOD MODEL OUTPUT !")      

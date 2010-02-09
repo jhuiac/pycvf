@@ -50,9 +50,13 @@ class DB(database.ContentsDatabase):
   def __getitem__(self, addr):
       return self.vdb[addr]
   def keys(self):
-    return self.vdb.keys()
+    it=iter(self.vdb.keys())
+    try:
+      return [it.next() for x in range(self.limit) ]
+    except:
+      return list(self.vdb.keys())
   def __len__(self):
-      return len(self.vdb)
+      return min(self.limit,len(self.vdb))
 
 
 ContentsDatabase=DB

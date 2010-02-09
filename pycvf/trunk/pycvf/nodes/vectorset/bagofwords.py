@@ -29,7 +29,7 @@ class BagOfWordsProcessor(object):
   def init(self):
      self.bowfilename=self.directory+"/bagofwords.pcl"
      try:
-        self.ibow=self.load(self.bowfilename)
+        self.ibow=BagOfWords.load(self.bowfilename)
         if (self.ibow==None):
             raise Exception
         self.model_node.status=genericmodel.STATUS_READY
@@ -52,6 +52,8 @@ class BagOfWordsProcessor(object):
   def process(self,v):
      try:
         r=self.ibow.push(v)
+     except KeyboardInterrupt:
+       raise
      except Exception,e:
        print e
        if (self.ibow.vocabulary==None):

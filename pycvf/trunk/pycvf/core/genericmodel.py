@@ -173,6 +173,10 @@ class Model(object):
      self.cname=basecname
      self.application=application # the application
      self.directory=(kargs["directory"] if  kargs.has_key("directory") else "/tmp/" )
+     try: 
+       os.stat(self.directory)
+     except OSError:
+       os.mkdir(self.directory)
      pycvf_debug(10,basecname)
      ## ported from 2.0
      def set_cname(a,b):

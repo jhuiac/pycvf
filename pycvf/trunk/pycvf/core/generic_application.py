@@ -168,14 +168,13 @@ class ModelUsingApplication(DatabaseUsingApplication):
      super(ModelUsingApplication,cls).prepare_process(*args,**kwargs)
      pycvf_debug(10,"MODELINIT")         
      cls.mdl=builders.model_builder(cls.mymodel.value)
-     cls.mdl.init('/',cls.vdb.datatype(),cls,modelpath=os.path.join(settings.PYCVF_MODEL_DIR,cls.session.value))
+     cls.mdl.init('/',cls.vdb.datatype(),cls,directory=os.path.join(settings.PYCVF_MODEL_DIR,cls.session.value))
      cls.mdl.metainfo_curdb=cls.vdb
      pycvf_debug(10,"/MODELINIT")
      assert(cls.mdl.get_curdb()==cls.vdb)
      cls.mmeta=cls.mdl.get_features_meta()
      cls.preprocess() 
-
-
+  
   @classmethod
   def preprocess(cls, *args, **kwqrgs):
       pycvf_debug(2,"PREPROCESS")
@@ -186,6 +185,7 @@ class ModelUsingApplication(DatabaseUsingApplication):
       c=0
       while cont:
           try:
+              c+=1
               status=cls.mdl.get_status()
               if (status!=STATUS_READY):
                 if(status==STATUS_ERROR):
@@ -193,8 +193,6 @@ class ModelUsingApplication(DatabaseUsingApplication):
                 sys.stderr.write("\riter =%d"%(c))
                 e=ei.next()
                 cls.mdl.process(e[0],addr=e[1])
-                c+=1
-               
               else:
                 pycvf_debug(10,"STATUS=READY -> LAUNCHING APP")
                 cont=False

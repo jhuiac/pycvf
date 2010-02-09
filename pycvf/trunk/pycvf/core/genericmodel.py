@@ -110,7 +110,6 @@ class Model(object):
   * Link to structures introduced in version 2 is deprecated for version 4 
   """
   anonymous_ctr=0
-  name=None
   processline=None
 
   
@@ -121,8 +120,8 @@ class Model(object):
   def output_datatype(self,datatype):
      return datatype
 
-  def get_modelpath(self):
-      return self.modelpath
+  def get_directory(self):
+      return self.directory
 
   def __init__(self,  *args, ** kwargs):
       self.parent=None ## parent node... (to be reseted to node on  delete)
@@ -131,22 +130,22 @@ class Model(object):
       self.application=None  ## our context : pathes, databases and so on...
       self.context={}
       self.submodels={}
-      self.structures={}
-      self.statmodels={}
+      self.structures={} # DEPRECATED
+      self.statmodels={} # DEPRECATED
       self.processing=[]
       self.status=STATUS_READY
       self.invert_processing=[]
-      self.modelpath=None
+      self.directory=None
       self.datatype_in=None
       self.datatype_out=None
       self.metainfo_curdb=None
       self.metainfo_curaddr=None
-      if (self.kwargs.has_key("name")):
+      if (self.kwargs.has_key("name") and self.kwargs["name"]!=None):
            self.name=self.kwargs["name"]
-           self.cname=None
       else :
-           self.name=None
-           self.cname=None
+           if (not (hasattr(self.__class__,"name"))):
+             self.name=None
+      self.cname=None
       #self.invert_processing=None # optional
   
   def destroy(self):
@@ -173,28 +172,31 @@ class Model(object):
      """
      self.cname=basecname
      self.application=application # the application
-     self.modelpath=(kargs["modelpath"] if  kargs.has_key("modelpath") else "/tmp/" )
+     self.directory=(kargs["directory"] if  kargs.has_key("directory") else "/tmp/" )
      pycvf_debug(10,basecname)
      ## ported from 2.0
-     self.metas=self.get_features_meta()
-     self.init_model(*self.args, **self.kwargs)
-     self.datatype_in=self.input_datatype(database)
-     self.datatype_out=self.output_datatype(database)
      def set_cname(a,b):
          pycvf_debug(10,"init of "+b+a[1].get_name(None)+"/")
-         a[1].init(b+a[1].get_name(None)+"/",self.datatype_out, application,modelpath=self.modelpath+b+a[1].get_name("noname")+"/")
+         a[1].init(b+a[1].get_name(None)+"/",self.datatype_out, application,directory=self.directory+a[1].get_name("noname")+"/")
          for k in a[1].context.items():
            if (self.context.has_key(k[0])):
               pycvf_warning("BE CAREFUL IT SEEMS THAT YOU HAVE A CONFLICT")
            self.context[k[0]]=k[1]
      self.submodel_op(lambda x,y:issubclass(x[1].__class__,Model), set_cname, self.cname)
      self.metas=self.get_features_meta()
+     self.init_model(*self.args, **self.kwargs)
+     self.datatype_in=self.input_datatype(database)
+     self.datatype_out=self.output_datatype(database)
+     self.metas=self.get_features_meta()
      if self.processline==None:
+       #if (self.process):
+       #  self.processline="src|"
+       #else:
        for pi in self.processing:
-          for i in pi[1].items():
-             if (self.context.has_key(i[0])):
-               pycvf_warning("overriding name %s"%i[0])
-             self.context[i[0]]=i[1]
+	      for i in pi[1].items():
+		if (self.context.has_key(i[0])):
+		  pycvf_warning("overriding name %s"%i[0])
+		self.context[i[0]]=i[1]
        self.processline ='|'.join(['src']+map(lambda x:x[0],self.processing))
      self.metas=self.get_features_meta()
      #sys.stderr.write("METAS="+str(self.metas)+"\n")
@@ -239,6 +241,7 @@ class Model(object):
   #
 
   def get_new_anonymous_substructure_name(self):
+     pycvf_warning("DEPRECATED")
      self.anonymous_ctr+=1
      return "__substructure__%04d"%(self.anonymous_ctr,)
 
@@ -247,6 +250,7 @@ class Model(object):
      return "__submodel__%04d"%(self.anonymous_ctr,)
 
   def get_new_anonymous_statmodel_name(self):
+     pycvf_warning("DEPRECATED")
      self.anonymous_ctr+=1
      return "__statmodel__%04d"%(self.anonymous_ctr,)
 
@@ -257,10 +261,12 @@ class Model(object):
        return self
 
   def __mul__(self,struct2):
+       pycvf_warning("DEPRECATED CONSTRUCTION")
        self.structures[struct2.get_name(self.get_new_anonymous_substructure_name())]=struct2
        return self
 
   def __sub__(self,stat2):
+       pycvf_warning("DEPRECATED CONSTRUCTION")
        self.statmodels[stat2.get_name(self.get_new_anonymous_statmodel_name())]=stat2
        return self
 
@@ -357,7 +363,7 @@ class Model(object):
   def process_self(self,i,push=False):
      """
 
-     NEW FOR VERSION 3 (PROCESS ONLY THIS NODES AND NOT SUB PROCESS)
+     SUGG NEW FOR VERSION 3 (PROCESS ONLY THIS NODES AND NOT SUB PROCESS)
 
      If push=True, then the result of this computation is saved under self.processed for later use.
      
@@ -622,7 +628,7 @@ class Model(object):
      """
      Returns information about one node
      """
-     return {'name':self.name,'data_in':self.datatype_in, 'processline': self.processline,'data_out': self.datatype_out,'directory':self.get_modelpath()}
+     return {'name':self.name,'total_name':self.get_total_name(),'data_in':self.datatype_in, 'processline': self.processline,'data_out': self.datatype_out,'directory':self.get_directory()}
 
 
 
@@ -643,7 +649,7 @@ class Model(object):
 
   def get_local_status(self):
       """ Returns the local status of a node """
-      return STATUS_READY
+      return self.status#STATUS_READY
 
   def get_status(self):
       """ Returns STATUS_READY if and only if the whole subtree if ready"""
@@ -657,6 +663,9 @@ class Model(object):
                   return s
       return STATUS_READY
   
+  def get_total_name(self):
+    return self.cname.replace("/","_")
+
   def get_cnames(self):
     "returns the complete name of a model"
     r=[]
@@ -681,9 +690,9 @@ class Model(object):
      
   def print_tree(self,  indent="",stream=sys.stdout):
      stream.write("*: "+str(self.local_meta())+"\n")
-     stream.write(indent+ "|  (submodels keys="+str(self.submodels.keys())+")\n")
-     stream.write(indent+ "|  (structures keys="+str(self.structures.keys())+")\n")
-     stream.write(indent+ "|  (statmodel keys="+str(self.statmodels.keys())+")\n")
+     #stream.write(indent+ "|  (submodels keys="+str(self.submodels.keys())+")\n")
+     #stream.write(indent+ "|  (structures keys="+str(self.structures.keys())+")\n")
+     #stream.write(indent+ "|  (statmodel keys="+str(self.statmodels.keys())+")\n")
      stream.write(indent+"|\n")
      lsm=len(self.submodels)
      submodelsi=self.submodels.items()
@@ -749,6 +758,10 @@ def pycvf_model_function(datatype_in=None, datatype_out=None):
   """  
   def make_decorator(fct):
     class CModel(Model):
+        name=fct.__name__
+        #def __init__(self,*args,**kwargs):
+        #   self.name=fct.__name__   
+        #   super(CModel,self).__init__(*args,**kwargs)
         def input_datatype(self,x):
             dtin=(datatype_in if datatype_in !=None else x)
             if ((dtin!=None) and callable(dtin) and (hasattr(dtin,"func_name"))):
@@ -760,9 +773,9 @@ def pycvf_model_function(datatype_in=None, datatype_out=None):
                 dtout=dtout(x)            
             return dtout        
         def init_model(self,*args,**kwargs):
-                 idn=""
-                 self.processline='src|'+fct.__name__+idn
-                 self.context[fct.__name__+idn]=lambda x:fct(x,*args,**kwargs)
+                 idn=self.get_total_name()
+                 self.processline='src|'+idn
+                 self.context[idn]=lambda x:fct(x,*args,**kwargs)
     return CModel
   return make_decorator
     
@@ -777,6 +790,10 @@ def pycvf_model_class(datatype_in=None, datatype_out=None):
   """
   def make_decorator(cls):
     class CModel(Model):
+        name=cls.__name__
+        #def __init__(self,*args,**kwargs):
+        #   self.name=cls.__name__   
+        #   super(CModel,self).__init__(*args,**kwargs)
         def input_datatype(self,x):
             dtin=(datatype_in if datatype_in !=None else x)
             if ((dtin!=None) and callable(dtin) and (hasattr(dtin,"func_name"))):
@@ -788,12 +805,12 @@ def pycvf_model_class(datatype_in=None, datatype_out=None):
                 dtout=dtout(x)            
             return dtout
         def init_model(self,*args,**kwargs):
-                 idn=""
-                 self.processline='src|'+cls.__name__.lower()+idn
+                 idn=self.get_total_name()
+                 self.processline='src|'+idn
                  self.cmodel_inst=cls(*args,**kwargs)
                  if hasattr(self.cmodel_inst,"set_model_node"):
                      self.cmodel_inst.set_model_node(self)
-                 self.context[cls.__name__.lower()+idn]=self.cmodel_inst.process
+                 self.context[idn]=self.cmodel_inst.process
         def on_destroy(self):
             if hasattr(self.cmodel_inst,"on_model_destroy"):
                 self.cmodel_inst.on_model_destroy(self)                        

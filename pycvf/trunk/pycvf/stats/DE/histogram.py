@@ -51,6 +51,8 @@ class StatModel:
       if (type(delta) in [tuple, list, numpy.matrix] ):
           self.delta=numpy.array(delta,dtype=float)
       self.ov=numpy.fliplr(numpy.fliplr(numpy.matrix(tuple(self.bins[1:].tolist())+(1,))).cumprod())
+   def get_as_vector(self):
+      return self.a.ravel().astype(float)/(self.no if self.no else 1)
    def dump(self,file_):
       marshal.dump( self.bins.shape, file_)
       marshal.dump( self.bins, file_)

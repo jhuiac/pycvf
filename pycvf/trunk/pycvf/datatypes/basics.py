@@ -148,19 +148,44 @@ class NumericArray:
     @classmethod
     def get_widget(cls,*args):
       #if (x.ndim==2):
-      from pycvf.datatypes import datapoints2d
-      return datapoints2d.Datatype.get_widget(*args)
-      #else:
-      #  from PyQt4.QtGui import QLineEdit
-      #  q=QLineEdit(*args)
-      #  return q
+      from PyQt4.QtGui import QLineEdit          
+      from PyQt4.QtGui import QWidget                
+      class QMultiWidget(QWidget):
+          initialized=False
+          def __init__(self,*args,**kwargs):
+              QWidget.__init__(self,*args,**kwargs)
+          def init(self,ndim):
+            self.initialized=True
+            #if (ndim==2)
+            from pycvf.datatypes import datapoints2d
+            self.wi2=datapoints2d.Datatype.get_widget(self,*args[1:])
+            #     else:
+            from PyQt4.QtGui import QLineEdit
+            self.wi1=QLineEdit(*args)
+            if (ndim==2):
+                self.wi2.show()
+                self.wi1.hide()
+                self.wi2.setGeometry(self.geometry())
+            else:
+                self.wi1.show()
+                self.wi2.hide()                
+                self.wi1.setGeometry(self.geometry())                
+          def set_dim(self,ndim):
+            if (not self.initialized):
+                self.init(ndim)
+          def resizeEvent(self, event):
+                self.wi2.setGeometry(self.geometry())
+                self.wi1.setGeometry(self.geometry())
+                return QWidget.resizeEvent(self,event)
+      return QMultiWidget(*args)
     @classmethod
     def set_widget_value(cls,widget,x,vdb=None,addr=None):
+      widget.set_dim(x.ndim)
       if (x.ndim==2):
         from pycvf.datatypes import datapoints2d
-        return datapoints2d.Datatype.set_widget_value(widget,x,vdb,addr)
+        return datapoints2d.Datatype.set_widget_value(widget.wi2,x,vdb,addr)
       else:
-        widget.setText((str(x)))    
+        widget.wi1.setText((str(x)))    
     @classmethod 
     def distance(cls,x1,x2): 
        return numpy.linalg.norm(x1-x2)

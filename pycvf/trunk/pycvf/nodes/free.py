@@ -21,6 +21,7 @@ from pycvf.core.autoimp import *
 
 
 class Model(genericmodel.Model):
+        name="free"
         type_in=None
         type_out=None
         def input_datatype(self,x):

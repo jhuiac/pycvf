@@ -90,6 +90,10 @@ class EmModel:
         else:
            self.gmm = GMM(self.lgm, "kmean")
         assert(self.gmm!=None)
+   def get_as_vector(self):
+      print self.gmm
+      print dir(self.gmm)
+      raise Exception
    def train(self,positive_training_set,negative_training_set=None, maxiter = 30, thresh = 1e-8,online=False):
       em=EM()
       _trained=False
@@ -135,4 +139,4 @@ class EmModel:
 
 
 __call__=EmModel
-StatModel=EmModel
+Model=EmModel

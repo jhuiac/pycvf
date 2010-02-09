@@ -33,6 +33,7 @@ case $PACKAGE in
   sudo easy_install https://alioth.debian.org/frs/download.php/3126/pymvpa_0.4.3.tar.gz
   sudo easy_install http://www.antlr.org/download/Python//antlr_python_runtime-3.1.tar.gz
   sudo easy_install http://www.mit.edu/~sav/arff/dist/arff-1.0c.tar.gz
+  sudo easy_install http://nltk.googlecode.com/files/nltk-2.0b7.zip
   ;;
  itk)
   # http://www.paulnovo.org/repository #ITK

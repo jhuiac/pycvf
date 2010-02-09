@@ -37,6 +37,8 @@ class StatModel():
        self.no=0
        self.so=0
        self.svc=0
+   def get_as_vector(self):
+      return numpy.hstack([self.mean(), self.std()])
    def mean(self):
        return self.so/float(self.no)
    def std(self):

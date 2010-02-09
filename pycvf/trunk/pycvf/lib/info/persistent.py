@@ -21,7 +21,7 @@
 
 
 # -*- coding: utf-8 -*-
-import pickle
+import cPickle as pickle
 
 class PersistentObject(object):
   dirty=True
@@ -34,6 +34,8 @@ class PersistentObject(object):
   def save(self):
     if self.dirty:
       self.dirty=False
-      pickle.save(self.po_filename)
+      pickle.dump(self,file(self.po_filename,"w"))
+  def set_filename(self,filename):
+      self.po_filename=filename
   def __del__():
     self.save()

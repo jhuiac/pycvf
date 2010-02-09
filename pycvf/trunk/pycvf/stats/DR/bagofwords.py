@@ -24,7 +24,7 @@
 
 import sys,numpy,time
 from pycvf.lib.info import persistent
-from pycvf.core.
+from pycvf.core.errors import *
 
 from scipy import cluster
 from scipy import spatial
@@ -50,7 +50,7 @@ class BagOfWords(persistent.PersistentObject):
      self.te=[]
      self.args=args
      self.kwargs=kwargs
-     print "BAGOFWORDS CREATED!", len(self.te),"/",self.burnin
+     #print "BAGOFWORDS CREATED!", len(self.te),"/",self.burnin
      self.algo=algo
      self.algos=[self.algo0,self.algo1,self.algo2]
   def algo0(self,r):

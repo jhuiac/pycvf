@@ -3,7 +3,7 @@ from pycvf.lib.info.options import *
 from pycvf.core import settings
 from pycvf.core import builders
 from pycvf.core.errors import *
-from pycvf.core.genericmodel import STATUS_READY, NotReady
+from pycvf.core.genericmodel import STATUS_READY, NotReady,STATUS_NOT_READY,STATUS_ERROR
 from pycvf.core import settings
 from pycvf.core import directories
 
@@ -160,31 +160,17 @@ def x__modelhelp(cls):
 class ModelUsingApplication(DatabaseUsingApplication):   
   frameworkv=CmdLineString(None,"framework_version","frameworkv","version of the framework to be used",settings.DEFAULT_FRAMEWORK)
   mymodel=CmdLineString('m',"model","model","set the model to be used",settings.DEFAULT_MODEL)
-  mymodelargs=CmdLineString(None,"modelargs","model_arguments","set model options",settings.DEFAULT_MODEL_ARGS) 
+  #mymodelargs=CmdLineString(None,"modelargs","model_arguments","set model options",settings.DEFAULT_MODEL_ARGS) 
   session=CmdLineString('s',"session",'name_of_session',"name of the session",settings.DEFAULT_SESSION)                             
 
   @classmethod
   def prepare_process(cls, *args, **kwargs):
      super(ModelUsingApplication,cls).prepare_process(*args,**kwargs)
-     #from pycvf.nodes.modelbuilder import model_build
-     if int(cls.frameworkv.value) in [1,2]:
-        pycvf_warning("Old models are deprecated please think about upgrading yourmodel")
-        modelbuilder=__import__(
-                              "pycvf.archives.framework%02d.models.modelbuilder"%(int(cls.frameworkv.value)),
-                              fromlist=[
-                                 'pycvf', 'archives', 'framework%02d'%(int(cls.frameworkv.value),), 'models'
-                                 ] 
-                           )
-        print dir(modelbuilder)
-        model_build=modelbuilder.model_build
-        cls.mdl=model_build(cls.mymodel.value,cls.vdb.datatype(),suppargs=cls.mymodelargs.value)
-        cls.mdl.metainfo_curdb=cls.vdb
-     else:
-        pycvf_debug(10,"MODELINIT")         
-        cls.mdl=builders.model_builder(cls.mymodel.value)
-        cls.mdl.init('/',cls.vdb.datatype(),cls,modelpath=os.path.join(settings.PYCVF_MODEL_DIR,cls.session.value))
-        cls.mdl.metainfo_curdb=cls.vdb
-        pycvf_debug(10,"/MODELINIT")
+     pycvf_debug(10,"MODELINIT")         
+     cls.mdl=builders.model_builder(cls.mymodel.value)
+     cls.mdl.init('/',cls.vdb.datatype(),cls,modelpath=os.path.join(settings.PYCVF_MODEL_DIR,cls.session.value))
+     cls.mdl.metainfo_curdb=cls.vdb
+     pycvf_debug(10,"/MODELINIT")
      assert(cls.mdl.get_curdb()==cls.vdb)
      cls.mmeta=cls.mdl.get_features_meta()
      cls.preprocess() 
@@ -197,18 +183,25 @@ class ModelUsingApplication(DatabaseUsingApplication):
       cont=True
       # while the model is in a learning stqte (returning NotReady) train the model
       ei=iter(cls.vdb)
+      c=0
       while cont:
           try:
               status=cls.mdl.get_status()
               if (status!=STATUS_READY):
-                sys.stderr.write(".")
+                if(status==STATUS_ERROR):
+                  raise Exception, "Error State"
+                sys.stderr.write("\riter =%d"%(c))
                 e=ei.next()
                 cls.mdl.process(e[0],addr=e[1])
+                c+=1
+               
               else:
+                pycvf_debug(10,"STATUS=READY -> LAUNCHING APP")
                 cont=False
           except StopIteration:
               pycvf_error("Your database appear to be too small for using this model")
           except NotReady:
+              sys.stderr.write("/!\ NOTREADY")
               pass
           except:
               raise
@@ -242,7 +235,7 @@ class IndexUsingApplication(ModelUsingApplication):
   """
   indexpath=CmdLineString(None,"idxpath","indexpath","directory where are stored the indexes",directories.PYCVF_INDEX_DIR+"/$sessionname/")
   indexclass=CmdLineString(None,"idx","indexclass","set the index structure to be used",settings.DEFAULT_INDEX_CLASS)#"index_vectors")
-  indexargs=CmdLineString(None,"idxargs","index_arguments","set index options","") 
+  #indexargs=CmdLineString(None,"idxargs","index_arguments","set index options","") 
   session=CmdLineString('s',"session",'name_of_session',"name of the session",settings.DEFAULT_SESSION)                             
   indexhelp_option=CmdLineOption(None,"idxhelp",None,"show info on parameters required by the index",x__idxhelp)                             
 

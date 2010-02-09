@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from pandac.PandaModules import loadPrcFileData
-loadPrcFileData("", "fullscreen 1")
+#loadPrcFileData("", "fullscreen 1")
 from pandac.PandaModules import *
 import sys,os,re, stat
 import direct.directbase.DirectStart
@@ -15,11 +15,13 @@ from pycvf.lib.ui.panda import picker
 from pycvf.lib.graphics.imgfmtutils import NumPy2PIL
 from pycvf.indexes import load_index
 import scipy
+from threading import Thread
 
 cmr12 = loader.loadFont('cmr12.egg')
+
+world_object=None
  
-class World(DirectObject):
-    
+class World(DirectObject):    
     def enable_picking(self):
         self.lastHiliteObj = []
 
@@ -106,15 +108,11 @@ class World(DirectObject):
         self.iconwheel.removeNode()
         del self.iconwheel
 
-    #def gotodir(self,dirname):
-        #self.resetscene()
-        #self.opendir(dirname)
-
-    #def goup(self):
-        #self.gotodir(os.path.join(self.curdir,".."))
 
     def __init__(self):
         ##  basic settings
+        global world_object
+        world_object=self
         self.movieid=0
         self.rotateinterval=50
         self.curdir=( os.getcwd() if len(sys.argv)<2 else sys.argv[1])
@@ -183,9 +181,72 @@ class NN3dSimpleIndexQueryApp(IndexUsingApplication):
     w.nq=int(cls.number_query.value)
     idb=iter(cls.vdb)
     w.explore_nn(idb.next())
-    run()
+    #run()
+    while True:
+     if (daemon):
+       daemon.handleRequests(0.01)
+     taskMgr.step()
     w.app=None
-       
+
+
+WITH_TWISTED_SERVER=False
+WITH_PYRO_SERVER=True
+
+if WITH_TWISTED_SERVER: 
+  import twisted.web.resource
+
+  class FileUpResource(twisted.web.resource.Resource):
+
+     isLeaf = 1
+
+     def render(self, request):
+         request.setHeader('Content-Type', 'text/html; charset=utf-8')
+         args = request.args
+         pageTitle = 'Nearest Neighbor Query'
+         return (((u"""<html><head><title>%(pageTitle)s</title><meta http-equiv="Content-Type" content="text/html;charset=utf-8"/></head>
+                 <body><h1>%(pageTitle)s</h1><form method="post" enctype="multipart/form-data"><table><tr><td> file: </td><td> <input name='file' type='file'> </td></tr>
+                </table><input type=submit></form><hr/><p>Form args:<br/>%(args)s</p><hr/></body></html>""") % vars()).encode())
+
+  resource = FileUpResource()
+
+daemon=None
+if WITH_PYRO_SERVER:
+  import Pyro
+  import Pyro.core
+  import Pyro.protocol
+
+  class MyCustomValidator(Pyro.protocol.DefaultConnValidator):
+    pass
+
+  Pyro.core.initServer()
+  daemon=Pyro.core.Daemon()
+  mcv=MyCustomValidator()
+  daemon.setNewConnectionValidator(mcv)
+  mcv.setAllowedIdentifications(["jfli"])
+
+  class NNQServer(Pyro.core.ObjBase):
+            def __init__(self):
+                    Pyro.core.ObjBase.__init__(self)
+            def query(self, query):
+                   print "RECEIVED NEW QUERY LABELED", query[1]
+                   world_object.resetscene()
+                   world_object.explore_nn(query)        
+
+  uri=daemon.connect(NNQServer(),"dbserver")
+  print "The daemon runs on port:",daemon.port
+  print "The object's uri is:",uri
+  
+  #class ServerThread(Thread):
+  #  #def __init__(self):
+  #  # Thread.__init__(self)
+  #  def run(self,*args,**kwargs):
+  #    daemon.requestLoop()
+
+  #st=ServerThread()
+  #st.start()
+  daemon.handleRequests(0.01)
+   
+
 #t=Texture()
 #i=PNMImage(512,512)
 #t.load(i)

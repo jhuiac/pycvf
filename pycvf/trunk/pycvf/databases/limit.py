@@ -35,6 +35,8 @@ class DB(database.ContentsDatabase):
    This is a filter database that allows you to limit the number of elements extracted in a database.
    This avoid developpers to include this useful feature in all the database.
   """
+  def datatype(self):
+      return self.vdb.datatype()
   def __init__(self,db="image.kanji()",limit=50):
       self.vdb=(pycvf_builder(db) if type(db) in [str,unicode] else db)
       self.limit=limit

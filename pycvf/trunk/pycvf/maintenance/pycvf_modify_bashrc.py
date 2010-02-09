@@ -9,7 +9,7 @@ def compute_platform_id():
  
 def modify_bashrc(pycvfdir=None):
   xfile=__file__
-  if (xfile[0]!=os.path.sep)
+  if (xfile[0]!=os.path.sep):
     xfile=os.path.join(xfile)
   if pycvfdir==None:
     pycvfdir=os.path.dirname(os.path.dirname(os.path.dirname(xfile)))
@@ -40,7 +40,7 @@ export PYTHONPATH=%PYCVFDIR%:%PYCVFDIR%%/%wrappers%/%build%/%%platform%:$PYTHONP
 
 def touch_pycvf_settings_py():
     HOME=os.path.expanduser("~")      
-    f=open(os.path.join(os.environ["HOME"],".pycvf-settings.py","a")
+    f=open(os.path.join(os.environ["HOME"],".pycvf-settings.py"),"a")
     f.close()
   
 if __name__="__main__":

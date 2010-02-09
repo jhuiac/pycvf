@@ -18,6 +18,7 @@ Contents:
    databases.rst
    nodes.rst
    structures.rst
+   machinelearning.rst
 
 Indices and tables
 ==================

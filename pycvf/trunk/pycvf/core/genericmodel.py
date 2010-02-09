@@ -157,7 +157,7 @@ class Model(object):
   def  set_parent(self,parent):
       self.parent=parent
 
-  def init(self,basecname,database,application,*args, **kargs):
+  def init(self,basecname,datatype,application,*args, **kargs):
      """
      This is the second step initialization of the model.
      This function is called with some additional arguments that
@@ -179,11 +179,13 @@ class Model(object):
            if (self.context.has_key(k[0])):
               pycvf_warning("BE CAREFUL IT SEEMS THAT YOU HAVE A CONFLICT")
            self.context[k[0]]=k[1]
+     self.datatype_in=self.input_datatype(datatype)
+     self.datatype_out=self.output_datatype(datatype)
      self.submodel_op(lambda x,y:issubclass(x[1].__class__,Model), set_cname, self.cname)
      self.metas=self.get_features_meta()
      self.init_model(*self.args, **self.kwargs)
-     self.datatype_in=self.input_datatype(database)
-     self.datatype_out=self.output_datatype(database)
+     self.datatype_in=self.input_datatype(datatype)
+     self.datatype_out=self.output_datatype(datatype)
      self.metas=self.get_features_meta()
      if self.processline==None:
        for pi in self.processing:

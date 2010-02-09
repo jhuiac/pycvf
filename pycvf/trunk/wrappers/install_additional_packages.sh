@@ -28,6 +28,15 @@ test -d $BUILD || mkdir -p $BUILD
 PACKAGE=$1
 
 case $PACKAGE in
+ pyffmpeg)
+  which git || sudo apt-get install git-core
+  git clone "http://github.com/tranx/pyffmpeg.git/" || exit -1
+  cd pyffmpeg
+  git checkout origin/beta
+  python setup.py build_ext -i
+  cd ..
+  cp pyffmpeg/*.so $BUILD
+  ;;
  easyinstalls)
   sudo easy_install flickrapi
   sudo easy_install https://alioth.debian.org/frs/download.php/3126/pymvpa_0.4.3.tar.gz
@@ -66,5 +75,5 @@ case $PACKAGE in
  cd ..
  ;;
  *)
-  echo "Please choose a valid package to install (easyinstalls|itk|sash|lsh|sift|zopencv)"
+  echo "Please choose a valid package to install (easyinstalls|itk|sash|lsh|sift|zopencv|pyffmpeg)"
 esac

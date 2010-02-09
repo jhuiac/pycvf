@@ -11,10 +11,10 @@
 #########################################################################################################################################
 from pycvf.core import database
 from pycvf.datatypes import datapoints2d
-from pycvf.stats.histogram import StatModel as HistogramModel
+from pycvf.stats.DE.histogram import StatModel as HistogramModel
 import numpy, random
 
-class DB(database.ContentsDatabase,datapoints2d. Datapoints2dDatatype):
+class DB(database.ContentsDatabase):
    """
    This database returns a set of 2d points that are distributed according to an input
    image coming from an inputdatabase when this input database is considered as 
@@ -22,6 +22,8 @@ class DB(database.ContentsDatabase,datapoints2d. Datapoints2dDatatype):
    
    
    """
+   def datatype(self):
+       return datapoints2d.Datatype
    def __init__(self, parent_database, npoints_per_clusters=1000):
      self.NE=npoints_per_clusters
      self.parent_database=parent_database

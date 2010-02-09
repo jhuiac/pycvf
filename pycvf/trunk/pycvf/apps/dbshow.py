@@ -19,7 +19,7 @@ class DbShowApp(DatabaseUsingApplication):
                                                                                        
      delay=float(cls.delay.value)
      print_addr=int(cls.print_addr.value)
-     dtp=(pycvf_builder(cls.forced_datatype.value) if len(cls.forced_datatype.value) else cls.vdb.dataype())
+     dtp=(pycvf_builder(cls.forced_datatype.value) if len(cls.forced_datatype.value) else cls.vdb.datatype())
 
      for i in cls.vdb:
        if print_addr:

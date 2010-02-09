@@ -23,6 +23,7 @@
 # -*- coding: utf-8 -*-
 #########################################################################################################################################
 
+from pycvf.core.errors import pycvf_warning
 import itertools
 
 class ContentsDatabase(object):

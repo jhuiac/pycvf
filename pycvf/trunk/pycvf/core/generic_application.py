@@ -177,12 +177,12 @@ class ModelUsingApplication(DatabaseUsingApplication):
                            )
         print dir(modelbuilder)
         model_build=modelbuilder.model_build
-        cls.mdl=model_build(cls.mymodel.value,cls.vdb,suppargs=cls.mymodelargs.value)
+        cls.mdl=model_build(cls.mymodel.value,cls.vdb.datatype(),suppargs=cls.mymodelargs.value)
         cls.mdl.metainfo_curdb=cls.vdb
      else:
         pycvf_debug(10,"/initializing model")         
         cls.mdl=builders.model_builder(cls.mymodel.value)
-        cls.mdl.init('/',cls.vdb,cls)
+        cls.mdl.init('/',cls.vdb.datatype(),cls)
         cls.mdl.metainfo_curdb=cls.vdb
         pycvf_debug(10,"/model initialzed")
      assert(cls.mdl.get_curdb()==cls.vdb)

@@ -252,6 +252,8 @@ class PropEditMapper:
   def from_dict(d):
     return map ( lambda x: (x[0],x[1],PropEditMapper.ta[type(x[1])]), d.items() )
 
+from pycvf.core.utilities import *
+FULLSCREEN=pycvf_config_var("FULLSCREEN",False)
 
 class QtFeaturesViewer(QtGui.QTableWidget):
         def __init__(self, d,  *args):
@@ -265,7 +267,7 @@ class QtFeaturesViewer(QtGui.QTableWidget):
             self.wi=[None]*len(d)
             for i in range(len(d)):
                xiw=self.ed[i][1]
-               print "xiw",xiw
+               #print xiw
                self.wi[i]=xiw.get_widget(self) 
                self.setCellWidget( i,0, self.wi[i])
                self.setRowHeight(i,300)
@@ -293,7 +295,14 @@ class QtFeaturesViewerDialog(QtGui.QDialog):
             self.pbcancel.setText("Cancel")
             self.connect(self.pbcancel,SIGNAL("clicked()"),self,SLOT("reject()"))
             self.layout.addWidget(self.pbcancel)
+	    if FULLSCREEN:
+               self.set_fullscreen()
             self.update()
+        def set_fullscreen(self):
+            self.setWindowFlags( QtCore.Qt.FramelessWindowHint | QtCore.Qt.Tool | QtCore.Qt.WindowStaysOnTopHint )
+            self.resize( QtGui.QApplication.desktop().size() )
+            #self.setFocusPolicy( QtGui.StrongFocus )
+            self.setAttribute(QtCore.Qt.WA_QuitOnClose, True)
         def push(self,x,*args,**kwargs):
             self.pwl.push(x,*args,**kwargs)
         def __del__(self):

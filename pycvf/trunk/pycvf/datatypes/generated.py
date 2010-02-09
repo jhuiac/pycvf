@@ -24,7 +24,7 @@ def Datatype(ElemType):
     def distance(cls,x1,x2): 
        return min(scipy.spatial.distance.cdist(x1,x2,ElemType.distance))
     @classmethod
-    def set_widget_value(cls,widget,x):
+    def set_widget_value(cls,widget,x,*args,**kwargs):
         #print widget
         widget.clear()
         xc=x#.copy()

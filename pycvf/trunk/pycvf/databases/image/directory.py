@@ -32,7 +32,7 @@ from pycvf.datatypes import image
 # Create the ContentsDatabase Object
 #########################################################################################################################################
 
-class DB(database.ContentsDatabase,image.Datatype):
+class DB(database.ContentsDatabase):
   """
    Provide a way to use strucutred directory as database of images.
    File may be filtered by name, randomized in order , and rescale.
@@ -40,7 +40,9 @@ class DB(database.ContentsDatabase,image.Datatype):
    TODO:
       * provide more complex file selection schemes (recursion ..)
   """
-  #TS_SMALLVIDEO={ 'video1':(0, -1, {'videoframebanksz':1, 'dest_width':128, 'dest_height':96})}
+
+  def datatype(self):
+      return image.Datatype
   def __init__(self,path=None,rescale=None,filefilter=None,extensions="jpg|png|gif|tif|tga|pgm|ppm",randomized=True):
      if (filefilter==None):
        filefilter="(.*).("+extensions+")"

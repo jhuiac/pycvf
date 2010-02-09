@@ -7,9 +7,10 @@
 ##  3. a fusion model for recreating data from the decomposed elements
 
 
+# DEPRECATED ???
+
 from pycvf.core import genericmodel
 from pycvf.core import model
-
 
 
 class Model(genericmodel.GenericModel):

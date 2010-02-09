@@ -38,6 +38,10 @@ except:
                       4:QtGui.QImage.Format_RGB32
                       }
 
+
+from pycvf.core.utilities import *
+FULLSCREEN=pycvf_config_var("FULLSCREEN",False)
+
 #al=numpy.dstack([  scipy.lena().astype(numpy.uint16).reshape(512,512,1).repeat(3,axis=2),  numpy.ones((512,512),dtype=numpy.uint8)*255])
 #l.f(al)
 class LazyDisplayQt(QtGui.QMainWindow):
@@ -47,7 +51,15 @@ class LazyDisplayQt(QtGui.QMainWindow):
             self._i=numpy.zeros((1,1,4),dtype=numpy.uint8)
             self.i=QtGui.QImage(self._i.data,self._i.shape[1],self._i.shape[0],self.imgconvarray[self._i.shape[2]])
             self.colortable=[ (numpy.array(cm.jet(x)[0:3])*256.).astype(numpy.uint8) for x in range(0,256) ]
+            if (FULLSCREEN):
+               self.set_fullscreen()
             self.show()
+            self.setFocus()
+        def set_fullscreen(self):
+            self.setWindowFlags( QtCore.Qt.FramelessWindowHint | QtCore.Qt.Tool | QtCore.Qt.WindowStaysOnTopHint )
+            self.resize( QtGui.QApplication.desktop().size() )
+            #self.setFocusPolicy( QtGui.StrongFocus )
+            self.setAttribute(QtCore.Qt.WA_QuitOnClose, True)
         def set_colormap(self,cma):
             self.colortable=cma
         def __del__(self):

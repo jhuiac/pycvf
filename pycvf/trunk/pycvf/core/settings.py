@@ -61,7 +61,7 @@ DEFAULT_INDEX_CLASS="pseudoincremental(lshindex_lshkit)"
 DEFAULT_INDEX_ARGS=""
 
 PYCVF_DATABASE_PATH=":pycvf.databases."
-PYCVF_MODEL_PATH=":pycvf.nodes."#:pycvf.archives.framework02.models."
+PYCVF_MODEL_PATH=":pycvf.nodes." #:pycvf.archives.framework02.models."
 PYCVF_INDEX_PATH=":pycvf.indexes."
 
 

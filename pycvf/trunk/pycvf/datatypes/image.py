@@ -55,7 +55,7 @@ class Datatype:
      q=QtDisplay(*args,**kwargs)
      return q
   @classmethod
-  def set_widget_value(cls,widget,x.*args,**kwargs):
+  def set_widget_value(cls,widget,x,*args,**kwargs):
      if (x.ndim==2 or x.shape[2]==1):
         x=numpy.asarray(x)
         widget.f(x.reshape(x.shape[0],x.shape[1],1).repeat(3,axis=2),*args,**kwargs)

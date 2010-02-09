@@ -27,26 +27,30 @@ from pyglet.text import Label
 from pyglet.gl import *
 glEnable(GL_TEXTURE_2D)
 import numpy
+from pycvf.core.utilities import *
 
+FULLSCREEN=pycvf_config_var("FULLSCREEN",False)
 
 class LazyDisplay(object):
-    def __init__(self,title="Python Experiment"):
-        self.window = pyglet.window.Window()
+    def __init__(self,title="Python Experiment",fullscreen=FULLSCREEN):
+        self.window = pyglet.window.Window(fullscreen=fullscreen)
+        self.fullscreen=fullscreen
         self.event_loop = pyglet.app.EventLoop()
         self.on_draw=self.window.event(self.on_draw)
         self.on_window_close=self.event_loop.event(self.on_window_close)
         self.ip=None
 #        self.window.set_title(title)
     def on_window_close(self,window):
-       self.event_loop.exit()
-       return pyglet.event.EVENT_HANDLED
+        self.event_loop.exit()
+        return pyglet.event.EVENT_HANDLED
     def __del__(self):
             self.window.close()
             self.ev_dispatch()
     def f(self,img):
             """ this function updates the image on the screen (this function does a copy of the image)"""
             (h,w,c)=numpy.shape(img)
-            self.window.set_size(w,h)
+            if (not self.fullscreen):
+              self.window.set_size(w,h)
             if (c==3):
                 self.ip=pyglet.image.ImageData(w,h,'RGB',img.astype(numpy.uint8).tostring())#[0])
             elif (c==4):
@@ -68,8 +72,8 @@ class LazyDisplay(object):
                 return
             self.window.clear()
             glPushMatrix()
-            glTranslatef(0,self.ip.height,0)
-            glScalef(1,-1,1)
+            glTranslatef(0,self.window.height,0)
+            glScalef(float(self.window.width)/self.ip.width,-(float(self.window.height)/self.ip.height),1)
             self.ip.blit(0,0)
             glPopMatrix()
             #print "."

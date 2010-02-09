@@ -49,7 +49,7 @@ class Label:
       q=QLineEdit(*args)
       return q
     @classmethod
-    def set_widget_value(cls,widget,x):
+    def set_widget_value(cls,widget,x,*args,**kwargs):
        widget.setText((str(x)))
     @classmethod 
     def distance(cls,x1,x2): 
@@ -83,7 +83,7 @@ class RGBColor:
       q=QLineEdit(*args)
       return q
     @classmethod
-    def set_widget_value(cls,widget,x):
+    def set_widget_value(cls,widget,x,*args,**kwargs):
       widget.setText((str(x)))
     @classmethod 
     def distance(cls,x1,x2): 
@@ -115,7 +115,7 @@ class Float:
       q=QLineEdit(*args)
       return q
     @classmethod
-    def set_widget_value(cls,widget,x):
+    def set_widget_value(cls,widget,x,*args,**kwargs):
       widget.setText((str(x)))
     @classmethod 
     def distance(cls,x1,x2): 
@@ -193,7 +193,7 @@ class NumericVector:
       q=QLineEdit(*args)
       return q
     @classmethod
-    def set_widget_value(cls,widget,x):
+    def set_widget_value(cls,widget,x,vdb=None, addr=None):
       widget.setText((str(x)))    
     @classmethod 
     def distance(cls,x1,x2): 

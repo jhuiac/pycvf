@@ -145,30 +145,21 @@ except:
     sys.stderr.write("""
     PYCVF is mostly released under LGPL v.3.
     HOWEVER SOME PARTS MAY BE RELEASED UNDER DIFFERENT LICENSING SCHEME.
-    
-    For providing you better support in further release, 
-    and in order to prove interest that our software received, 
-    we would appreciate if you would accept to register.
-    Please fill-in the registration form, and decide whether 
-    you want to register after.
-   
-    
-    
-    
-    Press Enter to continue to License.
+
+    Press Enter to continue with reading the License terms.
     """)
     pdbd = os.path.dirname(globals()["__file__"])
     os.system(os.environ.get('PAGER','more')+ " "+ pdbd+"/../../LICENSE")
     answer=""
     while answer not in ["yes","no"]:
-      sys.stderr.write("Do you accept the term of the license ? (yes/no) \n")
+      sys.stderr.write("Do you accept the term of the License  terms ? ('yes'/'no') \n")
       answer=sys.stdin.readline().strip().lower()
-      if (answer!='yes'):
+      if (answer.lower()!='yes'):
         sys.stderr.write("\nWell, you did not accept the license.")
         sys.stderr.write("You cannot legally use the software then, also you shall remove the source code from your machine.\n")       
         sys.exit(-1)
     file(pycvf_license_accept_file,"w").write("# PyCVF License has been accepted on %s" %(datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")))       
     sys.stderr.write("\nThanks for approving the license\n\n")
-    sys.stderr.write("We now would like also to thank you for taking a few more seconds to register as a PyCVF user.")
+    sys.stderr.write(" to register as a PyCVF user.")
     register_pycvf()
     

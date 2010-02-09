@@ -57,7 +57,7 @@ class QtDisplay(QtGui.QWidget):
             self.colortable=[ (numpy.array(cm.jet(x)[0:3])*256.).astype(numpy.uint8) for x in range(0,256) ]
         def set_colormap(self,cma):
             self.colortable=cma
-        def f(self,thearray):
+        def f(self,thearray,*args,**kwargs):
             self._i=thearray.astype(numpy.uint8).copy('C')
             self.i=QtGui.QImage(self._i.data,self._i.shape[1],self._i.shape[0],self._i.shape[1]*self._i.shape[2],self.imgconvarray[self._i.shape[2]])
             if (self._i.shape[2]==1):

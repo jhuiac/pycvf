@@ -36,6 +36,8 @@ from pycvf.datatypes import basics
 from pycvf.core.builders import *
 from pycvf.core.errors import *
 
+
+
 class DB(database.ContentsDatabase):
   """
   This create a dabase from another database by exploding all the elements of the initial database
@@ -45,7 +47,9 @@ class DB(database.ContentsDatabase):
       self.vdb=(model_builder(db) if type(db) in [str, unicode] else db)
       if (structure==None):
           #structure=self.vdb.datatype.default_structure()
-          structure=self.vdb.default_structure()
+          tdtp=self.vdb.datatype()
+          structure=tdtp.get_typerelated_structures()[tdtp.get_default_structure()][0]
+          #print structure
       self.structure=(pycvf_builder(structure) if type(structure) in [str, unicode] else structure)
       self.quick_len=quick_len
       self.cache_id=cache_id

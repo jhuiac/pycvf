@@ -54,10 +54,10 @@ class DB(database.ContentsDatabase):
                   self.observer=None
               def set_observer(self,obs):
                   self.observer=obs
-              def __iter__(self):
-                  yield self.c
-                  while not self.stopcriterion(self.c):
-                     yield self.step()
+              def __iter__(selfac):
+                  yield selfac.c
+                  while not self.stopcriterion(selfac.c):
+                     yield selfac.step()
               def len(self):
                   return -1
               def copy(self):

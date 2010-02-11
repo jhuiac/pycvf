@@ -23,6 +23,7 @@
 # -*- coding: utf-8 -*-
 import itertools,numpy
 
+
 from pycvf.core.structure import ModelStructure
 
 def try_getitem(e,i):
@@ -38,7 +39,11 @@ class ReaderStructure(ModelStructure):
   ## CONTENTS
   @staticmethod
   def output_datatype(datatype):
-     return datatype
+      from pycvf.datatypes import image
+      from pycvf.datatypes import video
+      if (datatype==video.Datatype):
+          return image.Datatype
+      return datatype
   def __init__(self,use_itertools=True):
      self.use_itertools=use_itertools
   def shape(self,instance):
@@ -66,6 +71,10 @@ class ReaderStructure(ModelStructure):
        for k in  range(len(instance)) :
           im[k]=f(instance[k])
        return im
+  def items(self,instance):
+      for x in iter(instance):
+        yield (None,x)
+#itertools.izip(
 #  def recompose_all(self,list):
 #     return SequenceReader(instance)
   def distance(self,x1,x2):

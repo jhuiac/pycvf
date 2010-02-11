@@ -49,6 +49,8 @@ class CacheableObject:
     def __init__(self,base,transform_catalog=SimpleEvaluatorTransformCatalog()):
         self.dict={'src':base}
         self.transform_catalog=transform_catalog
+    def keys(self):
+        return self.dict.keys()
     def __getitem__(self,xstr):
         if (self.dict.has_key(xstr)):
             return self.dict[xstr]
@@ -63,6 +65,8 @@ class CacheableObject:
               else:
                 self.dict[xstr]=self.transform_catalog.apply(l[-1],self['|'.join(l[:-1])])
                 return self.dict[xstr]
+            except KeyboardInterrupt:
+              raise
             except NotReady:
               raise
             except Exception, e:

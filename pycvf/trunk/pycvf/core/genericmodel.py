@@ -117,6 +117,12 @@ class Model(object):
   def get_directory(self):
       return self.directory
 
+  def get_root_node(self):
+      if (self.parent!=None):
+        return self.parent.get_root_node()
+      else:
+        return self
+
   def __init__(self,  *args, ** kwargs):
       self.parent=None ## parent node... (to be reseted to node on  delete)
       self.args=args        ## initialize arguments

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
  #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 ## ##########################################################################################################
@@ -33,14 +34,14 @@ def unit(n,d):
   return v
 
 def patch(ary,pos,sz):
-    print "P"
-    print "PPOS=",pos
-    print "PSZ=",sz
-    pycvf_warning("PATCH")
+    #print "P"
+    #print "PPOS=",pos
+    #print "PSZ=",sz
+    #pycvf_warning("PATCH")
     off=sum(map(lambda x,y,z:x*(y%z),ary.strides,pos,ary.shape))
-    print off
+    #print off
     r=numpy.ndarray(buffer=buffer(ary.data,off,len(ary.data)-off) ,shape=sz, strides=ary.strides, dtype=ary.dtype )
-    print "/P"
+    #print "/P"
     return r
 
 def set_patch(ary,pos,sz,value):
@@ -262,7 +263,7 @@ class RegularPatchEdges(DefaultStructure):
      """
      Decompose and recompose arrays into regular boxes...
      """
-     def __init__(self, layersdim, patchsize=(4,4),edge_dim=0, *args, **kwargs):
+     def __init__(self, layersdim=1, patchsize=(4,4),edge_dim=0, *args, **kwargs):
          DefaultStructure.__init__(self,*args,**kwargs)
          self.patchsize=patchsize
          self.layersdim=layersdim

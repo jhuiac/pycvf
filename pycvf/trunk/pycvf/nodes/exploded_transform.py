@@ -17,10 +17,13 @@ class Model(genericmodel.Model):
             #self.datatype_in=x
             return x
         def output_datatype(self,x):
-            if (self.recomposed):
-               dtp=x
-            else: 
+            try:
+              if (self.recomposed):
+                 dtp=x
+              else: 
                dtp=self.structure.output_datatype(self.datatype_in)
+            except:
+              return x
             #model.output_datatype(self.vdb)
             return x#basics.Label.Datatype()
         def init_model(self,model,structure=None,modelelementpath="/",addressed=False,recomposed=True):

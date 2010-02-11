@@ -33,7 +33,7 @@ try:
   import zopencv as zcv
 
   def rgb2hsv(img,copy=True):
-    if copy: ires=img.copy('C')
+    if copy: res=img.copy('C')
     else: ires=img
     zcv.cvCvtColor (res, res, zcv.CV_RGB2HSV)
     return res

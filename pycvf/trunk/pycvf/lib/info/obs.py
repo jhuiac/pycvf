@@ -133,7 +133,7 @@ def make_observation(l=[ [-1,-1], [-1,0],[-1,1] ], bordermode="mirror" ,cropbefo
     NP=int(avolume)
     L=l.shape[0]
     #print L
-    x=scipy.weave.inline(code,['initarr', 'resarr','ndim','cropbefore','cropafter','NP','L','l'], compiler='gcc')#,type_converters = scipy.weave.converters.blitz)
+    x=scipy.weave.inline(code,['initarr', 'resarr','ndim','cropbefore','cropafter','NP','L','l'], compiler='gcc', extra_compile_args="-O3")#,type_converters = scipy.weave.converters.blitz)
     return resarr
   
   return f

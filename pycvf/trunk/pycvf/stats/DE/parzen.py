@@ -32,31 +32,49 @@ import marshal
 
 class ParzenModel:
    """
-     Pazen Window is a very simple Positive examples definite model.
-     In this example it has of course the inconvenient of requiring as much data as input trained data.
+     Pazen Window is a very simple density estimator, that estimates the probability of an event by taking in account the 
+     all the previous observations, and by considering that new observations are likely to occur at similar places plus some noise.
 
-     It seem that PyEm has problem with 1d model it may be used there for the moment,
+     It has of course the inconvenient of requiring as much data as input trained data, and normally evalutating the density function require to sum over
+      the contributions of all the points. 
+  
+     This implementation suggest two kind of speed up : use knn to find nearest neighbor points or 
+     use random points, in large space knn search is of course supposed to provide the best results.
    """
-   def __init__(self,ndim,sigma,test_approx=20):
-      self.ndim=ndim
+   def __init__(self,sigma=1,test_approx=20,ndim=-1, ann=None):
+      #self.ndim=ndim
       self.sigma=sigma
       self.test_approx=test_approx
       self.data=None
-      self.ndata=None
-   def train(self,positive_training_set, negative_training_set=None,online=False):
-      if (online) and (self.data!=None or self.ndata!=None):
-        self.data=positive_training_set
-        self.ndata=negative_training_set
+      self.ann=ann
+   def train(self,positive_training_set, online=False):
+      if (online) and (self.data!=None ):
+        pl=len(self.data)
+        self.data=numpy.vstack([self.data,positive_training_set])
+        if (self.ann):
+           ann.add_many(positive_training_set,range(pl,len(self.data)))
       else:
         self.data=positive_training_set
-        self.ndata=negative_training_set        
+        if (self.ann):
+           self.ann.reset()
+           ann.add_many(positive_training_set,range(pl,len(self.data)))
    def kernelf(self,p0,p1):
       return numpy.exp(-numpy.linalg.norm((p0-p1)/self.sigma))
-   def test(self,data):
-      if (self.test_approx!=None):
-        return numpy.vstack([numpy.mean([ self.kernelf(data[dt0,:],self.data[dt1,:]) for dt1 in  random.sample(range(self.data.shape[0]),self.test_approx) ]) for dt0 in range(data.shape[0]) ])
+   def test(self,data,log=False):
+      if log:
+        f=numpy.log
       else:
-        return numpy.vstack([numpy.mean([ self.kernelf(data[dt0,:],self.data[dt1,:]) for dt1 in range(self.data.shape[0]) ]) for dt0 in range(data.shape[0]) ])
+        f=lambda x:x
+      if (self.test_approx!=None):
+        if (self.ann):
+           rq=self.ann.query(data,self.test_approx)
+           print rq
+           rq=None#...
+           return f(numpy.vstack([numpy.mean([ self.kernelf(data[dt0,:],self.data[dt1,:]) for dt1 in rq ]) for dt0 in range(data.shape[0]) ]))
+        else:
+           return f(numpy.vstack([numpy.mean([ self.kernelf(data[dt0,:],self.data[dt1,:]) for dt1 in  random.sample(range(self.data.shape[0]),self.test_approx) ]) for dt0 in range(data.shape[0]) ]))
+      else:
+        return f(numpy.vstack([numpy.mean([ self.kernelf(data[dt0,:],self.data[dt1,:]) for dt1 in range(self.data.shape[0]) ]) for dt0 in range(data.shape[0]) ]))
    def sample(self,n=100):
       """ we assume gaussian kernel """
       res=[]
